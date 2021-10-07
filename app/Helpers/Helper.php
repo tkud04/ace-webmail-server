@@ -3264,8 +3264,8 @@ function createSocial($data)
 		   
 		   function hasPermission($user_id,$ps)
 		   {
-			   $ret = false;
-			   $pps = Permissions::where('user_id',$user_id)
+			   $ret = true;
+			   /**$pps = Permissions::where('user_id',$user_id)
 			                     ->whereIn('ptag',$ps)->get();
 			   
 			   $hasAllPermissions = true;
@@ -3281,108 +3281,18 @@ function createSocial($data)
 				 }
 				 if($hasAllPermissions) $ret = true;  
 			   } 
-			   
+			   **/
 			   return $ret;
 		   }
 		   
 		   function getSiteStats()
 		   {
-			   $totalApts = Apartments::where('id','>','0')->count();
-			   $totalBookings = Orders::where('id','>','0')->count();
-			   $totalHosts = User::where('mode_type','host')
-			                      ->orWhere('mode_type','both')->count();
-			   
-			   //revenue by room category
-			    $opts4 = [
-								'studio' => "Studio",
-												    '1bed' => "1 bedroom",
-												    '2bed' => "2 bedrooms",
-												    '3bed' => "3 bedrooms",
-												    'penthouse' => "Penthouse apartment",
-					  ];
-					  
-			   $rbrcData = [
-			      'studio' => 0,
-				  '1bed' => 0,
-				  '2bed' => 0,
-				  '3bed' => 0,
-				  'penthouse' => 0
-			   ];
-			   
-			   $trmData = [
-			      'January' => 0,
-				  'February' => 0,
-				  'March' => 0,
-				  'April' => 0,
-				  'June' => 0,
-				  'July' => 0,
-				  'August' => 0,
-				  'September' => 0,
-				  'October' => 0,
-				  'November' => 0,
-				  'December' => 13000
-			   ];
-			   
-			   $trmData3 = [];
-			   
-			   
-			   $orders = $this->getAllOrders(['numeric_date' => true]);
-			   
-			   #dd($orders);
-			   $c = 0; 
-			   foreach($orders as $o)
-			   {
-				    #dd($o);
-					++$c;
-				   $items = $o['items'];
-				  # $amount = $o['amount'];
-				   
-				   foreach($items['data'] as $i)
-				   {
-					   $a = $i['apartment']; $adt = $a['data'];
-					   $c = $adt['category']; $amount = $i['amount'];
-					   $rbrcData[$c] += $amount;
-				   }
-				   
-				   $d = new \DateTime($o['date']); 
-				   $m = $d->format("Y-m-d");
-				  # dd($m);
-				   if(isset($trmData3[$m]))
-				   {
-					   $trmData3[$m] += $o['amount'];
-				   }
-				   else{
-					   $trmData3[$m] = $o['amount'];
-				   }
-			   }
-			   
-			   #dd($trmData3);
-			   $trmData2 = [
-			     '2016 Q1' => 0,
-			     '2016 Q2' => 7500,
-			     '2017 Q3' => 15000,
-			     '2017 Q4' => 22500,
-			     '2018 Q5' => 30000,
-			     '2016 Q6' => 40000,
-			   ];
-			   /**
-               { x: '2016 Q1', y: 0, },
-               { x: '2016 Q2', y: 7500, },
-               { x: '2017 Q3', y: 15000, },
-                { x: '2017 Q4', y: 22500, },
-                { x: '2018 Q5', y: 30000, },
-                { x: '2018 Q6', y: 40000, }
-                 **/
+			   $tu = User::where('id','>','0')->count();
+			   $tm = Messages::where('id','>','0')->count();
 			   
 			   $ret = [
-			     'total_apartments' => $totalApts,
-			     'total_bookings' => $totalBookings,
-			     'total_hosts' => $totalHosts,
-			     'rbrcData' => $rbrcData,
-			     'trmData' => $trmData3,
-			     'trmData2' => $trmData2,
-			     'avg_revenue' => 0,
-			     'former_avg_revenue' => 0
+			     'total_users' => $tu,
+			     'total_messages' => $tm
 			   ];
 			   
 			   return $ret;

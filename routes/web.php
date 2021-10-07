@@ -31,39 +31,11 @@ Route::post('oauth-sp', 'LoginController@postOAuthSP');
 
 //Users
 Route::get('users', 'MainController@getUsers');
+Route::get('new-user', 'MainController@getAddUser');
+Route::post('new-user', 'MainController@postAddUser');
 Route::get('user', 'MainController@getUser');
 Route::post('user', 'MainController@postUser');
 Route::get('edu', 'MainController@getEnableDisableUser');
-
-//Apartments
-Route::get('apartments', 'MainController@getApartments');
-Route::get('post-apartment', 'MainController@getAddApartment');
-Route::post('post-apartment', 'MainController@postAddApartment');
-Route::get('apartment', 'MainController@getApartment');
-Route::post('apartment', 'MainController@postApartment');
-Route::get('remove-apartment', 'MainController@getRemoveApartment');
-Route::get('uas', 'MainController@getUpdateApartmentStatus');
-Route::get('tph', 'MainController@getTopPerformingHosts');
-
-Route::get('apartment-tips', 'MainController@getApartmentTips');
-Route::get('add-apartment-tip', 'MainController@getAddApartmentTip');
-Route::post('add-apartment-tip', 'MainController@postAddApartmentTip');
-Route::get('remove-apartment-tip', 'MainController@getRemoveApartmentTip');
-
-//Reviews
-Route::get('reviews', 'MainController@getReviews');
-Route::get('arr', 'MainController@getApproveRejectReview');
-Route::get('dr', 'MainController@getRemoveReview');
-
-//Permissions
-Route::get('add-permissions', 'MainController@getAddPermission');
-Route::post('add-permissions', 'MainController@postAddPermission');
-Route::get('remove-permission', 'MainController@getRemovePermission');
-
-//Transactions
-Route::get('finance', 'MainController@getFinance');
-Route::get('transactions', 'MainController@getTransactions');
-Route::get('transaction', 'MainController@getTransaction');
 
 //Communication
 Route::get('communication', 'MainController@getCommunication');

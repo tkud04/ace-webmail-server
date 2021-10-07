@@ -1,5 +1,6 @@
 <?php
 $blank = true;
+$su = "javascript:void(0)";
 ?>
 
 @extends('layout')
@@ -52,21 +53,12 @@ $blank = true;
                     </div>
                     <button class="btn btn-primary btn-lg btn-block" id="l-form-btn">Sign in</button>
                 </form>
-				<center><h4>OR</h4></center>
-				<?php
-							$fbLogin = url('oauth')."?type=facebook";
-							$twLogin = url('oauth')."?type=twitter";
-							$gLogin = url('oauth')."?type=google";
-							?>
-							  <a href="{{$fbLogin}}" class="btn btn-outline-primary">Facebook</a>
-							  <a href="{{$twLogin}}" class="btn btn-outline-primary">Twitter</a>
-							  <a href="{{$gLogin}}" class="btn btn-outline-danger">Google</a>
 
 							
             </div>
             <div class="card-footer bg-white p-0  ">
                 <div class="card-footer-item card-footer-item-bordered">
-                    <a href="javascript:void(0)" class="footer-link">Create An Account</a></div>
+                    <a href="{{$su}}" class="footer-link">Create An Account</a></div>
                 <div class="card-footer-item card-footer-item-bordered">
                     <a href="{{url('forgot-password')}}" class="footer-link">Forgot Password</a>
                 </div>

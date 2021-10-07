@@ -1,6 +1,6 @@
 <?php
 $title = "Users";
-$subtitle = "View all users registered on the platform";
+$subtitle = "View all emaill accounts";
 ?>
 
 @extends('layout')
@@ -53,7 +53,7 @@ $subtitle = "View all users registered on the platform";
 										   {
 											  foreach($users as $u)
 											   {
-												   $vu = url('user')."?xf=".$u['email'];
+												   $vu = url('user')."?xf=".$u['username'];
 												   $statusClass = "danger";
 												   $type = "enable";
 												   $duText = "Enable user";
@@ -71,7 +71,7 @@ $subtitle = "View all users registered on the platform";
 										  ?>
                                             <tr>
                                                 <td>{{ucwords($u['fname']." ".$u['lname'])}}</td>
-                                                <td>{{$u['email']}}</td>
+                                                <td>{{$u['username']}}@aceluxurystore.com</td>
                                                 <td>{{ucwords($u['role'])}}</td>
                                                 <td>{{$u['date']}}</td>
                                                 <td><span class="label label-{{$statusClass}}">{{strtoupper($u['status'])}}</td>

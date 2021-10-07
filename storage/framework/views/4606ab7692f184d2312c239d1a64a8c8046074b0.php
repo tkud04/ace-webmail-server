@@ -3,17 +3,17 @@ $title = "Dashboard";
 $subtitle = "Admin dashboard";
 ?>
 
-@extends('layout')
 
-@section('scripts')
-<link href="{{asset('lib/morris-bundle/morris.css')}}" rel="stylesheet">
-<script src="{{asset('lib/morris-bundle/raphael.min.js')}}"></script>
-<script src="{{asset('lib/morris-bundle/morris.js')}}"></script>
-<script src="{{asset('lib/morris-bundle/morris-init.js')}}"></script>
-@stop
 
-@section('title',$title)
-@section('content')
+<?php $__env->startSection('scripts'); ?>
+<link href="<?php echo e(asset('lib/morris-bundle/morris.css')); ?>" rel="stylesheet">
+<script src="<?php echo e(asset('lib/morris-bundle/raphael.min.js')); ?>"></script>
+<script src="<?php echo e(asset('lib/morris-bundle/morris.js')); ?>"></script>
+<script src="<?php echo e(asset('lib/morris-bundle/morris-init.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('title',$title); ?>
+<?php $__env->startSection('content'); ?>
  <div class="ecommerce-widget">
 
                         <div class="row">
@@ -59,10 +59,10 @@ $subtitle = "Admin dashboard";
                                     <div class="card-body">
                                         <h5 class="text-muted">Total Users</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">{{$ta}}</h1>
+                                            <h1 class="mb-1"><?php echo e($ta); ?></h1>
                                         </div>
-                                        <div class="metric-label d-inline-block float-right {{$taClass}} font-weight-bold">
-										{!! $taIcon !!}<span>{{$tap}}%</span>
+                                        <div class="metric-label d-inline-block float-right <?php echo e($taClass); ?> font-weight-bold">
+										<?php echo $taIcon; ?><span><?php echo e($tap); ?>%</span>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue"></div>
@@ -74,10 +74,10 @@ $subtitle = "Admin dashboard";
                                     <div class="card-body">
                                         <h5 class="text-muted">Total Emails</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">{{$tb}}</h1>
+                                            <h1 class="mb-1"><?php echo e($tb); ?></h1>
                                         </div>
-                                        <div class="metric-label d-inline-block float-right {{$tbClass}} font-weight-bold">
-                                            {!! $tbIcon !!}<span>{{$tbp}}%</span>
+                                        <div class="metric-label d-inline-block float-right <?php echo e($tbClass); ?> font-weight-bold">
+                                            <?php echo $tbIcon; ?><span><?php echo e($tbp); ?>%</span>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue3"></div>
@@ -117,11 +117,12 @@ $subtitle = "Admin dashboard";
 									   ?>
                                                     <tr>
                                                         <td>
-														 {{$a['username']}}@aceluxurystore.com
+														 <?php echo e($a['username']); ?>@aceluxurystore.com
 														</td>
-														<td><span class="badge-dot badge-{{$ssClass}} mr-1"></span>{{$ss}} </td>
+														<td><span class="badge-dot badge-<?php echo e($ssClass); ?> mr-1"></span><?php echo e($ss); ?> </td>
                                                         <td>
-														  {{$a['date']}}
+														  <?php echo e($a['date']); ?>
+
                                                         </td>
                                                         
                                                     </tr>
@@ -130,7 +131,7 @@ $subtitle = "Admin dashboard";
 										}
 										?>       
                                                     <tr>
-                                                        <td colspan="9"><a href="{{url('orders')}}" class="btn btn-outline-light float-right">View more</a></td>
+                                                        <td colspan="9"><a href="<?php echo e(url('orders')); ?>" class="btn btn-outline-light float-right">View more</a></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -146,4 +147,6 @@ $subtitle = "Admin dashboard";
 							
 							</div>
 							
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace-webmail-server\resources\views/index.blade.php ENDPATH**/ ?>

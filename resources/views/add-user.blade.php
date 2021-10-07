@@ -1,8 +1,6 @@
 <?php
-$title = $u['fname']." ".$u['lname'];
-$subtitle = "View information about this user.";
-$em = $u['username']."@aceluxurystore.com";
-$pu = url('add-permissions')."?xf=".$u['username'];
+$title = "Add New User";
+$subtitle = "Add new email account.";
 ?>
 
 @extends('layout')
@@ -35,22 +33,21 @@ $pu = url('add-permissions')."?xf=".$u['username'];
 <div class="row">
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
-                                <h5 class="card-header">Personal Information</h5>
+                                <h5 class="card-header">Add New User</h5>
                                 <div class="card-body">
-                                    <form action="{{url('user')}}" id="user-form" method="post">
+                                    <form action="{{url('new-user')}}" id="user-form" method="post">
 										{!! csrf_field() !!}
-										<input type="hidden" name="xf" value="{{$u['id']}}"/>
-                                        <div class="row">
+										<div class="row">
 										<div class="col-md-6">
 										<div class="form-group">
                                             <label for="user-fname">First Name</label>
-                                            <input id="user-fname" type="text" name="fname" value="{{$u['fname']}}" placeholder="Enter first name" class="form-control">
+                                            <input id="user-fname" type="text" name="fname" value="" placeholder="Enter first name" class="form-control">
                                         </div>
 										</div>
 										<div class="col-md-6">
 										<div class="form-group">
                                             <label for="user-lname">Last Name</label>
-                                            <input id="user-lname" type="text" name="lname" value="{{$u['lname']}}" placeholder="Enter last name" class="form-control">
+                                            <input id="user-lname" type="text" name="lname" value="" placeholder="Enter last name" class="form-control">
                                         </div>
 										</div>
 										</div>
@@ -59,10 +56,10 @@ $pu = url('add-permissions')."?xf=".$u['username'];
 										<div class="form-group">
 										   <div class="row">
 										   <div class="col-md-12">
-                                            <label for="user-email">Email address</label>
+                                            <label for="user-email">Username</label>
 											</div>
 											<div class="col-md-6">
-                                            <input id="user-username" type="text" name="username" value="{{$u['username']}}" placeholder="Username" class="form-control" readonly>
+                                            <input id="user-username" type="text" name="username" value="" placeholder="Username" class="form-control">
                                            </div>
 										   <div class="col-md-6">
                                             <p class="form-control-plaintext">@aceluxurystore.com</p>
@@ -83,10 +80,10 @@ $pu = url('add-permissions')."?xf=".$u['username'];
 											 <?php
 											  foreach($roles as $r)
 											  {
-												  $ss = $r == $u['role'] ? " selected='selected'" : "";
+												  
 												  $rr = $r == "su" ? "super user" : $r;
 											 ?>
-											 <option value="{{$r}}"{{$ss}}>{{ucwords($rr)}}</option>
+											 <option value="{{$r}}">{{ucwords($rr)}}</option>
 											  <?php
 											  }
 											  ?>
@@ -104,10 +101,9 @@ $pu = url('add-permissions')."?xf=".$u['username'];
 											 <?php
 											  foreach($statuses as $s)
 											  {
-												  $ss = $s == $u['status'] ? " selected='selected'" : "";
-												  $sss = $s == "enabled" ? "active" : $s;
+												 $sss = $s == "enabled" ? "active" : $s;
 											 ?>
-											 <option value="{{$s}}"{{$ss}}>{{ucwords($sss)}}</option>
+											 <option value="{{$s}}">{{ucwords($sss)}}</option>
 											  <?php
 											  }
 											  ?>
@@ -117,12 +113,8 @@ $pu = url('add-permissions')."?xf=".$u['username'];
 										</div>
 										
                                         <div class="row">
-                                            <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
-                                                <label class="be-checkbox custom-control custom-checkbox">
-                                                   <span class="custom-control-label">Last updated: <em>{{$u['updated']}}</em></span>
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-6 pl-0">
+
+                                            <div class="col-sm-12 pl-0">
                                                 <p class="text-right">
                                                     <button class="btn btn-space btn-secondary" id="user-form-btn">Save</button>
                                                 </p>
