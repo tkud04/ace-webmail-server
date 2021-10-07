@@ -1,0 +1,7 @@
+features
+manage apartments
+-view apartments
+-edit apartment
+-disable apartment
+-delete apartment
+
