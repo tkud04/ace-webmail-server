@@ -46,7 +46,12 @@ class APIController extends Controller {
     {
 		$req = $request->all();
 		$ret = $this->helpers->getFmails();
-		dd($ret);
+		foreach($ret as $r)
+		{
+			$m = json_decode($r['message'],true);
+			dd($m);
+		}
+		
 		return json_encode($ret);
 		
     }
