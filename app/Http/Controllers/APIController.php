@@ -1,4 +1,5 @@
-$tk <?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -151,5 +152,4 @@ class APIController extends Controller {
 
 	
 }
-= isset($req['tk']) ? $req['tk'] : "";
-		$u = isset($req['u']) ? $req['u'] : "";
+
