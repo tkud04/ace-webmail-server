@@ -2397,6 +2397,19 @@ function createSocial($data)
 		 	   			    }
            
 		 	              }
+						  
+						  function getSiteStats()
+		          {
+			   $tu = User::where('id','>','0')->count();
+			   $tm = Messages::where('id','>','0')->count();
+			   
+			   $ret = [
+			     'total_users' => $tu,
+			     'total_messages' => $tm
+			   ];
+			   
+			   return $ret;
+		   }
 			  
 }
 ?>
