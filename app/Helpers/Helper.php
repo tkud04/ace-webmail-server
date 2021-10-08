@@ -1334,6 +1334,7 @@ function createSocial($data)
 					   $this->createSetting([
 				       'name' => 'msg',
 				       'value' => json_encode($msg),
+					   'label' => "inbox",
 					   'status' => "enabled"
 					]);
 					   $mm = $this->createMessage($msg);
