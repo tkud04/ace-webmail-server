@@ -43,6 +43,31 @@ class APIController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getHello(Request $request)
+    {
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		return json_encode($ret);
+    }
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postHello(Request $request)
+    {
+		$req = $request->all();
+		$ret = $this->helpers->apiLogin($req);
+		
+		return json_encode($ret);
+		
+    }
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
 	public function getPostman(Request $request)
     {
 		$req = $request->all();
