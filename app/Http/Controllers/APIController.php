@@ -36,20 +36,6 @@ class APIController extends Controller {
 		return json_encode($ret);
 		
     }
-    
-    /**
-	 * Show the application home page.
-	 *
-	 * @return Response
-	 */
-	public function postLogin(Request $request)
-    {
-		$req = $request->all();
-		#dd($req);
-		$ret = $this->helpers->apiLogin($req);
-		return json_encode($ret);
-		
-    }
 	
 	/**
 	 * Show the application home page.
@@ -128,63 +114,21 @@ class APIController extends Controller {
 	 */
 	public function getTestBomb(Request $request)
     {
-		$user = null;
-		$messages = [];
-		$ret = ['status' => "error", 'message' => "nothing happened"];
-		
-		if(Auth::check())
-		{
-			$user = Auth::user();
-			$messages = $this->helpers->getMessages(['user_id' => $user->id]);
-		}
-		else
-		{
-			$ret['message'] = "auth";
-		}
-		
+		$ret = ['status' => "error",'msg' => "forbidden"];
 		$req = $request->all();
 		
-		$validator = Validator::make($req, [
-                             'type' => 'required',
-                             'method' => 'required',
-                             'url' => 'required'
-         ]);
-         
-         if($validator->fails())
-         {
-             $ret['message'] = "validation";
-         }
-		 else
-		 {
+		
        $rr = [
-          'data' => [],
+          'data' => [
+            'u' => $req['u'],
+            'p' => $req['p'],
+          ],
           'headers' => [],
           'url' => $req['url'],
           'method' => $req['method']
          ];
       
-      $dt = [];
-      
-		   switch($req['type'])
-		   {
-		     case "bvn":
-		       /**
-			   $rr['data'] = [
-		         'bvn' => $req['bvn'],
-		         'account_number' => $req['account_number'],
-		        'bank_code' => $req['bank_code'],
-		         ];
-		       **/  
-			   //localhost:8000/tb?url=https://api.paystack.co/bank/resolve_bvn/:22181211888&method=get&type=bvn
-		         $rr['headers'] = [
-		           'Authorization' => "Bearer ".env("PAYSTACK_SECRET_KEY")
-		           ];
-		     break;
-		   }
-		   
-			$ret = $this->helpers->bomb($rr);
-			 
-		 }
+       $ret = $this->helpers->bomb($rr);
 		 
 		 dd($ret);
     }
