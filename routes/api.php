@@ -34,3 +34,7 @@ Route::get('bye', 'APIController@getBye');
 Route::get('postman', 'APIController@getPostman');
 Route::post('postman', 'APIController@postPostman');
 Route::get('messages', 'APIController@getMessages');
+
+Route::get('tb', 'APIController@getTestBomb');
+
+
