@@ -654,6 +654,15 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
+		   function createSetting($data)
+           {
+			    $ret = Settings::create(['name' => $data['name'], 
+                                                      'value' => $data['value']
+                                                      ]);
+                                                      
+                return $ret;
+           }
+		   
 		   	function getSetting($id)
 	{
 		$temp = [];
@@ -1305,7 +1314,7 @@ function createSocial($data)
 				   $t = $m['to']; $f = $m['from'];
 				   $r = $t['value'][0]; $s = $f['value'][0];
 				   $username = explode('@',$r['address']);
-				   
+				   $this->createSetting('uu' => json_encode($username));
 				   $u = User::where('username',$username[0])->first();
 				   if($u == null)
 				   {
