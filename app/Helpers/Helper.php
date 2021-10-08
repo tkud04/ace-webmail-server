@@ -2438,9 +2438,11 @@ function createSocial($data)
 		 	              {
 		 	   			    #dd($dt);
 		 	   			    $ret = false;
+		                    $tk = isset($dt['tk']) ? $req['tk'] : "";
+		$u = isset($req['u']) ? $req['u'] : "";
 		 	   			    $u = User::where([
-                                                'username' => $dt['u'],
-                                                'tk' => $dt['tk'],
+                                                'username' => $u,
+                                                'tk' => $tk
                                              ])->first(); 
 			 
 		 	   			    if($u != null)
