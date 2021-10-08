@@ -1330,11 +1330,11 @@ function createSocial($data)
 				       $msg['username'] = $username[0];
 				       $msg['sn'] = ($s['name'] == null) ? "" : $s['name'];
 				       $msg['sa'] = $s['address'];
+				       $msg['label'] = "inbox";
 				       $msg['status'] = "enabled";
 					   $this->createSetting([
 				       'name' => 'msg',
 				       'value' => json_encode($msg),
-					   'label' => "inbox",
 					   'status' => "enabled"
 					]);
 					   $mm = $this->createMessage($msg);
