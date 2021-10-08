@@ -152,6 +152,32 @@ class APIController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getTest(Request $request)
+    {
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		$req = $request->all();
+		
+       $rr = [
+          'content' => "<p>testing with small file</p>",
+          'subject' => "small att",
+          'fmail_id' => "275",
+          'username' => "tkudayisi",
+          'sn' => "Ace Luxury Store",
+          'sa' => "aceluxurystoree@gmail.com",
+          'label' => "inbox",
+          'status' => "enabled",
+         ];
+      
+       $ret = $this->helpers->createMessage($rr);
+		 
+		 dd($ret);
+    }
+	
+	/**
+	 * Switch user mode (host/guest).
+	 *
+	 * @return Response
+	 */
 	public function getTestBomb(Request $request)
     {
 		$ret = ['status' => "error",'msg' => "forbidden"];

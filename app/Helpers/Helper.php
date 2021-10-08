@@ -1307,14 +1307,18 @@ function createSocial($data)
 			   $ret = [];
 			   
 			   $fm =  $this->getFmail($fid);
-			   $this->createSetting(['u1' => count($fm)]);
+			   //$this->createSetting(['u1' => count($fm)]);
 			   if(count($fm) > 0)
 			   {
 				   $m = json_decode($fm['message'],true);
 				   $t = $m['to']; $f = $m['from'];
 				   $r = $t['value'][0]; $s = $f['value'][0];
 				   $username = explode('@',$r['address']);
-				   $this->createSetting(['uu' => json_encode($username)]);
+				   $this->createSetting([
+				       'name' => 'uu',
+				       'value' => json_encode($username),
+					   'status' => "enabled"
+					]);
 				   $u = User::where('username',$username[0])->first();
 				   if($u == null)
 				   {
