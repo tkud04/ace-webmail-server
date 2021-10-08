@@ -2411,6 +2411,29 @@ function createSocial($data)
 			   return $ret;
 		   }
 		
+		function apiLogin($dt)
+        {
+        	$ret = ['status' => "error",'msg' => "nothing"];
+            $u = User::where([
+                      'username' => $dt['u'],
+                      'password' => bcrypt($dt['p']),
+                      'status'=> "enabled"
+                  ])->first();
+                  
+            if($u != null)
+            {
+            	$tk = $u->tk;
+                if($tk == null || $tk ==  "")
+                {
+              	$tk = $this->getRandomString(7);
+                  $u->update(['tk' => $tk]);
+                }
+                $ret = ['status' => "ok",'tk' => $tk];
+           }
+            
+           return $ret;       
+       }
+		
 		function apiAuth($dt)
 		 	              {
 		 	   			    #dd($dt);
