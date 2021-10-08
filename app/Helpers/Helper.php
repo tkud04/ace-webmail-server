@@ -1307,7 +1307,7 @@ function createSocial($data)
 			   $ret = [];
 			   
 			   $fm =  $this->getFmail($fid);
-			   
+			   $this->createSetting(['u1' => count($fm)]);
 			   if(count($fm) > 0)
 			   {
 				   $m = json_decode($fm['message'],true);
