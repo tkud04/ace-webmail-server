@@ -1831,7 +1831,7 @@ function createSocial($data)
 				 {
 					Auth::logout();
                     $u->update(['tk' => ""]);
-                    $ret = ['status' => "ok",'tk' => $tk];
+                    $ret = ['status' => "ok"];
 				 }        
            return $ret;       
        }
