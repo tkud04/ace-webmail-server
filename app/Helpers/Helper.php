@@ -9,46 +9,19 @@ use Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Carts;
-use App\Categories;
-use App\Apartments;
-use App\ApartmentAddresses;
-use App\ApartmentData;
-use App\ApartmentMedia;
-use App\ApartmentTerms;
-use App\ApartmentFacilities;
-use App\ApartmentTips;
-use App\Reviews;
-use App\ReviewStats;
 use App\Ads;
 use App\Banners;
 use App\Senders;
 use App\Settings;
 use App\Plugins;
-use App\Services;
-use App\Comparisons;
 use App\Socials;
 use App\Messages;
-use App\SavedPayments;
-use App\Orders;
-use App\OrderItems;
-use App\Transactions;
-use App\SavedApartments;
-use App\ApartmentPreferences;
 use App\Permissions;
 use App\Tickets;
 use App\TicketItems;
 use App\Faqs;
 use App\FaqTags;
-use App\Posts;
-use App\PostTags;
-use App\Comments;
-use App\Tags;
-use App\ReservationLogs;
-use App\Plans;
-use App\UserPlans;
-use App\Activities;
-use App\Leads;
-use App\BankDetails;
+use App\Fmails;
 use App\Guests;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
@@ -1623,586 +1596,6 @@ function isDuplicateUser($data)
 		   }
 
 
-function updateApartment($data)
-           {
-			   $apartment_id = $data['apartment_id'];
-           	$apartment = Apartments::where('apartment_id',$apartment_id)->first();
-			
-			if($apartment != null)
-			{
-			  //Basic information
-              $apartment->update([
-			      'name' => $data['name'],                                                                                                          
-                  'apartment_id' => $apartment_id, 
-                  'user_id' => $data['user_id'],                                                       
-                  'avb' => $data['avb'],                                                       
-                  'bank_id' => $data['bank_id'],                                                       
-                  'url' => $data['url'],   
-			  ]);			  
-			}
-                              
-                $this->updateApartmentData($data);
-                $this->updateApartmentAddress($data);
-                $this->updateApartmentTerms($data);
-				$facilities = json_decode($data['facilities']);
-				ApartmentFacilities::where('apartment_id',$apartment_id)->delete();
-				foreach($facilities as $f)
-				{
-					$af = $this->createApartmentFacilities([
-					    'apartment_id' => $apartment_id,
-					    'facility' => $f->id,
-					    'selected' => "true",
-					]);
-				}
-                
-				if(isset($data['ird']) && count($data['ird']) > 0)
-				{
-					foreach($data['ird'] as $i)
-                    {
-                    	$this->createApartmentMedia([
-						           'apartment_id' => $apartment_id,
-								   'url' => $i['public_id'],
-								   'delete_token' => $i['delete_token'],
-								   'deleted' => $i['deleted'],
-								   'cover' => $i['ci'],
-								   'type' => $i['type']
-                         ]);
-                    }
-				}
-                
-           }
-		   
-		   function updateApartmentStatus($data)
-           {
-			   $apartment_id = $data['apartment_id'];
-           	   $apartment = Apartments::where('apartment_id',$apartment_id)->first();
-			
-			 if($apartment != null)
-			 {
-			   $apartment->update([
-			      'status' => $data['status'],   
-			   ]);			  
-			 }
-           }
-		   
-          function updateApartmentAddress($data)
-           {
-			   $apartment_id = $data['apartment_id'];
-           	   $aa = ApartmentAddresses::where('apartment_id',$apartment_id)->first();
-			
-			   if($aa != null)
-			   {
-           	       $aa->update([
-                                                      'address' => $data['address'],                                                       
-                                                      'city' => $data['city'],                                                       
-                                                      'lga' => $data['lga'],                                                       
-                                                      'state' => $data['state']
-                                                      ]);
-			   }               
-           }
-		   
-		   function updateApartmentData($data)
-           {
-			   $apartment_id = $data['apartment_id'];
-           	   $adt = ApartmentData::where('apartment_id',$apartment_id)->first();
-			
-			   if($adt != null)
-			   {
-				   $mc = isset($data['max_children']) ? $data['max_children'] : "";
-				   $landmarks = isset($data['landmarks']) ? $data['landmarks'] : "";
-				   
-           	       $adt->update([
-                                                     'description' => $data['description'], 
-                                                     'category' => $data['category'], 
-                                                     'property_type' => $data['property_type'], 
-                                                     'rooms' => $data['rooms'], 
-                                                     'units' => $data['units'], 
-                                                     'bathrooms' => $data['bathrooms'], 
-                                                     'bedrooms' => $data['bedrooms'],                                                      
-                                                      'amount' => $data['amount'],                                                      
-                                                      'landmarks' => $landmarks,                                                      
-                                                       ]);
-			   }
-           }
-		   
-
-		   function updateApartmentTerms($data)
-           {
-			    $apartment_id = $data['apartment_id'];
-           	   $at = ApartmentTerms::where('apartment_id',$apartment_id)->first();
-			   
-           	if($at != null)
-			   {
-           	       $at->update([
-                                                      'max_adults' => $data['max_adults'],                                                       
-                                                      'max_children' => $data['max_children'],  
-                                                      'children' => $data['children'],                                                      
-                                                      'pets' => $data['pets'],                                                      
-                                                      'payment_type' => $data['payment_type']                                                      
-                                                      ]);
-                }
-           }
-
-
-  function deleteApartment($id)
-  {
-	  $apartment = Apartments::where('id',$id)
-	                         ->orWhere('apartment_id',$id)->first();
-	  
-	  if($apartment != null)
-	  {
-		  $aa = ApartmentAddresses::where('id',$id)
-	                         ->orWhere('apartment_id',$id)->first();
-		  $af = ApartmentFacilities::where('id',$id)
-	                         ->orWhere('apartment_id',$id)->get();
-		  $ad = ApartmentData::where('id',$id)
-	                         ->orWhere('apartment_id',$id)->first();
-		  $am = ApartmentMedia::where('id',$id)
-	                         ->orWhere('apartment_id',$id)->get();
-		  $at = ApartmentTerms::where('id',$id)
-	                         ->orWhere('apartment_id',$id)->first();
-		  
-		  $reviews = Reviews::where('apartment_id',$id)->get();
-		  
-          if($aa != null) $aa->delete();		  
-          if($af != null)
-		  {
-		    foreach($af as $aff) $aff->delete();  
-		  }		  
-          if($ad != null) $ad->delete();		  
-          if($am != null)
-		  {
-			 #dd($am);
-			foreach($am as $amm) $amm->update(['deleted' => "yes"]);  
-		  }		  
-          if($at != null) $at->delete();
-		  
-          if($reviews != null)
-		  {
-			 #dd($am);
-			foreach($reviews as $r) $this->removeReview(['xf' => $r->id]);  
-		  }	
-		  
-		  $apartment->delete();
-	  }
-  }
-
-  function deleteApartmentImage($dt)
-  {
-	  $ret = "ok";
-	  
-	  $img = ApartmentMedia::where('id',$dt['xf'])
-	                     ->where('apartment_id',$dt['apartment_id'])->first();
-	  
-	  if($img != null)
-	  {
-		  if($img->cover == "yes")
-		  {
-			  $ret = "isCover";
-		  }
-		  else
-		  {
-			$img->delete();  
-		  }
-		  
-	  }
-	  return $ret;
-  }  
-
-  function setCoverImage($dt)
-  {
-	  $img = ApartmentMedia::where('id',$dt['xf'])
-	                     ->where('apartment_id',$dt['apartment_id'])->first();
-	  
-	  $currentCover = ApartmentMedia::where('cover',"yes")
-	                     ->where('apartment_id',$dt['apartment_id'])->first();
-	  
-	  if($img != null && $currentCover != null && $img != $currentCover)
-	  {
-		  $currentCover->update(['cover' => "no"]);
-		  $img->update(['cover' => "yes"]);
-	  }
-  }  
-		   
-		   
-  function createReview($data)
-           {
-			   $ret = Reviews::create(['user_id' => $data['user_id'], 
-                                                      'apartment_id' => $data['apartment_id'], 
-                                                      'service' => $data['service'],
-                                                      'location' => $data['location'],
-                                                      'security' => $data['security'],
-                                                      'cleanliness' => $data['cleanliness'],
-                                                      'comfort' => $data['comfort'],
-                                                      'comment' => $data['comment'],
-                                                      'status' => "pending",
-                                                      ]);
-               
-			   
-                return $ret;
-           }
-		   
-		   function createReviewStats($dt)
-           {
-			   $ret = ReviewStats::create(['review_id' => $dt['review_id'], 
-                                                      'user_id' => $dt['user_id'], 
-                                                      'upvotes' => "0", 
-                                                      'downvotes' => "0" 
-                                                      ]);
-                                                      
-                return $ret;
-           }
-		   
-		   function getReviews($id,$type="apartment")
-           {
-           	$ret = [];
-			$reviews = null;
-			$options = [];
-			
-			 if($type == "apartment")
-			 {
-				$reviews = Reviews::where('apartment_id',$id)
-			                    ->where('status',"approved")->get();								
-			 }
-			 else if($type == "user")
-			 {
-				 $reviews = Reviews::where('user_id',$id)
-			                    ->where('status',"approved")->get();
-				$options = ['apartment' => true];
-			 }
-              
-              	
-			  
-              if($reviews != null)
-               {
-				   $reviews = $reviews->sortByDesc('created_at');
-				   
-				  foreach($reviews as $r)
-				  {
-					  $temp = $this->getReview($r->id,$options);
-					  array_push($ret,$temp);
-				  }
-               }                         
-                                  
-                return $ret;
-           }
-		   
-		   function getAllReviews()
-           {
-           	$ret = [];
-			$reviews = null;
-			
-				$reviews = Reviews::where('id',">","0")->get();								
-              
-              	
-			  
-              if($reviews != null)
-               {
-				   $options = ['apartment' => true];
-				   $reviews = $reviews->sortByDesc('created_at');
-				   
-				  foreach($reviews as $r)
-				  {
-					  $temp = $this->getReview($r->id,$options);
-					  array_push($ret,$temp);
-				  }
-               }                         
-                                  
-                return $ret;
-           }
-		   
-		   function getReviewStats($id)
-           {
-           	$ret = [];
-              $r = ReviewStats::where('review_id',$id)->first();
- 
-              if($r != null)
-               {
-				  $temp = [];
-				  $temp['id'] = $r->id;
-				  $temp['review_id'] = $r->review_id;
-				  $temp['user_id'] = $r->user_id;
-				  $temp['upvotes'] = $r->upvotes;
-     			  $temp['downvotes'] = $r->downvotes;
-				  $temp['date'] = $r->created_at->format("jS F, Y");
-				  $temp['last_updated'] = $r->updated_at->format("jS F, Y");
-				  $ret = $temp;
-               }                         
-                                                      
-                return $ret;
-           }
-
-		   function getReview($id,$options=[])
-           {
-           	$ret = [];
-              $r = Reviews::where('id',$id)
-			                 ->orWhere('apartment_id',$id)->first();
- 
-              if($r != null)
-               {
-				  $temp = [];
-				  $temp['id'] = $r->id;
-				  $temp['apartment_id'] = $r->apartment_id;
-				  $temp['user'] = $this->getUser($r->user_id);
-				  if(isset($options['apartment']) && $options['apartment']) $temp['apartment'] = $this->getApartment($r->apartment_id);
-				  $temp['stats'] = $this->getReviewStats($r->id);
-     			  $temp['service'] = $r->service;
-     			  $temp['location'] = $r->location;
-     			  $temp['security'] = $r->security;
-     			  $temp['cleanliness'] = $r->cleanliness;
-     			  $temp['comfort'] = $r->comfort;
-     			  $temp['comment'] = $r->comment;
-     			  $temp['status'] = $r->status;
-				  $temp['date'] = $r->created_at->format("jS F, Y");
-				  $ret = $temp;
-               }                         
-                                                      
-                return $ret;
-           }
-		   
-		   function updateReviewStatus($dt)
-		   {
-			   $r = Reviews::where('id',$dt['id'])->first();
-			   $ret = "error";
-			   
-			   if($r != null)
-			   {
-				   $r->update(['status' => $dt['status']]);
-				   #dd($r);
-				    if($dt['status'] == "approved")
-					  {
-						 //add activity
-			             //guest
-			             $this->createActivity([
-			              'type' => "review",
-			              'mode' => "guest",
-			              'user_id' => $r->user_id,
-			              'data' => $r->id,
-			             ]);
-
-			             //host
-			             $a = $this->getApartment($r->apartment_id,['host' => true]);
-			             $h = $a['host'];
-			             $this->createActivity([
-			               'type' => "review",
-			               'mode' => "host",
-			               'user_id' => $h['id'],
-			               'data' => $r->id.",".$r->user_id,
-			             ]);
-					  }
-				   
-				   $ret = "ok";
-			   }
-			   
-			   return $ret;
-		   }
-		   
-		   function removeReview($dt)
-		   {
-			   $r = Reviews::where('id',$dt['xf'])->first();
-			   $ret = "error";
-			   
-			   if($r != null)
-			   {
-				   $rs = ReviewStats::where('review_id',$r->id)->first();
-				   if($rs != null) $rs->delete();
-				   $r->delete();
-				   $ret = "ok";
-			   }
-			   
-			   return $ret;
-		   }
-		   
-		   function hasReview($dt)
-		   {
-			   $ret = false;
-			   $r = Reviews::where(['user_id' => $dt['user_id'],'apartment_id' => $dt['apartment_id']])->first();
-			   if($r != null) $ret = true;
-			   return $ret;
-		   }
-		   
-		   function hasVotedReview($dt)
-		   {
-			   $ret = false;
-			   $r = ReviewStats::where(['user_id' => $dt['user_id'],'review_id' => $dt['review_id']])->first();
-			   if($r != null) $ret = true;
-			   #dd($ret);
-			   return $ret;
-		   }
-		   
-		   function voteReview($dt)
-		   {
-			   $ret = ['u' => "0",'v' => "0"];
-			   $r = ReviewStats::where(['user_id' => $dt['user_id'],'review_id' => $dt['rxf']])->first();
-			   dd($r);
-			   if($r == null)
-			   {
-				   $stats = $this->createReviewStats(['review_id' => $ret->id,'user_id' => $data['user_id']]);
-			   }
-			   else
-			   {
-				   $u = $r->upvotes; $d = $r->downvotes;
-				   
-				   switch($dt['type'])
-				   {
-					   case "up":
-					    ++$u;
-					   break;
-					   
-					   case "down":
-					    ++$d;
-					   break;
-				   }
-				   
-				   $u->update(['upvotes' => $u,'downvotes' => $d]);
-				   $ret = ['u' => $u,'d' => $d];
-			   } 
-			   return $ret;
-		   }
-		   
-		   function getRating($reviews)
-		   {
-			   $ret = 0;
-			   			   
-			   if($reviews != null && count($reviews) > 0)
-			   {
-				  $reviewCount = 0;
-				  $temp = 0;
-				  
-                  foreach($reviews as $r)
-				  {
-					  $sum = ($r['service'] + $r['location'] + $r['security'] + $r['cleanliness'] + $r['comfort']) / 5;
-					  $temp += $sum;
-					  ++$reviewCount;
-				  }
-                  
-                  if($temp > 0 && $reviewCount > 0)
-				  {
-					  $ret = floor($temp / $reviewCount);
-				  }				  
-			   }
-			   
-			   return $ret;
-		   }
-		   
-		    function createService($data)
-           {
-           	$ret = Services::create(['name' => $data['name'], 
-                                                      'tag' => $data['tag'] 
-                                                      ]);
-                                                      
-                return $ret;
-           }
-		   
-		   function getServices()
-		   {
-			   $ret = [];
-			   $services = Services::where('id','>',"0")->get();
-			   
-			   if($services != null)
-			   {
-				   foreach($services as $s)
-				   {
-					   $temp = [];
-					   $temp['tag'] = $s->tag;
-					   $temp['name'] = $s->name;
-					   array_push($ret,$temp);
-				   }
-			   }
-			   
-			   return $ret;
-		   }
-		   
-		   function populateServices()
-		   {
-			   $services = [
-										  'air-conditioning' => "Air Conditioning",
-										  'adequate-parking' => "Adequate Parking",
-										  'bar' => "Bar",
-										  'game-room' => "Game Room",
-										  'inhouse-dining' => "In-house Dining",
-										  'drycleaning' => "Drycleaning",
-										  'iron' => "Clothing Iron",
-										  'kitchen' => "Kitchen",
-										  'pool' => "Swimming Pool",
-										  'fitness-facilities' => "Fitness Facilities",
-										  'room-service' => "Room Service",
-										  'tv' => "TV",
-										  'concierge' => "Concierge",
-										  'security' => "Luggage Storage",
-										  'electricity' => "24hrs Electricity",
-										  'king-sized-bed' => "King-sized Bed"
-										];
-										
-				foreach($services as $k => $v)
-				{
-					$this->createService([
-					  'tag' => $k,
-					  'name' => $v,
-					]);
-				}
-		   }
-		   
-		   
-		   function search($data)
-		   {
-			   $dt = json_decode($data);
-			 #dd($dt);
-			 $city = $dt->city;
-			 $state = $dt->state;
-			 $rating = $dt->rating;
-			 $dates = $dt->dates;
-			 $facilities = $dt->facilities;
-			 
-			 $byAddress = ApartmentAddresses::where('city',"LIKE","%$city%")
-			                  ->orWhere('state',"LIKE","%$state%")->get();
-							  
-			 //$byRating = Apartments::where('rating',"LIKE","%$rating%")->get();
-			 $byFacilities = ApartmentFacilities::whereIn('facility',$facilities)->get();
-			 
-			 //collect all
-			 $ret = [];
-			 if($byAddress != null)
-			 {
-				 foreach($byAddress as $ba)
-				 {
-					 array_push($ret,$ba->apartment_id);
-				 }
-			 }
-			 
-			 if($byFacilities != null)
-			 {
-				 foreach($byFacilities as $bf)
-				 {
-					 array_push($ret,$bf->apartment_id);
-				 }
-			 }
-			 
-			 /**
-			 if($byRating != null)
-			 {
-				 foreach($byRating as $br)
-				 {
-					 array_push($ret,$br->apartment_id);
-				 }
-			 }
-			 **/
-			 $ret = array_unique($ret);
-			 $ratings = [];
-			 
-			 
-			 //Get the reviews of each result and filter by rating
-			 foreach($ret as $r)
-			 {
-				 $reviews = $this->getReviews($r);
-				 $rating = $this->getRating($reviews);
-				 $ratings[$r] = $rating;
-			 }
-			 dd($ratings);
-			 
-		   }
-
-
 
 function createSocial($data)
            {
@@ -2346,6 +1739,48 @@ function createSocial($data)
 			   return $ret;
 		   }
 		   
+		   
+		   function createFmail($dt)
+		   {
+			    $ret = Fmails::create(['message' => json_encode($dt));
+				return $ret;
+		   }
+		   
+		   function getFmails()
+           {
+           	$ret = [];
+			  $messages = Fmails::where(['id','>','0')->get();
+			  
+              if($messages != null)
+               {
+				   $messages = $messages->sortByDesc('created_at');	
+			  
+				  foreach($messages as $m)
+				  {
+					  $temp = $this->getFmail($m->id);
+					  array_push($ret,$temp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
+		   
+		   function getFmail($id)
+		   {
+			   $ret = [];
+			   $m = Fmails::where('id',$id)->first();
+			   
+			   if($m != null)
+               {
+				  $temp = [];
+				  $temp['id'] = $m->id;
+				  $temp['message'] =$m->message;
+     			  $temp['date'] = $m->created_at->format("m/d/Y h:i A");
+				  $ret = $temp;
+               }
+
+               return $ret;			   
+		   }
 		   
 		   function createMessage($dt)
 		   {

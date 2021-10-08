@@ -45,8 +45,8 @@ class APIController extends Controller {
 	public function getPostman(Request $request)
     {
 		$req = $request->all();
-		$ret = ['status' => "ok"];
-		dd($req);
+		$ret = $this->helpers->getFmails();
+		dd($ret);
 		return json_encode($ret);
 		
     }
@@ -60,7 +60,8 @@ class APIController extends Controller {
     {
 		$req = $request->all();
 		$ret = ['status' => "ok"];
-		dd($req);
+		#dd($req);
+		$this->helpers->createFmail($req);
 		return json_encode($ret);
 		
     }
