@@ -66,9 +66,8 @@ class APIController extends Controller {
 	public function postPostman(Request $request)
     {
 		$req = $request->all();
-		$ret = ['status' => "ok"];
 		#dd($req);
-		$this->helpers->createFmail($req);
+		$ret = $this->helpers->createFmail($req);
 		return json_encode($ret);
 		
     }

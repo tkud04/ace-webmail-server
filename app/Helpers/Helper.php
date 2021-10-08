@@ -22,6 +22,7 @@ use App\TicketItems;
 use App\Faqs;
 use App\FaqTags;
 use App\Fmails;
+use App\Attachments;
 use App\Guests;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
@@ -1743,6 +1744,7 @@ function createSocial($data)
 		   function createFmail($dt)
 		   {
 			    $ret = Fmails::create(['message' => json_encode($dt)]);
+				$this->parseMessage($ret->id);
 				return $ret;
 		   }
 		   
@@ -1782,13 +1784,74 @@ function createSocial($data)
                return $ret;			   
 		   }
 		   
+		   function createAttachment($dt)
+		   {
+			    $ret = Attachments::create([
+				   'message_id' => $dt['message_id'],
+				   'cid' => $dt['cid'],
+				   'ctype' => $dt['ctype'],
+				   'filename' => $dt['filename'],
+				   'content' => $dt['content'],
+				   'checksum' => $dt['checksum'],
+				   'size' => $dt['size'],
+				]);
+				return $ret;
+		   }
+		   
+		   function getAttachments($mid)
+           {
+           	$ret = [];
+			  $atts = Attachments::where('message_id',$mid)->get();
+			  
+              if($atts != null)
+               {
+				   $atts = $atts->sortByDesc('created_at');	
+			  
+				  foreach($atts as $a)
+				  {
+					  $temp = $this->getAttachment($a->id);
+					  array_push($ret,$temp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
+		   
+		   function getAttachment($id)
+		   {
+			   $ret = [];
+			   $a = Attachments::where('id',$id)->first();
+			   
+			   if($a != null)
+               {
+				  $temp = [];
+				  $temp['id'] = $a->id;
+				  $temp['message_id'] = $a->message_id;
+				  $temp['cid'] = $a->cid;
+				  $temp['ctype'] = $a->ctype;
+				  $temp['filename'] = $a->filename;
+				  $temp['content'] = $a->content;
+				  $temp['checksum'] = $a->checksum;
+				  $temp['size'] = $a->size;
+     			  $temp['date'] = $a->created_at->format("m/d/Y h:i A");
+				  $ret = $temp;
+               }
+
+               return $ret;			   
+		   }
+		   
+		   
+		   
+		  
 		   function createMessage($dt)
 		   {
-			   $ret = Messages::create(['user_id' => $dt['user_id'], 
-                                                      'host' => $dt['host'], 
-                                                      'msg' => $dt['msg'], 
-                                                      'sent_by' => $dt['sent_by'], 
-                                                      'apartment_id' => $dt['apartment_id'], 
+			   $ret = Messages::create(['fmail_id' => $dt['fmail_id'], 
+                                                      'username' => $dt['username'], 
+                                                      'sn' => $dt['sn'], 
+                                                      'sa' => $dt['sa'], 
+                                                      'subject' => $dt['subject'], 
+                                                      'content' => $dt['content'], 
+                                                      'label' => $dt['label'], 
                                                       'status' => "unread", 
                                                       ]);
                                                       
@@ -1804,11 +1867,12 @@ function createSocial($data)
                {
 				  $temp = [];
 				  $temp['id'] = $m->id;
-				  $temp['guest'] = $this->getUser($m->user_id);
-				  $temp['host'] = $this->getUser($m->host);
-				  $temp['sent_by'] = $m->sent_by;
-				  $temp['apartment_id'] = $m->apartment_id;
-				  $temp['msg'] = $m->msg;
+				  $temp['fmail_id'] = $m->fmail_id;
+				  $temp['username'] = $m->username;
+				  $temp['sn'] = $m->sn;
+				  $temp['sa'] = $m->sa;
+				  $temp['content'] = $m->content;
+				  $temp['label'] = $m->label;
 				  $temp['status'] = $m->status;
      			  $temp['date'] = $m->created_at->format("m/d/Y h:i A");
 				  $ret = $temp;
@@ -1817,26 +1881,10 @@ function createSocial($data)
                return $ret;			   
 		   }
 		   
-		   function getMessages($dt)
+		   function getMessages($username)
            {
            	$ret = [];
-			  $messages = null;
-			  $tt = isset($dt['type']) ? $dt['type'] : "inbox";
-			  
-			  switch($tt)
-			  {
-				  case "inbox":
-				   $messages = Messages::where(['host' => $dt['user_id']])->get();
-				  break;
-				  
-				  case "sent":
-				   $messages = Messages::where(['user_id' => $dt['user_id']])->get();
-				  break;
-				  
-				  case "all":
-				   $messages = Messages::where(['user_id' => $dt['user_id']])
-				                       ->orWhere(['host' => $dt['user_id']])->get();
-				  break;
+			  $messages = Messages::where('username',$username)->get();
 			  }
 			  
               if($messages != null)
@@ -1852,6 +1900,65 @@ function createSocial($data)
                                   
                 return $ret;
            }
+		   
+		    function parseMessage($fid)
+		   {
+			   $ret = [];
+			   
+			   $fm =  $this->helpers->getFmail($fid);
+			   
+			   if(count($fm) > 0)
+			   {
+				   $m = json_decode($fm['message'],true);
+				   $t = $m['to']; $f = $m['from'];
+				   $r = $t['value'][0]; $s = $f['value'][0];
+				   $username = explode('@',$r['address']);
+				   
+				   $u = User::where('username',$username[0])->first();
+				   if($u == null)
+				   {
+					   $ret = ['status' => "nice try"];
+				   }
+				   else
+				   {
+					   //Email
+				       $msg = [];
+				       $msg['content'] = $m['textAsHtml'];
+				       $msg['subject'] = $m['subject'];
+				       $msg['fmail_id'] = $fid;
+				       $msg['username'] = $username[0];
+				       $msg['sn'] = ($s['name'] == null) ? "" : $s['name'];
+				       $msg['sa'] = $s['address'];
+				       $msg['status'] = "enabled";
+					   $mm = $this->createMessage($msg);
+					   
+					    //Attachments
+					   $fatts = $m['attachments']; $atts = [];
+					   
+					   foreach($fatts as $ff)
+					   {
+						   $atts = [];
+						   $content = $ff['content'];
+						   $atts['message_id'] = $mm->id;
+						   $atts['cid'] = $ff['textAsHtml'];
+						   $atts['ctype'] = $ff['contentType'];
+						   $atts['filename'] = $ff['filename'];
+						   $atts['content'] = json_encode($content['data']);
+						   $atts['checksum'] = $ff['checksum'];
+						   $atts['size'] = $ff['size'];
+						   $this->createAttachment($msg);
+					   }
+					   
+					   $ret = ['status' => "ok"];
+				   }
+			   
+				  
+				   
+			   }
+			   
+			   return $ret;
+		   }
+		   
 		   
 		   function getChatHistory($dt)
 		   {
