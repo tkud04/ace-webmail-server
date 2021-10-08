@@ -61,6 +61,20 @@ class APIController extends Controller {
 		
 		return json_encode($ret);
 		
+    }	
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getBye(Request $request)
+    {
+		$req = $request->all();
+		$ret = $this->helpers->apiLogout($req);
+		
+		return json_encode($ret);
+		
     }
 	
 	/**

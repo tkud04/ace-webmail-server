@@ -1821,6 +1821,18 @@ function createSocial($data)
             
            return $ret;       
        }
+	   
+	   function apiLogout($dt)
+        {
+        	$ret = ['status' => "error",'msg' => "nothing"]; $u = null;
+                 
+				Auth::logout();
+				 $u = User::where('username',$dt['u'])->first(); 
+                  $u->update(['tk' => ""]);
+                $ret = ['status' => "ok",'tk' => $tk];
+                       
+           return $ret;       
+       }
 		
 		function apiAuth($dt)
 		 	              {
