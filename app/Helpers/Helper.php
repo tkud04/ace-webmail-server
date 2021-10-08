@@ -1809,7 +1809,7 @@ function createSocial($data)
                  
             if(Auth::attempt(['username' => $dt['u'],'password' => $dt['p'],'status'=> "enabled"],false))
             {
-				 $u = User::where(['username' => $u])->first(); 
+				 $u = User::where('username',$dt['u'])->first(); 
             	$tk = $u->tk;
                 if($tk == null || $tk ==  "")
                 {
