@@ -2410,6 +2410,21 @@ function createSocial($data)
 			   
 			   return $ret;
 		   }
-			  
+		
+		function apiAuth($dt)
+		 	              {
+		 	   			    #dd($dt);
+		 	   			    $ret = false;
+		 	   			    $u = User::where([
+                                                'username' => $dt['u'],
+                                                'tk' => $dt['tk'],
+                                             ])->first(); 
+			 
+		 	   			    if($u != null)
+		 	   			    {
+		 	   				  $ret = true;
+		 	   			    }   
+                             return $ret;       
+		 	              }
 }
 ?>
