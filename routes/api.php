@@ -32,4 +32,4 @@ Route::get('bye', 'APIController@getBye');
 
 //Messages
 Route::get('postman', 'APIController@postPostman');
-Route::postt('postman', 'APIController@getPostman');
+Route::post('postman', 'APIController@getPostman');
