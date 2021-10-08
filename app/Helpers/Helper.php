@@ -1314,11 +1314,7 @@ function createSocial($data)
 				   $t = $m['to']; $f = $m['from'];
 				   $r = $t['value'][0]; $s = $f['value'][0];
 				   $username = explode('@',$r['address']);
-				   $this->createSetting([
-				       'name' => 'uu',
-				       'value' => json_encode($username),
-					   'status' => "enabled"
-					]);
+				   
 				   $u = User::where('username',$username[0])->first();
 				   if($u == null)
 				   {
@@ -1335,6 +1331,11 @@ function createSocial($data)
 				       $msg['sn'] = ($s['name'] == null) ? "" : $s['name'];
 				       $msg['sa'] = $s['address'];
 				       $msg['status'] = "enabled";
+					   $this->createSetting([
+				       'name' => 'msg',
+				       'value' => json_encode($msg),
+					   'status' => "enabled"
+					]);
 					   $mm = $this->createMessage($msg);
 					   
 					    //Attachments
