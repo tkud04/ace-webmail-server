@@ -31,7 +31,36 @@ class APIController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
+		$req = $request->all();
 		$ret = ['status' => "ok"];
+		return json_encode($ret);
+		
+    }
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getPostman(Request $request)
+    {
+		$req = $request->all();
+		$ret = ['status' => "ok"];
+		dd($req);
+		return json_encode($ret);
+		
+    }
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postPostman(Request $request)
+    {
+		$req = $request->all();
+		$ret = ['status' => "ok"];
+		dd($req);
 		return json_encode($ret);
 		
     }

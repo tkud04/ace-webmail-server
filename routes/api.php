@@ -29,3 +29,7 @@ Route::post('reset', 'APIController@postPasswordReset');
 Route::get('hello', 'APIController@getHello');
 Route::post('hello', 'APIController@postHello');
 Route::get('bye', 'APIController@getBye');
+
+//Messages
+Route::get('postman', 'APIController@postPostman');
+Route::postt('postman', 'APIController@getPostman');

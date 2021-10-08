@@ -62,7 +62,7 @@ $subtitle = "Admin dashboard";
                                             <h1 class="mb-1">{{$ta}}</h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right {{$taClass}} font-weight-bold">
-										{!! $taIcon !!}<span>{{$tap}}%</span>
+										
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue"></div>
@@ -77,7 +77,7 @@ $subtitle = "Admin dashboard";
                                             <h1 class="mb-1">{{$tb}}</h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right {{$tbClass}} font-weight-bold">
-                                            {!! $tbIcon !!}<span>{{$tbp}}%</span>
+                                           
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue3"></div>
@@ -130,7 +130,7 @@ $subtitle = "Admin dashboard";
 										}
 										?>       
                                                     <tr>
-                                                        <td colspan="9"><a href="{{url('orders')}}" class="btn btn-outline-light float-right">View more</a></td>
+                                                        <td colspan="9"><a href="{{url('users')}}" class="btn btn-outline-light float-right">View more</a></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

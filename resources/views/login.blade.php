@@ -41,7 +41,7 @@ $su = "javascript:void(0)";
                     {!! csrf_field() !!}
 					
 					<div class="form-group">
-                        <input class="form-control form-control-lg" name="id" id="login-id" type="text" placeholder="Email address" autocomplete="off">
+                        <input class="form-control form-control-lg" name="id" id="login-id" type="text" placeholder="Username" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input class="form-control form-control-lg" name="password" id="login-password" type="password" placeholder="Password">

@@ -62,7 +62,7 @@ $subtitle = "Admin dashboard";
                                             <h1 class="mb-1"><?php echo e($ta); ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right <?php echo e($taClass); ?> font-weight-bold">
-										<?php echo $taIcon; ?><span><?php echo e($tap); ?>%</span>
+										
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue"></div>
@@ -77,7 +77,7 @@ $subtitle = "Admin dashboard";
                                             <h1 class="mb-1"><?php echo e($tb); ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right <?php echo e($tbClass); ?> font-weight-bold">
-                                            <?php echo $tbIcon; ?><span><?php echo e($tbp); ?>%</span>
+                                           
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue3"></div>
