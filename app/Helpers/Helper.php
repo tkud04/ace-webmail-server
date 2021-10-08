@@ -1805,7 +1805,7 @@ function createSocial($data)
 		
 		function apiLogin($dt)
         {
-        	$ret = ['status' => "error",'msg' => "nothing"];
+        	$ret = ['status' => "error",'msg' => "nothing"]; $u = null;
                  
             if(Auth::attempt(['username' => $dt['u'],'password' => $dt['p'],'status'=> "enabled"],false))
             {
