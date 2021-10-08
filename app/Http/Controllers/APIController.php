@@ -45,7 +45,7 @@ class APIController extends Controller {
 	 */
 	public function getHello(Request $request)
     {
-		$ret = ['status' => "error",'msg' => "forbidden"];
+		$ret = ['status' => "error",'msg' => "unsupported"];
 		return json_encode($ret);
     }
 	
