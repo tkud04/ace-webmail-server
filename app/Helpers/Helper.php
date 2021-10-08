@@ -558,7 +558,7 @@ $subject = $data['subject'];
 				 
 				 try
 				 {
-					 dd($data);
+					 #dd($data);
 					$res = $client->request(strtoupper($data['method']),$url,$dt);
 					$ret = $res->getBody()->getContents(); 
 			       //dd($ret);
@@ -1806,18 +1806,14 @@ function createSocial($data)
 		function apiLogin($dt)
         {
         	$ret = ['status' => "error",'msg' => "nothing"];
-            $u = User::where([
-                      'username' => $dt['u'],
-                      'password' => bcrypt($dt['p']),
-                      'status'=> "enabled"
-                  ])->first();
-                  
-            if($u != null)
+                 
+            if(Auth::attempt(['username' => $dt['u'],'password' => $dt['p'],'status'=> "enabled"],false))
             {
+				 $u = User::where(['username' => $u])->first(); 
             	$tk = $u->tk;
                 if($tk == null || $tk ==  "")
                 {
-              	$tk = $this->getRandomString(7);
+              	 $tk = $this->getRandomString(7);
                   $u->update(['tk' => $tk]);
                 }
                 $ret = ['status' => "ok",'tk' => $tk];
