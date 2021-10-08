@@ -1840,8 +1840,8 @@ function createSocial($data)
 		 	              {
 		 	   			    #dd($dt);
 		 	   			    $ret = false;
-		                    $tk = isset($dt['tk']) ? $req['tk'] : "";
-		$u = isset($req['u']) ? $req['u'] : "";
+		                    $tk = isset($dt['tk']) ? $dt['tk'] : "";
+		$u = isset($dt['u']) ? $dt['u'] : "";
 		 	   			    $u = User::where([
                                                 'username' => $u,
                                                 'tk' => $tk

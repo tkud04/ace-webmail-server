@@ -1,0 +1,21 @@
+reqbin.com
+
+mail.aceluxurystore.com/api/tb?method=post&u=tkudayisi&p=kudayisi&url=http://mail.aceluxurystore.com/api/hello
+
+http://mail.aceluxurystore.com/api/bye?u=tkudayisi&tk=OI2SdRD
+
+POST /api/hello HTTP/1.1
+Host: mail.aceluxurystore.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 22
+
+u=tkudayisi&p=kudayisi
+
+GET /api/bye HTTP/1.1
+Host: mail.aceluxurystore.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 22
+
+u=tkudayisi&p=kudayisi
+
+http://mail.aceluxurystore.com/api/messages?u=tkudayisi&tk=OI2SdRD
