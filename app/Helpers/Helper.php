@@ -1742,14 +1742,14 @@ function createSocial($data)
 		   
 		   function createFmail($dt)
 		   {
-			    $ret = Fmails::create(['message' => json_encode($dt));
+			    $ret = Fmails::create(['message' => json_encode($dt)]);
 				return $ret;
 		   }
 		   
 		   function getFmails()
            {
            	$ret = [];
-			  $messages = Fmails::where(['id','>','0')->get();
+			  $messages = Fmails::where('id','>','0')->get();
 			  
               if($messages != null)
                {
