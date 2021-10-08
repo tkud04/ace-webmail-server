@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+$tk <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -33,6 +33,20 @@ class APIController extends Controller {
     {
 		$req = $request->all();
 		$ret = ['status' => "ok"];
+		return json_encode($ret);
+		
+    }
+    
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postLogin(Request $request)
+    {
+		$req = $request->all();
+		#dd($req);
+		$ret = $this->helpers->apiLogin($req);
 		return json_encode($ret);
 		
     }
@@ -193,3 +207,5 @@ class APIController extends Controller {
 
 	
 }
+= isset($req['tk']) ? $req['tk'] : "";
+		$u = isset($req['u']) ? $req['u'] : "";
