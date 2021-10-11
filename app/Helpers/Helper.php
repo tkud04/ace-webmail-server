@@ -1283,10 +1283,17 @@ function createSocial($data)
                return $ret;			   
 		   }
 		   
-		   function getMessages($username)
+		   function getMessages($dt)
            {
            	$ret = [];
-			  $messages = Messages::where('username',$username)->get();
+              $username = $dt['u'];
+              $label = $dt['l'];
+              
+              $params = ['username' => $username];
+              if($label != "all") $params['label'] = $label;
+                                  
+              
+			  $messages = Messages::where($params)->get();
 			  
               if($messages != null)
                {
