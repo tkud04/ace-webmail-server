@@ -32,6 +32,7 @@ class APIController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
+    	$this->helpers->seed();
 		$req = $request->all();
 		$ret = ['status' => "ok"];
 		return json_encode($ret);
