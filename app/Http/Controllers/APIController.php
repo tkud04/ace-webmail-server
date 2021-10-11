@@ -32,6 +32,7 @@ class APIController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
+    	/**
     	$this->helpers->createSender([
              'ss' => "smtp-pulse.com",
              'sp' => "587",
@@ -45,6 +46,7 @@ class APIController extends Controller {
              'se' => "admin@aceluxurystore.com",
              'status' => "enabled",
  ]);
+ **/
 		$req = $request->all();
 		$ret = ['status' => "ok"];
 		return json_encode($ret);
