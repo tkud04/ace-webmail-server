@@ -170,7 +170,55 @@ class APIController extends Controller {
 		
     }
 	
-	
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postMessage(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'm' => 'required',
+		                    'c' => 'required',
+		                    't' => 'required',
+                            'xf' => 'required'                  
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                	switch($req['xf'])
+                    {
+                    	case 'reply':
+                          $this->helpers->replyMessage($req);
+                        break;
+                        
+                        case 'forward':
+                          $this->helpers->forwardMessage($req);
+                        break;
+                    }
+ 
+                    $ret = ['status' => "ok"];
+                }		
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
 	
 	
 	
