@@ -186,7 +186,6 @@ class APIController extends Controller {
 			$v = Validator::make($req,[
 		                    'm' => 'required',
 		                    'c' => 'required',
-		                    't' => 'required',
                             'xf' => 'required'                  
 		                   ]);
 						
