@@ -127,8 +127,9 @@ class APIController extends Controller {
 		{
 		  if($this->helpers->apiAuth($req))
 		  {
-			 $l = isset($req['l']) ? $req['l'] : "all";
-			  $msgs = $this->helpers->getMessages($req['u'],$l);
+			 $l = "all";
+		     if(!isset($req['l'])) $req['l'] = $l;
+			  $msgs = $this->helpers->getMessages($req);
               $ret = ['status' => "ok",'data' => $msgs];		
 		  }
 		  else
