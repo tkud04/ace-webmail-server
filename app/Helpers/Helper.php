@@ -1875,5 +1875,15 @@ function createSocial($data)
 		 	   			    }   
                              return $ret;       
 		 	              }
+		
+		function replyMessage($dt)
+        {
+        	
+       }
+       
+       function forwardMessage($dt)
+        {
+        	
+       }
 }
 ?>
