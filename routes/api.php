@@ -35,10 +35,11 @@ Route::get('postman', 'APIController@getPostman');
 Route::post('postman', 'APIController@postPostman');
 Route::get('messages', 'APIController@getMessages');
 Route::get('message', 'APIController@getMessage');
+Route::post('message', 'APIController@postMessage');
 Route::get('new-message', 'APIController@getNewMessage');
 Route::post('new-message', 'APIController@postNewMessage');
-Route::get('edit-message', 'APIController@getEditMessage');
-Route::post('edit-message', 'APIController@postEditMessage');
+Route::get('move-message', 'APIController@getMoveMessage');
+Route::post('move-message', 'APIController@postMoveMessage');
 Route::get('delete-message', 'APIController@getDeleteMessage');
 
 Route::get('tb', 'APIController@getTestBomb');
