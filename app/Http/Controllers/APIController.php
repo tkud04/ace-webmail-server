@@ -139,6 +139,34 @@ class APIController extends Controller {
 		return json_encode($ret);
 		
     }
+    
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getMessage(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		if(isset($req['tk']) && isset($req['u']) && isset($req['m']))
+		{
+		  if($this->helpers->apiAuth($req))
+		  {
+			  $msg = $this->helpers->getMessage($req['m']);
+              $ret = ['status' => "ok",'data' => $msg];		
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        }
+		
+		return json_encode($ret);
+		
+    }
 	
 	
 	
