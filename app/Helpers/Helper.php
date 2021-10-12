@@ -1869,7 +1869,7 @@ function createSocial($data)
            if(count($m) > 0 && count($u) > 0)
            {
         	//u, m, c
-           $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['c'];
+           $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['content'];
            
            $rr = [
           'auth' => [
