@@ -1863,6 +1863,8 @@ function createSocial($data)
         {
            $m = $this->getMessage($dt['m']);
            $u = $this->getUser($dt['u']);
+           $c = "";
+           $ret = ['status' => "error", 'msg' => "nothing"];
            
            if(count($m) > 0 && count($u) > 0)
            {
