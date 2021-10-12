@@ -533,10 +533,27 @@ $subject = $data['subject'];
 					}
 				   
 				 }
+				 /**
+				  $rr = [
+          'auth' => [
+            'u' => "api",
+            'p' => env('MAILGUN_API_KEY')
+          ],
+          'data' => [
+            'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
+            'to' => $m['sa'],
+            'subject' => "Re: ".$m['subject'],
+            'html' => $c
+          ],
+          'headers' => [],
+          'url' => env('MAILGUN_BASE_URL')."/messages",
+          'method' => "post"
+         ];
+				 **/
 				 
 				 try
 				 {
-					 #dd($data);
+					 dd($data);
 					$res = $client->request(strtoupper($data['method']),$url,$dt);
 					$ret = $res->getBody()->getContents(); 
 			       //dd($ret);
