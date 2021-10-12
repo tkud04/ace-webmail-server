@@ -533,23 +533,7 @@ $subject = $data['subject'];
 					}
 				   
 				 }
-				 /**
-				  $rr = [
-          'auth' => [
-            'u' => "api",
-            'p' => env('MAILGUN_API_KEY')
-          ],
-          'data' => [
-            'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
-            'to' => $m['sa'],
-            'subject' => "Re: ".$m['subject'],
-            'html' => $c
-          ],
-          'headers' => [],
-          'url' => env('MAILGUN_BASE_URL')."/messages",
-          'method' => "post"
-         ];
-				 **/
+
 				 
 				 try
 				 {
@@ -1890,10 +1874,7 @@ function createSocial($data)
            $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['content'];
            
            $rr = [
-          'auth' => [
-            'u' => "api",
-            'p' => env('MAILGUN_API_KEY')
-          ],
+          'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
             'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
             'to' => $m['sa'],
