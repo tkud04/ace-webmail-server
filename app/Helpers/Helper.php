@@ -1250,6 +1250,7 @@ function createSocial($data)
 				  $temp['username'] = $m->username;
 				  $temp['sn'] = $m->sn;
 				  $temp['sa'] = $m->sa;
+				  $temp['subject'] = $m->subject;
 				  $temp['content'] = $m->content;
 				  $temp['label'] = $m->label;
 				  $temp['attachments'] = $this->getAttachments($m->username);

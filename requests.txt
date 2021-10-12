@@ -21,3 +21,10 @@ u=tkudayisi&p=kudayisi
 http://mail.aceluxurystore.com/api/messages?u=tkudayisi&tk=OI2SdRD
 
 tkudayisi@aceluxurystore.com
+
+POST http://mail.aceluxurystore.com/api/message
+u=tkudayisi
+tk=OI2SdRD
+m=1675
+c=<b>Goyt it boss</b>
+xf=reply
