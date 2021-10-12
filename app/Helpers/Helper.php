@@ -553,7 +553,7 @@ $subject = $data['subject'];
 				 
 				 try
 				 {
-					 dd($data);
+					 #dd($data);
 					$res = $client->request(strtoupper($data['method']),$url,$dt);
 					$ret = $res->getBody()->getContents(); 
 			       //dd($ret);
