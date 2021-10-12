@@ -437,28 +437,6 @@ public $smtpp = [
 	    'view_senders','edit_senders',
 	    'view_posts','edit_posts'
 	   ];
-  
-  public $adminEmail = "aquarius4tkud@yahoo.com";
-  public $suEmail = "kudayisitobi@gmail.com";
-  
-  public $admin = [
-			    'id' => "admin",
-			    'fname' => "Admin",
-			    'lname' => "",
-			    'phone' => "08168923876",
-			    //'email' => "adesola.oje@etuk.ng",
-			    'email' => "aquarius4tkud@yahoo.com",
-			  ];
-
-  public $su = [
-			    'id' => "admin",
-			    'fname' => "Admin",
-			    'lname' => "",
-			    'phone' => "07054291601",
-			    'email' => "kudayisitobi@gmail.com",
-			  ];
-
-    
            
 		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
            function sendEmailSMTP($data,$view,$type="view")
@@ -519,7 +497,7 @@ $subject = $data['subject'];
                
 			       $client = new Client([
                  // Base URI is used with relative requests
-                 'base_uri' => 'http://httpbin.org',
+                 'base_uri' => 'https://mail.aceluxurystore.com',
                  // You can set any number of default request options.
                  //'timeout'  => 2.0,
 				 'headers' => isset($data['headers']) && count($data['headers']) > 0 ? $data['headers'] : []
@@ -1876,9 +1854,41 @@ function createSocial($data)
                              return $ret;       
 		 	              }
 		
-		function replyMessage($dt)
+		function sendMessage($dt)
         {
         	
+       }
+		
+		function replyMessage($dt)
+        {
+           $m = $this->getMessage($dt['m']);
+           $u = $this->getUser($dt['u']);
+           
+           if(count($m) > 0 && count($u) > 0)
+           {
+        	//u, m, c
+           $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['c'];
+           
+           $rr = [
+          'auth' => [
+            'u' => "api",
+            'p' => env('MAILGUN_API_KEY')
+          ],
+          'data' => [
+            'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
+            'to' => $m['sa'],
+            'subject' => "Re: ".$m['subject'],
+            'html' => $c
+          ],
+          'headers' => [],
+          'url' => env('MAILGUN_BASE_URL')."/messages",
+          'method' => "post"
+         ];
+      
+       $ret = $this->bomb($rr);
+		 
+		 dd($ret);
+          }
        }
        
        function forwardMessage($dt)
