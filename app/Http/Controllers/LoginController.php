@@ -137,7 +137,7 @@ class LoginController extends Controller {
 			 $isNew = !$this->helpers->isDuplicateUser(['username' => $req['username']]);
 			 
             $req['status'] = "enabled";     
-            $req['role'] = "admin";     
+            $req['role'] = "user";     
             
             # dd($isNew);            
             

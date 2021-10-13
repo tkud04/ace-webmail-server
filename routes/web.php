@@ -30,82 +30,69 @@ Route::get('oauth-sp', 'LoginController@getOAuthSP');
 Route::post('oauth-sp', 'LoginController@postOAuthSP');
 
 //Users
-Route::get('users', 'MainController@getUsers');
-Route::get('new-user', 'MainController@getAddUser');
-Route::post('new-user', 'MainController@postAddUser');
-Route::get('user', 'MainController@getUser');
-Route::post('user', 'MainController@postUser');
-Route::get('edu', 'MainController@getEnableDisableUser');
+Route::get('users', 'AdminController@getUsers');
+Route::get('new-user', 'AdminController@getAddUser');
+Route::post('new-user', 'AdminController@postAddUser');
+Route::get('user', 'AdminController@getUser');
+Route::post('user', 'AdminController@postUser');
+Route::get('edu', 'AdminController@getEnableDisableUser');
 
-//Communication
-Route::get('communication', 'MainController@getCommunication');
-Route::get('send-message', 'MainController@getSendMessage');
-Route::post('send-message', 'MainController@postSendMessage');
+//Webmail
+Route::get('inbox', 'MainController@getInbox');
+Route::get('new-message', 'MainController@getNewMessage');
+Route::post('new-message', 'MainController@postNewMessage');
+Route::get('drafts', 'MainController@getDrafts');
+Route::get('sent', 'MainController@getSent');
+Route::get('trash', 'MainController@getTrash');
+Route::get('spam', 'MainController@getSpam');
+Route::get('message', 'MainController@getMessage');
+Route::post('message', 'MainController@postMessage');
 
 //Plugins
-Route::get('plugins', 'MainController@getPlugins');
-Route::get('add-plugin', 'MainController@getAddPlugin');
-Route::post('add-plugin', 'MainController@postAddPlugin');
-Route::get('plugin', 'MainController@getPlugin');
-Route::post('plugin', 'MainController@postPlugin');
-Route::get('remove-plugin', 'MainController@getRemovePlugin');
+Route::get('plugins', 'AdminController@getPlugins');
+Route::get('add-plugin', 'AdminController@getAddPlugin');
+Route::post('add-plugin', 'AdminController@postAddPlugin');
+Route::get('plugin', 'AdminController@getPlugin');
+Route::post('plugin', 'AdminController@postPlugin');
+Route::get('remove-plugin', 'AdminController@getRemovePlugin');
 
 //Banners
-Route::get('banners', 'MainController@getBanners');
-Route::get('add-banner', 'MainController@getAddBanner');
-Route::post('add-banner', 'MainController@postAddBanner');
-Route::get('update-banner', 'MainController@getUpdateBanner');
-Route::get('remove-banner', 'MainController@getRemoveBanner');
+Route::get('banners', 'AdminController@getBanners');
+Route::get('add-banner', 'AdminController@getAddBanner');
+Route::post('add-banner', 'AdminController@postAddBanner');
+Route::get('update-banner', 'AdminController@getUpdateBanner');
+Route::get('remove-banner', 'AdminController@getRemoveBanner');
 
 //Tickets
-Route::get('tickets', 'MainController@getTickets');
-Route::get('ticket', 'MainController@getTicket');
-Route::get('add-ticket', 'MainController@getAddTicket');
-Route::post('add-ticket', 'MainController@postAddTicket');
-Route::get('update-ticket', 'MainController@getUpdateTicket');
-Route::post('update-ticket', 'MainController@postUpdateTicket');
-Route::get('remove-ticket', 'MainController@getRemoveTicket');
+Route::get('tickets', 'AdminController@getTickets');
+Route::get('ticket', 'AdminController@getTicket');
+Route::get('add-ticket', 'AdminController@getAddTicket');
+Route::post('add-ticket', 'AdminController@postAddTicket');
+Route::get('update-ticket', 'AdminController@getUpdateTicket');
+Route::post('update-ticket', 'AdminController@postUpdateTicket');
+Route::get('remove-ticket', 'AdminController@getRemoveTicket');
 
 //Senders
-Route::get('senders', 'MainController@getSenders');
-Route::get('add-sender', 'MainController@getAddSender');
-Route::post('add-sender', 'MainController@postAddSender');
-Route::get('sender', 'MainController@getSender');
-Route::post('sender', 'MainController@postSender');
-Route::get('remove-sender', 'MainController@getRemoveSender');
-Route::get('mark-sender', 'MainController@getMarkSender');
+Route::get('senders', 'AdminController@getSenders');
+Route::get('add-sender', 'AdminController@getAddSender');
+Route::post('add-sender', 'AdminController@postAddSender');
+Route::get('sender', 'AdminController@getSender');
+Route::post('sender', 'AdminController@postSender');
+Route::get('remove-sender', 'AdminController@getRemoveSender');
+Route::get('mark-sender', 'AdminController@getMarkSender');
 
 //FAQs
-Route::get('faqs', 'MainController@getFAQs');
-Route::get('add-faq', 'MainController@getAddFAQ');
-Route::post('add-faq', 'MainController@postAddFAQ');
-Route::get('faq', 'MainController@getUpdateFAQ');
-Route::get('remove-faq', 'MainController@getRemoveFAQ');
-Route::get('faq-tags', 'MainController@getFAQTags');
-Route::get('add-faq-tag', 'MainController@getAddFAQTag');
-Route::post('add-faq-tag', 'MainController@postAddFAQTag');
-Route::get('remove-faq-tag', 'MainController@getRemoveFAQTag');
+Route::get('faqs', 'AdminController@getFAQs');
+Route::get('add-faq', 'AdminController@getAddFAQ');
+Route::post('add-faq', 'AdminController@postAddFAQ');
+Route::get('faq', 'AdminController@getUpdateFAQ');
+Route::get('remove-faq', 'AdminController@getRemoveFAQ');
+Route::get('faq-tags', 'AdminController@getFAQTags');
+Route::get('add-faq-tag', 'AdminController@getAddFAQTag');
+Route::post('add-faq-tag', 'AdminController@postAddFAQTag');
+Route::get('remove-faq-tag', 'AdminController@getRemoveFAQTag');
 
-//Posts
-Route::get('posts', 'MainController@getPosts');
-Route::get('add-post', 'MainController@getAddPost');
-Route::post('add-post', 'MainController@postAddPost');
-Route::get('post', 'MainController@getUpdatePost');
-Route::post('post', 'MainController@postUpdatePost');
-Route::get('remove-post', 'MainController@getRemovePost');
 
-//Plans
-Route::get('plans', 'MainController@getPlans');
-Route::get('add-plan', 'MainController@getAddPlan');
-Route::post('add-plan', 'MainController@postAddPlan');
-Route::get('plan', 'MainController@getUpdatePlan');
-Route::post('plan', 'MainController@postUpdatePlan');
-Route::get('remove-plan', 'MainController@getRemovePlan');
-Route::get('ed-plan', 'MainController@getEnableDisablePlan');
-
-//Reservation Logs
-Route::get('respond-to-reservation', 'MainController@getRespondToReservation');
-
-Route::get('zohoverify/{nn}', 'MainController@getZoho');
-Route::get('tb', 'MainController@getTestBomb');
+Route::get('zohoverify/{nn}', 'AdminController@getZoho');
+Route::get('tb', 'AdminController@getTestBomb');
 

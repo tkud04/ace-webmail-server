@@ -1,6 +1,7 @@
 <?php
 $blank = true;
-$su = "javascript:void(0)";
+//$su = "javascript:void(0)";
+$su = url("signup");
 ?>
 
 @extends('layout')

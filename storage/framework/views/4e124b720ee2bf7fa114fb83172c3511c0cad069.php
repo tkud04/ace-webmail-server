@@ -1,6 +1,7 @@
 <?php
 $blank = true;
-$su = "javascript:void(0)";
+//$su = "javascript:void(0)";
+$su = url("signup");
 ?>
 
 
@@ -42,7 +43,7 @@ $su = "javascript:void(0)";
 
 					
 					<div class="form-group">
-                        <input class="form-control form-control-lg" name="id" id="login-id" type="text" placeholder="Email address or username" autocomplete="off">
+                        <input class="form-control form-control-lg" name="id" id="login-id" type="text" placeholder="Username" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input class="form-control form-control-lg" name="password" id="login-password" type="password" placeholder="Password">

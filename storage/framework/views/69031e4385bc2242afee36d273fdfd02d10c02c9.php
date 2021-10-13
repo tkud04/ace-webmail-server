@@ -10,8 +10,15 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav flex-column">
-                            <li class="nav-divider">
-                                Webmail
+                           
+							<?php
+							$a = "active";
+							 if($user-> role == "admin")
+							 {
+								 $a = "";
+							?>
+							 <li class="nav-divider">
+                                Admin
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="<?php echo e(url('/')); ?>"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
@@ -27,7 +34,30 @@
                                     </ul>
                                 </div>
                             </li>
-                           
+							<?php
+							 }
+							?>
+							<li class="nav-divider">
+                                Webmail
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link <?php echo e($a); ?>" href="<?php echo e(url('inbox')); ?>"><i class="fa fa-fw fa-inbox"></i>Inbox </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(url('new-message')); ?>"><i class="fa fa-fw fa-plus"></i>Compose </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(url('drafts')); ?>"><i class="fa fa-fw fa-edit"></i>Drafts </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(url('sent')); ?>"><i class="fa fa-fw fa-paper-plane"></i>Sent </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(url('trash')); ?>"><i class="fa fa-fw fa-trash"></i>Trash </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="<?php echo e(url('spam')); ?>"><i class="fa fa-fw fa-exclamation-triangle"></i>Spam </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>

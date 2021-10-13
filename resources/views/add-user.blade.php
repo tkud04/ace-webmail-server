@@ -69,6 +69,18 @@ $subtitle = "Add new email account.";
 										</div>
 										</div>
 										<div class="row">
+					 <div class="col-md-6">
+					  <div class="form-group">
+                        <input class="form-control form-control-lg" name="pass" id="user-password" type="password" placeholder="Password">
+                    </div>
+                     </div> 
+					 <div class="col-md-6">
+					  <div class="form-group">
+                        <input class="form-control form-control-lg" name="pass_confirmation" id="user-password-2" type="password" placeholder="Confirm password">
+                    </div>
+                     </div>
+                    </div>
+										<div class="row">
 										<div class="col-md-6">
 										<div class="form-group">
                                             <label for="user-role">Role</label>

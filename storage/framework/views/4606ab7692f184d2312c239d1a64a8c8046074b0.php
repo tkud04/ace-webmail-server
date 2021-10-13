@@ -131,7 +131,7 @@ $subtitle = "Admin dashboard";
 										}
 										?>       
                                                     <tr>
-                                                        <td colspan="9"><a href="<?php echo e(url('orders')); ?>" class="btn btn-outline-light float-right">View more</a></td>
+                                                        <td colspan="9"><a href="<?php echo e(url('users')); ?>" class="btn btn-outline-light float-right">View more</a></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
