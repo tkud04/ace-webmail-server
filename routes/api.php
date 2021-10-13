@@ -30,7 +30,8 @@ Route::get('hello', 'APIController@getHello');
 Route::post('hello', 'APIController@postHello');
 Route::get('bye', 'APIController@getBye');
 
-Route::get('update-session', 'APIController@postUpdateSession');
+Route::get('update-session', 'APIController@getUpdateSession');
+Route::post('update-session', 'APIController@postUpdateSession');
 
 //Messages
 Route::get('postman', 'APIController@getPostman');

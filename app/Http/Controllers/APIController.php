@@ -233,6 +233,17 @@ class APIController extends Controller {
 		return json_encode($ret);
 		
     }
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getUpdateSession(Request $request)
+    {
+		$ret = ['status' => "error",'msg' => "unsupported"];
+		return json_encode($ret);
+    }
 
 	/**
 	 * Show the application home page.
