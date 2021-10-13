@@ -23,6 +23,7 @@ use App\Faqs;
 use App\FaqTags;
 use App\Fmails;
 use App\Attachments;
+use App\Sessions;
 use App\Guests;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
@@ -1804,6 +1805,87 @@ function createSocial($data)
 			   
 			   return $ret;
 		   }
+		   
+		   function createSession($data)
+		  	              {
+		  	   			   #dd($data);
+		  	   			 $ret = null;
+			 
+			 
+		  	   				 $ret = Sessions::create(['username' => $data['username'], 
+		  	                                          'tk' => $data['tk'],
+		  	                                          'etk' => $data['etk'],
+		  	                                        ]);
+		  	   			  return $ret;
+		  	              }
+
+		  	      function getSessions()
+		  	      {
+		  	   	   $ret = [];
+	   
+		  	   	   $sessions = Sessions::where('id','>',"0")->get();
+	   
+		  	   	   if(!is_null($sessions))
+		  	   	   {
+		  	   		   foreach($sessions as $s)
+		  	   		   {
+		  	   		     $temp = $this->getSession($s->id);
+		  	   		     array_push($ret,$temp);
+		  	   	       }
+		  	   	   }
+	   
+		  	   	   return $ret;
+		  	      }
+				  
+		 	 	 function getSession($id)
+		 	            {
+		 	            	$ret = [];
+		 	                $s = Sessions::where('id',$id)->orWhere('tk',$id)->first();
+ 
+		 	               if($s != null)
+		 	                {
+		 	                    	$temp['id'] = $s->id; 
+		 	                    	$temp['username'] = $s->username; 
+		 	                    	$temp['tk'] = $s->tk; 
+		 	                    	$temp['etk'] = $s->etk; 
+		 	                        $temp['date'] = $s->created_at->format("jS F, Y"); 
+		 	                        $ret = $temp; 
+		 	                }                          
+                                                      
+		 	                 return $ret;
+		 	            }
+				
+				function updateSession($data)
+		 	              {
+		 	   			   #dd($data);
+		 	   			 $ret = "error";
+		                  $s = Sessions::where('tk',$data['tk'])->first();
+			 
+			 
+		 	   			 if(!is_null($s))
+		 	   			 {
+		 	   				 $s->update(['etk' => $data['etk']]);
+		 	   			   $ret = "ok";
+		 	   			 }
+           	
+                               return $ret;
+		 	              }
+						  
+						  function removeSession($data)
+		 	              {
+		 	   			   #dd($data);
+		 	   			 $ret = "error";
+		                  $s = Sessions::where('tk',$data['tk'])->first();
+			 
+			 
+		 	   			 if(!is_null($s))
+		 	   			 {
+		 	   				 $s->delete();
+		 	   			   $ret = "ok";
+		 	   			 }
+           	
+                               return $ret;
+		 	              }
 		
 		function apiLogin($dt)
         {
@@ -1811,13 +1893,10 @@ function createSocial($data)
                  
             if(Auth::attempt(['username' => $dt['u'],'password' => $dt['p'],'status'=> "enabled"],false))
             {
-				 $u = User::where('username',$dt['u'])->first(); 
-            	$tk = $u->tk;
-                if($tk == null || $tk ==  "")
-                {
+				// $u = User::where('username',$dt['u'])->first(); 
+            
               	 $tk = $this->getRandomString(7);
-                  $u->update(['tk' => $tk]);
-                }
+                  $this->createSession(['username' => $dt['u'],'tk' => $tk,'etk' => ""]);
                 $ret = ['status' => "ok",'tk' => $tk];
            }
             
@@ -1832,7 +1911,7 @@ function createSocial($data)
 				 if($u != null)
 				 {
 					Auth::logout();
-                    $u->update(['tk' => ""]);
+                    $this->removeSession($dt['tk']);
                     $ret = ['status' => "ok"];
 				 }        
            return $ret;       
@@ -1844,12 +1923,12 @@ function createSocial($data)
 		 	   			    $ret = false;
 		                    $tk = isset($dt['tk']) ? $dt['tk'] : "";
 		$u = isset($dt['u']) ? $dt['u'] : "";
-		 	   			    $u = User::where([
+		 	   			    $s = Sessions::where([
                                                 'username' => $u,
                                                 'tk' => $tk
                                              ])->first(); 
 			 
-		 	   			    if($u != null)
+		 	   			    if($s != null)
 		 	   			    {
 		 	   				  $ret = true;
 		 	   			    }   
@@ -1886,15 +1965,47 @@ function createSocial($data)
           'method' => "post"
          ];
       
-       $ret = $this->bomb($rr);
+       $ret2 = $this->bomb($rr);
 		 
-		 dd($ret);
+		 #dd($ret2);
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
           }
+		  
+		  return $ret;
        }
        
        function forwardMessage($dt)
         {
-        	
-       }
+        	$m = $this->getMessage($dt['m']);
+           $u = $this->getUser($dt['u']);
+           $c = "";
+           $ret = ['status' => "error", 'msg' => "nothing"];
+           
+           if(count($m) > 0 && count($u) > 0)
+           {
+        	//u, m, c
+           $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['content'];
+           
+           $rr = [
+          'auth' => ["api",env('MAILGUN_API_KEY')],
+          'data' => [
+            'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
+            'to' => $m['sa'],
+            'subject' => "Fw: ".$m['subject'],
+            'html' => $c
+          ],
+          'headers' => [],
+          'url' => env('MAILGUN_BASE_URL')."/messages",
+          'method' => "post"
+         ];
+      
+       $ret2 = $this->bomb($rr);
+		 
+		 #dd($ret2);
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
+          }
+		  
+		  return $ret;
+        }
 }
 ?>
