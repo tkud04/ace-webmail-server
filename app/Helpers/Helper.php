@@ -1907,11 +1907,11 @@ function createSocial($data)
         {
         	$ret = ['status' => "error",'msg' => "nothing"]; $u = null;
  
-				 $u = User::where(['username' => $dt['u'],'tk' => $dt['tk']])->first();
-				 if($u != null)
+				 $s = Sessions::where(['username' => $dt['u'],'tk' => $dt['tk']])->first();
+				 if($s != null)
 				 {
 					Auth::logout();
-                    $this->removeSession($dt['tk']);
+                    $s->delete();
                     $ret = ['status' => "ok"];
 				 }        
            return $ret;       
