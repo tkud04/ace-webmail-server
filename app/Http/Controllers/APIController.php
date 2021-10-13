@@ -233,6 +233,43 @@ class APIController extends Controller {
 		return json_encode($ret);
 		
     }
+
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postUpdateSession(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'etk' => 'required'                
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                	$this->helpers->updateSession($req);
+                    $ret = ['status' => "ok"];
+                }		
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
 	
 	
 	
