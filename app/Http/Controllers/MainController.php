@@ -75,6 +75,45 @@ class MainController extends Controller {
 		return view($v,compact($cpt));
 		
     }
+    
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getInbox(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+				  $v = "messages"; 
+				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "inbox"]);
+				  $title = "Inbox";
+				  $subtitle = "View messages in your inbox";
+				  #dd($msgs);
+				  array_push($cpt,'msgs');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+			  		   
+			
+		}
+		else
+		{
+			$v = "login";
+		}
+		
+		return view($v,compact($cpt));
+		
+    }
 	
 	
 	
