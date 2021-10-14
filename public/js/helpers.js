@@ -275,7 +275,7 @@ const fwd = dt => {
                $('#edit-actions').addClass("d-inline-flex");
 	          showElem(['#edit-actions']);	
               alert("Message sent!");
-              window.location = "messages";			   
+              window.location = "inbox";			   
 		   }
 		   else if(res.status == "error"){
 			   console.log(res.message);
@@ -330,7 +330,7 @@ const reply = dt => {
                $('#edit-actions').addClass("d-inline-flex");
 	          showElem(['#edit-actions']);	
               alert("Message sent!");
-              window.location = "messages";			   
+              window.location = "inbox";			   
 		   }
 		   else if(res.status == "error"){
 			   console.log(res.message);
