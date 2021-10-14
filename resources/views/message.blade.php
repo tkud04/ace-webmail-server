@@ -30,6 +30,16 @@ $xf = $m['id'];
 @stop
 
 @section('content')
+<script>
+$(document).ready(() => {
+let addPostContentEditor = new Simditor({
+		textarea: $('#reply-box'),
+		toolbar: toolbar,
+		placeholder: `Enter your post content here. Maximum of 7000 words..`
+	});	
+});
+
+</script>
 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
@@ -71,12 +81,47 @@ $xf = $m['id'];
 								  
 							
 							</div>
-                            <div class="card-body">
+                            <div class="card-body" style="overflow-y:scroll;">
                                 <div class="row">
+                                    <div class="col-md-12 mb-3">
+									  <div class="d-flex justify-content-between">
+										  <div class="d-inline-flex">
+										    <div class="mr-2"> <i class="fa fa-2x fa-fw fa-user-circle"></i></div>
+										    <div class="d-inline-flex">
+											    <div><span class="text-bold mr-2">{{$m['sn']}} </span></div>
+												 <div>{{"<".$m['sa'].">"}}</div>
+											</div>
+										  </div>
+									    <div class="align-self-end">
+									    <div class="d-inline-flex">
+										  <div><span class="text-bold justify-content-center">{{$m['date']}}</span></div>
+										   <div><a href="{{$void}}" class="btn" title="Mark as Unread" onclick="reply({{$xf}})"><i class="fa fa-fw fa-envelope menu-icon"></i></a></div>
+								<div class="dropdown">
+                                <a id="more-btn" href="{{$void}}" class="btn dropdown-toggle" title="More" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								   <i class="fa fa-fw fa-ellipsis-v menu-icon"></i>
+								 </a>
+                                  <div class="dropdown-menu" aria-labelledby="more-btn">
+                                    <a class="dropdown-item" href="{{$void}}">Action</a>
+                                    <a class="dropdown-item" href="{{$void}}">Another action</a>
+                                    <a class="dropdown-item" href="{{$void}}">Something else here</a>
+                                  </div>
+                                </div>
+                                </div>
+                                </div>
+									  </div><hr>
+									</div>
+                                    
                                     <div class="col-md-12">
 									<center>
+									<div>
 									{!! $m['content'] !!}
+									</div>
+									<div class="d-inline-flex">
+									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
+									<div><textarea class="form-control" name="reply" id="reply-box"></textarea></div>
+									</div>
 									</center>
+									
 							        </div>
 							    </div>
 							 </div>

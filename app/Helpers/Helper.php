@@ -1258,7 +1258,7 @@ function createSocial($data)
 				  $temp['label'] = $m->label;
 				  $temp['attachments'] = $this->getAttachments($m->username);
 				  $temp['status'] = $m->status;
-     			  $temp['date'] = $m->created_at->format("m/d/Y h:i A");
+     			  $temp['date'] = $m->created_at->format("jS F,Y h:i A");
 				  $ret = $temp;
                }
 
