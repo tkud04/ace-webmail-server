@@ -263,13 +263,22 @@ $(document).ready(function() {
 	   hideElem(['#edit-actions']);	
 	   showElem(['#edit-loading']);
 	        let fd = new FormData();
-		 fd.append("u",u);
-		 fd.append("m",m);
-		 fd.append("t",t);
-		 fd.append("tk","kt");
-		 fd.append("c",c);
-		 fd.append("xf",editMode);
-		 fwd(fd);
+	       fd.append("u",u);
+	       fd.append("tk","kt");
+	       fd.append("m",m);
+	       fd.append("xf",editMode);
+	       fd.append("c",c);
+	
+	   if(editMode == "reply"){
+	      reply(fd);
+       }
+       
+       else if(editMode == "forward"){
+	      fd.append("t",t);
+	      fwd(fd);
+       }
+		 
+		 
     });
 	
 	
