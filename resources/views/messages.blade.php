@@ -45,11 +45,22 @@
 										   {
 											  foreach($msgs as $m)
 											   {
-												   
+												   $b = $m['status'] == "unread" ? " text-bold" : "";
 												   
 										  ?>
                                             <tr>
-                                                <td></td>
+                                                <td>
+                                                	<a href="javascript:void(0)">
+                                                	<div class="row">
+                                                	  <div class="col-md-6 col-sm-12 mb-5">
+                                                	    <p class="{{$b}}">{{$m['sn']}}</p>
+                                               	   </div>
+                                                      <div class="col-md-6 col-sm-12 mb-5">
+                                                	    <p class="{{$b}}">{{$m['subject']}}</p>
+                                               	   </div>
+                                                    </div>
+                                                   </a>
+                                                </td>
                                             </tr>
 									     <?php
 											   }
