@@ -22,6 +22,11 @@
 	 <!-- bootstrap bundle js -->
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 	
+	<!--AutoComplete --> 
+    <link href="{{asset('css/flexselect.css')}}" rel="stylesheet">
+    <script src="{{asset('js/liquidmetal.js')}}"></script>
+    <script src="{{asset('js/jquery.flexselect.js')}}"></script>
+	
 	<!-- custom js -->
 	<script src="{{asset('js/helpers.js').'?ver='.rand(56,99999)}}"></script>
 	<script src="{{asset('js/mmm.js').'?ver='.rand(56,99999)}}"></script>

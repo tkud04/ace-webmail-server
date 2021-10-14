@@ -2026,5 +2026,19 @@ function createSocial($data)
 			
 			return $clear;
 		}
+		
+        function getContacts($u)
+        {
+        	$ret = [];
+        	$msgs = $this->getMessages(['u' => $u,'l' => "all"]);
+	
+        	if(count($msgs) > 0)
+	        {
+	        	foreach($msgs as $m) array_push($ret,$m['sa']);
+	        	$ret = array_unique($ret);
+	        }
+	        return $ret;
+        }
+
 }
 ?>

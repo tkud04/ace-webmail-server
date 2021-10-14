@@ -22,6 +22,11 @@
 	 <!-- bootstrap bundle js -->
     <script src="<?php echo e(asset('vendor/bootstrap/js/bootstrap.bundle.js')); ?>"></script>
 	
+	<!--AutoComplete --> 
+    <link href="<?php echo e(asset('css/flexselect.css')); ?>" rel="stylesheet">
+    <script src="<?php echo e(asset('js/liquidmetal.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/jquery.flexselect.js')); ?>"></script>
+	
 	<!-- custom js -->
 	<script src="<?php echo e(asset('js/helpers.js').'?ver='.rand(56,99999)); ?>"></script>
 	<script src="<?php echo e(asset('js/mmm.js').'?ver='.rand(56,99999)); ?>"></script>

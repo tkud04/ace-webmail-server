@@ -38,6 +38,8 @@ $(document).ready(() => {
 	$('#forward-form').hide();
 	$('#edit-actions').removeClass("d-inline-flex");
 	$('#edit-actions').hide();
+	 $('#reply-to').flexselect();
+	 $('#forward-to').flexselect();
 });
 
 </script>
@@ -102,9 +104,11 @@ $(document).ready(() => {
 								   <i class="fa fa-fw fa-ellipsis-v menu-icon"></i>
 								 </a>
                                   <div class="dropdown-menu" aria-labelledby="more-btn">
-                                    <a class="dropdown-item" href="<?php echo e($void); ?>">Action</a>
-                                    <a class="dropdown-item" href="<?php echo e($void); ?>">Another action</a>
-                                    <a class="dropdown-item" href="<?php echo e($void); ?>">Something else here</a>
+                                    <a id="more-reply" class="dropdown-item" href="<?php echo e($void); ?>">Reply</a>
+                                    <a id="more-forward" class="dropdown-item" href="<?php echo e($void); ?>">Forward</a>
+                                    <a id="more-mark-unread" class="dropdown-item" href="<?php echo e($void); ?>">Mark as unread</a>
+                                    <a id="more-mark-spam" class="dropdown-item" href="<?php echo e($void); ?>">Mark as spam</a>
+                                    <a id="more-delete" class="dropdown-item" href="<?php echo e($void); ?>">Delete</a>
                                   </div>
                                 </div>
                                 </div>
@@ -124,14 +128,30 @@ $(document).ready(() => {
 									</div>
 									<div class="d-inline-flex" id="reply-form">
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
-									<div><textarea class="form-control" name="reply" id="reply-box"></textarea></div>
+									<div>
+									 <select class="form-control mb-2" id="reply-to">
+                                                <option value="none">Select location</option>
+                                                   <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                           <option value="<?php echo e($c); ?>"><?php echo e($c); ?></option>
+                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+									 </select>
+									 <textarea class="form-control" name="reply" id="reply-box" rows="15" cols="50" placeholder="Content"></textarea>
+									</div>
 									</div>
 									<div class="d-inline-flex" id="forward-form">
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
-									<div><textarea class="form-control" name="forward" id="forward-box"></textarea></div>
+									<div>
+									  <select class="form-control" id="forward-to">
+                                                <option value="none">Select location</option>
+                                                   <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                           <option value="<?php echo e($c); ?>"><?php echo e($c); ?></option>
+                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+									 </select>
+									  <textarea class="form-control mb-2" name="forward" id="forward-box" rows="15" cols="50" placeholder="Content (optional)"></textarea>
+									</div>
 									</div>
 									<div class="d-inline-flex" id="edit-actions">
-									   <a id="submit-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-reply"></i> Submit</a>
+									   <a id="submit-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-rocket"></i> Submit</a>
 									   <a id="discard-btn" class="btn btn-outline-danger" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-trash"></i> Discard</a>
 									</div>
 									</center>

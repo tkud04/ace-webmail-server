@@ -143,11 +143,13 @@ class MainController extends Controller {
 				  if(count($m) > 0)
 				  {
 					   $title = $m['subject'];
+					   $contacts = $this->helpers->getContacts($user->username);
 				  $subtitle = "";
 				  #dd($msgs);
 				  array_push($cpt,'m');		
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
+				  array_push($cpt,'contacts');		
 				  }
 				  else
 				  {

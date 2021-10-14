@@ -211,40 +211,34 @@ $(document).ready(function() {
 	   $('.mm').prop('checked', cc);        
     });
 	
-	$("#reply-btn").click(e => {
+	$("#reply-btn, #more-reply").click(e => {
        e.preventDefault();
 	   editMode = "reply";
 	   
 	   $('#edit-menu').removeClass("d-inline-flex");
 	   $('#edit-menu').hide();
 	   
-	   let replyEditor = new Simditor({
-		textarea: $('#reply-box'),
-		toolbar: toolbar,
-		placeholder: `Enter your post content here. Maximum of 7000 words..`
-	});	    
+	  
 	   $('#reply-form').addClass("d-inline-flex");
 	   showElem(['#reply-form']);	
 	   $('#edit-actions').addClass("d-inline-flex");
 	   showElem(['#edit-actions']);	
+	   scrollTo({id:"#reply-to"});
     });
 	
-	$("#forward-btn").click(e => {
+	$("#forward-btn, #more-forward").click(e => {
        e.preventDefault();
 	   editMode = "forward";
 	   
 	   $('#edit-menu').removeClass("d-inline-flex");
 	   $('#edit-menu').hide();
 	   
-	   let forwardEditor = new Simditor({
-		textarea: $('#forward-box'),
-		toolbar: toolbar,
-		placeholder: `Enter your post content here. Maximum of 7000 words..`
-	});	    
+	   
 	   $('#forward-form').addClass("d-inline-flex");
 	   showElem(['#forward-form']);	
 	   $('#edit-actions').addClass("d-inline-flex");
 	   showElem(['#edit-actions']);	
+	   scrollTo({id:"#forward-to"});
     });
 	
 	$("#discard-btn").click(e => {
