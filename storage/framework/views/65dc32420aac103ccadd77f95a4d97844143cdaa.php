@@ -1,4 +1,6 @@
-
+<?php
+$void = "javascript:void(0)";
+?>
 
 
 
@@ -30,10 +32,26 @@
 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header"><?php echo e($title); ?></h5>
+                            <div class="card-header">
+							 <div class="row">
+							    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							 <ul class="list-inline"  style="overflow-x: scroll;">
+							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
+							  <li class="list-inline-item"><a id="refresh-btn" href="<?php echo e($void); ?>" class="btn" title="Refresh" onclick="refresh()"><i class="fa fa-fw fa-recycle menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="spam-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam" onclick="markSpam()"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" onclick="trash()"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="unread-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread" onclick="markUnread()"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="move-btn" href="<?php echo e($void); ?>" class="btn" title="Move to" onclick="moveTo()"><i class="fa fa-fw fa-folder-open menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="more-btn" href="<?php echo e($void); ?>" class="btn" title="More" onclick="more()"><i class="fa fa-fw fa-ellipsis-v menu-icon"></i></a></li>				  
+							 </ul>  
+							</div>	  
+							</div>	  
+								  
+							
+							</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered first etuk-table">
+                                    <table class="table first etuk-table">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -45,19 +63,31 @@
 										   {
 											  foreach($msgs as $m)
 											   {
-												   $b = $m['status'] == "unread" ? " text-bold" : "";
+												   $sn = "<p>{$m['sn']}</p>";
+												   $subject = "<p>{$m['subject']}</p>";
+												   $ss  = $m['excerpt'];
+												   $xf = $m['id'];
 												   
+												   if($m['status'] == "unread")
+												   {
+													   //$b = "text-bold";
+													  $sn = "<p><span class='label label-success p-2'>{$m['sn']}</span></p>";
+												   }
 										  ?>
                                             <tr>
                                                 <td>
-                                                	<a href="javascript:void(0)">
-                                                	<div class="row">
-                                                	  <div class="col-md-6 col-sm-12 mb-5">
-                                                	    <p class="<?php echo e($b); ?>"><?php echo e($sender); ?></p>
-                                               	   </div>
-                                                      <div class="col-md-6 col-sm-12 mb-5">
-                                                	    
-                                               	   </div>
+                                                	<a href="<?php echo e($void); ?>">
+                                                	<div class="row mt-5">
+                                                	  <div class="col-md-6 col-sm-12 mb-1">
+													    <ul class="list-inline">
+													     <li class="list-inline-item"><input type="checkbox" class="mm" data-xf="<?php echo e($xf); ?>"></li>
+                                                         <li class="list-inline-item"><?php echo $sn; ?></li>
+													    </ul>  
+                                               	      </div>  
+                                                      <div class="col-md-6 col-sm-12 mb-1">
+                                                	    <p><?php echo $subject; ?></p>
+                                                	    <p><?php echo $ss; ?>..</p>
+                                               	      </div>													  
                                                     </div>
                                                    </a>
                                                 </td>

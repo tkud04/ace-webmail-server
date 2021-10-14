@@ -9,7 +9,7 @@
 	<title>@yield('title') | Ace Webmail</title>
 	
 	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+   <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
     <link href="{{asset('vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('libs/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/fonts/fontawesome/css/fontawesome-all.css')}}">
@@ -66,6 +66,7 @@ if(!isset($blank))
                                 <input class="form-control" type="text" placeholder="Search..">
                             </div>
                         </li>
+						 <!--
                         <li class="nav-item dropdown notification">
                             <a class="nav-link nav-icons" href="javascript:void(0)" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
@@ -114,7 +115,7 @@ John Abraham</span>is now following you
                                 </li>
                             </ul>
                         </li>
-                       
+                       -->
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="javascript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/avatar.png')}}" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">

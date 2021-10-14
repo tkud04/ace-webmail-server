@@ -1254,6 +1254,7 @@ function createSocial($data)
 				  $temp['sa'] = $m->sa;
 				  $temp['subject'] = $m->subject;
 				  $temp['content'] = $m->content;
+				  $temp['excerpt'] = $this->clean(substr($m->content,0,33));
 				  $temp['label'] = $m->label;
 				  $temp['attachments'] = $this->getAttachments($m->username);
 				  $temp['status'] = $m->status;
@@ -2007,5 +2008,23 @@ function createSocial($data)
 		  
 		  return $ret;
         }
+		
+		function clean($str)
+		{
+			// Strip HTML Tags
+			$clear = strip_tags($str);
+			// Clean up things like &amp;
+			$clear = html_entity_decode($clear);
+			// Strip out any url-encoded stuff
+			$clear = urldecode($clear);
+			// Replace non-AlNum characters with space
+			$clear = preg_replace('/[^A-Za-z0-9]/', ' ', $clear);
+			// Replace Multiple spaces with single space
+			$clear = preg_replace('/ +/', ' ', $clear);
+			// Trim the string of leading/trailing space
+			$clear = trim($clear);
+			
+			return $clear;
+		}
 }
 ?>
