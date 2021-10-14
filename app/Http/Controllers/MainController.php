@@ -142,6 +142,8 @@ class MainController extends Controller {
 				  #dd($m);
 				  if(count($m) > 0)
 				  {
+					  $req['op'] = "read";
+					  $this->helpers->updateMessage($req);
 					   $title = $m['subject'];
 					   $contacts = $this->helpers->getContacts($user->username);
 				  $subtitle = "";

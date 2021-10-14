@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 	   let tables = ['.etuk-table'];
 	   for(var i=0; i<tables.length;i++){

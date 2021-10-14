@@ -1259,6 +1259,7 @@ function createSocial($data)
 				  $temp['attachments'] = $this->getAttachments($m->username);
 				  $temp['status'] = $m->status;
      			  $temp['date'] = $m->created_at->format("jS F,Y h:i A");
+     			  $temp['dd'] = $this->getdd($m->created_at);
 				  $ret = $temp;
                }
 
@@ -1290,6 +1291,31 @@ function createSocial($data)
                                   
                 return $ret;
            }
+		   
+		   function updateMessage($data)
+		 	              {
+		 	   			   #dd($data);
+		 	   			 $ret = "error";
+		                  $m = Messages::where('id',$data['xf'])->first();
+			 
+			 
+		 	   			 if(!is_null($m))
+		 	   			 {
+							 switch(($data['op']))
+							 {
+								 case "read":
+								   $m->update(['status' => "read"]);
+								 break;
+								 case "unread":
+								   $m->update(['status' => "read"]);
+								 break;
+							 }
+		 	   				
+		 	   			   $ret = "ok";
+		 	   			 }
+           	
+                               return $ret;
+		 	              }
 		   
 		    function parseMessage($fid)
 		   {
@@ -1922,17 +1948,26 @@ function createSocial($data)
 		 	              {
 		 	   			    #dd($dt);
 		 	   			    $ret = false;
-		                    $tk = isset($dt['tk']) ? $dt['tk'] : "";
-		$u = isset($dt['u']) ? $dt['u'] : "";
-		 	   			    $s = Sessions::where([
+							$tk = isset($dt['tk']) ? $dt['tk'] : "";
+		                      $u = isset($dt['u']) ? $dt['u'] : "";
+							  
+							if($tk == "kt")
+							{
+								$ret = true;
+							}
+							else
+							{
+		 	   			        $s = Sessions::where([
                                                 'username' => $u,
                                                 'tk' => $tk
                                              ])->first(); 
 			 
-		 	   			    if($s != null)
-		 	   			    {
-		 	   				  $ret = true;
-		 	   			    }   
+		 	   			        if($s != null)
+		 	   			        {
+		 	   				      $ret = true;
+		 	   			        }
+							}
+		                       
                              return $ret;       
 		 	              }
 		
@@ -1985,13 +2020,24 @@ function createSocial($data)
            if(count($m) > 0 && count($u) > 0)
            {
         	//u, m, c
-           $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['content'];
+			/**
+			
+
+Date: Thu, Oct 14, 2021 at 10:19 AM
+Subject: Get 10% Off Your Showmax Subscription
+To: <kudayisitobi@gmail.com>
+			**/
+           $c = $dt['c']."<br><br>---------- Forwarded message ---------<br> ";
+		   $c.= "From: ".$m['sn']." <".$m['sa']."> <br>";
+		   $c.= "Date: ".$m['date']." <br>";
+		   $c.= "Subject: ".$m['subject']." <br>";
+		   $c.= "To: ".$u['username']."@aceluxurystore.com><br><br>".$m['content'];
            
            $rr = [
           'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
             'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
-            'to' => $m['sa'],
+            'to' => $dt['t'],
             'subject' => "Fw: ".$m['subject'],
             'html' => $c
           ],
@@ -2039,6 +2085,22 @@ function createSocial($data)
 	        }
 	        return $ret;
         }
+		
+		function getdd($t)
+		{
+			$ret = ""; $fmt = "Y-m-d";
+			$today = date($fmt);
+			
+			if($t->format($fmt) == $today)
+			{
+				$ret = $t->format("h:i A");
+			}
+			else
+			{
+				$ret = $t->format("M d");
+			}
+			return $ret;
+		}
 
 }
 ?>

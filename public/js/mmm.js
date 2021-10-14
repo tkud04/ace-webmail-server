@@ -253,6 +253,25 @@ $(document).ready(function() {
 	   showElem(['#edit-menu']);
     });
 	
+	$("#submit-btn").click(e => {
+       e.preventDefault();
+
+	   let u = $('#u').val(), m = $('#m').val(), t = $(`#${editMode}-to`).val(), c = $(`#${editMode}-box`).val();
+	   
+	   
+	   $('#edit-actions').removeClass("d-inline-flex");
+	   hideElem(['#edit-actions']);	
+	   showElem(['#edit-loading']);
+	        let fd = new FormData();
+		 fd.append("u",u);
+		 fd.append("m",m);
+		 fd.append("t",t);
+		 fd.append("tk","kt");
+		 fd.append("c",c);
+		 fd.append("xf",editMode);
+		 fwd(fd);
+    });
+	
 	
 	
 });

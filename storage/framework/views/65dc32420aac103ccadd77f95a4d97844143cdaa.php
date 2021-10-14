@@ -8,6 +8,15 @@ $void = "javascript:void(0)";
 
 <?php $__env->startSection('scripts'); ?>
   <!-- DataTables CSS -->
+    <link href="<?php echo e(asset('lib/datatables/css/datatables.min.css')); ?>" rel="stylesheet" /> 
+	
+	<!-- DataTables js -->
+	<script src="<?php echo e(asset('lib/datatables/js/datatables.min.js')); ?>"></script>
+	 <script src="<?php echo e(asset('lib/datatables/js/datatables-init.js')); ?>"></script>
+  <?php $__env->stopSection(); ?>
+  
+  <?php $__env->startSection('scriptss'); ?>
+  <!-- DataTables CSS -->
   <link href="<?php echo e(asset('lib/datatables/css/buttons.bootstrap.min.css')); ?>" rel="stylesheet" /> 
   <link href="<?php echo e(asset('lib/datatables/css/buttons.dataTables.min.css')); ?>" rel="stylesheet" /> 
   <link href="<?php echo e(asset('lib/datatables/css/dataTables.bootstrap.min.css')); ?>" rel="stylesheet" /> 
@@ -21,7 +30,7 @@ $void = "javascript:void(0)";
     <script src="<?php echo e(asset('lib/datatables/js/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')); ?>"></script>
     <script src="<?php echo e(asset('lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')); ?>"></script>
     <script src="<?php echo e(asset('lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('lib/datatables/js/datatables-init.js')); ?>"></script>
+   
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page-header'); ?>
@@ -29,6 +38,12 @@ $void = "javascript:void(0)";
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+<script>
+$(document).ready(() => {
+	hideElem(xx);
+});
+
+</script>
 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
@@ -37,12 +52,11 @@ $void = "javascript:void(0)";
 							    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							 <ul class="list-inline"  style="overflow-x: scroll;">
 							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
-							  <li class="list-inline-item"><a id="refresh-btn" href="<?php echo e($void); ?>" class="btn" title="Refresh" onclick="refresh()"><i class="fa fa-fw fa-recycle menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="refresh-btn" href="<?php echo e($void); ?>" class="btn" title="Refresh" onclick="refresh()"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="spam-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam" onclick="markSpam()"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" onclick="trash()"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="unread-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread" onclick="markUnread()"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="move-btn" href="<?php echo e($void); ?>" class="btn" title="Move to" onclick="moveTo()"><i class="fa fa-fw fa-folder-open menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="more-btn" href="<?php echo e($void); ?>" class="btn" title="More" onclick="more()"><i class="fa fa-fw fa-ellipsis-v menu-icon"></i></a></li>				  
+							  <li class="list-inline-item"><a id="move-btn" href="<?php echo e($void); ?>" class="btn" title="Move to" onclick="moveTo()"><i class="fa fa-fw fa-folder-open menu-icon"></i></a></li>				  
 							 </ul>  
 							</div>	  
 							</div>	  
@@ -77,18 +91,20 @@ $void = "javascript:void(0)";
                                             <tr>
                                                 <td>
                                                 	<a href="<?php echo e($vu); ?>">
-                                                	<div class="row mt-5">
-                                                	  <div class="col-md-6 col-sm-12 mb-1">
-													    <ul class="list-inline">
-													     <li class="list-inline-item"><input type="checkbox" class="mm" data-xf="<?php echo e($xf); ?>"></li>
-                                                         <li class="list-inline-item"><?php echo $sn; ?></li>
-													    </ul>  
-                                               	      </div>  
-                                                      <div class="col-md-6 col-sm-12 mb-1">
-                                                	    <p><?php echo $subject; ?></p>
-                                                	    <p><?php echo $ss; ?>..</p>
-                                               	      </div>													  
-                                                    </div>
+                                                	 <div class="d-flex justify-content-between">
+													   <div class="d-inline-flex mt-3">
+                                                	    <div><input type="checkbox" class="mm mr-2" data-xf="<?php echo e($xf); ?>"></div>  
+													     <div><?php echo $sn; ?></div>
+                                               	       </div>
+													   <div class="d-inline-flex mt-3">
+                                                	   <div><?php echo $subject; ?></div>
+                                                	   <div class="ml-1 mr-1"> - </div>
+                                                	   <div style="color: #ccc;"><?php echo $ss; ?>...</div>
+                                               	       </div>
+													   <div class="d-inline-flex  mt-3">
+                                                	     <div><?php echo e($m['dd']); ?></div>
+                                               	       </div>
+                                               	      </div>
                                                    </a>
                                                 </td>
                                             </tr>

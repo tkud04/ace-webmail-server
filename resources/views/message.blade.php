@@ -7,23 +7,6 @@ $xf = $m['id'];
 
 @section('title',$title)
 
-@section('scripts')
-  <!-- DataTables CSS -->
-  <link href="{{asset('lib/datatables/css/buttons.bootstrap.min.css')}}" rel="stylesheet" /> 
-  <link href="{{asset('lib/datatables/css/buttons.dataTables.min.css')}}" rel="stylesheet" /> 
-  <link href="{{asset('lib/datatables/css/dataTables.bootstrap.min.css')}}" rel="stylesheet" /> 
-  
-      <!-- DataTables js -->
-       <script src="{{asset('lib/datatables/js/datatables.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('lib/datatables/js/datatables-init.js')}}"></script>
-@stop
 
 @section('page-header')
 @include('page-header',['title' => $title,'subtitle' => $subtitle])
@@ -34,6 +17,7 @@ $xf = $m['id'];
 $(document).ready(() => {
 	$('#reply-form').removeClass("d-inline-flex");
 	$('#reply-form').hide();
+	$('#edit-loading').hide();
 	$('#forward-form').removeClass("d-inline-flex");
 	$('#forward-form').hide();
 	$('#edit-actions').removeClass("d-inline-flex");
@@ -43,6 +27,8 @@ $(document).ready(() => {
 });
 
 </script>
+<input type="hidden" id="u" value="{{$user->username}}">
+<input type="hidden" id="m" value="{{$xf}}">
 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
@@ -128,12 +114,7 @@ $(document).ready(() => {
 									<div class="d-inline-flex" id="reply-form">
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
 									<div>
-									 <select class="form-control mb-2" id="reply-to">
-                                                <option value="none">Select location</option>
-                                                   @foreach($contacts as $c)
-                                                           <option value="{{$c}}">{{$c}}</option>
-                                                   @endforeach
-									 </select>
+									 
 									 <textarea class="form-control" name="reply" id="reply-box" rows="15" cols="50" placeholder="Content"></textarea>
 									</div>
 									</div>
@@ -141,7 +122,7 @@ $(document).ready(() => {
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
 									<div>
 									  <select class="form-control" id="forward-to">
-                                                <option value="none">Select location</option>
+                                                <option value="none">Recipient</option>
                                                    @foreach($contacts as $c)
                                                            <option value="{{$c}}">{{$c}}</option>
                                                    @endforeach
@@ -153,6 +134,7 @@ $(document).ready(() => {
 									   <a id="submit-btn" class="btn btn-outline-primary" href="{{$void}}"><i class="fa fa-fw fa-rocket"></i> Submit</a>
 									   <a id="discard-btn" class="btn btn-outline-danger" href="{{$void}}"><i class="fa fa-fw fa-trash"></i> Discard</a>
 									</div>
+									<h4 id="edit-loading">Sending.. <img src="{{asset('images/loading.gif')}}" class="img img-fluid" alt="Sending.."></h4>
 									</center>
 									
 							        </div>

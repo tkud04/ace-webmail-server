@@ -244,3 +244,56 @@ const scrollTo = dt => {
         });
 }
 
+const fwd = dt => {
+	 
+	//create request
+	let url = "api/message";
+	const req = new Request(url,{method: 'POST', body: dt});
+	
+	//fetch request
+	fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error", message: "Technical error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to forward message: " + error);			
+			hideElem('#edit-loading');
+		    $(`#edit-actions`).removeClass("d-inline-flex");
+	        showElem([`#edit-actions`]);	
+	   })
+	   .then(res => {
+		   console.log(res);
+			 hideElem(['#rp-loading','#rp-submit']); 
+             	 
+		   if(res.status == "ok"){
+               $('#edit-loading').hide();
+               $('#edit-actions').addClass("d-inline-flex");
+	          showElem(['#edit-actions']);				   
+		   }
+		   else if(res.status == "error"){
+			   console.log(res.message);
+			 if(res.message == "validation" || res.message == "dt-validation"){
+				 $('#rp-finish').html(`<p class='text-primary'>Please enter a valid email address.</p>`);
+				 showElem(['#rp-finish','#rp-submit']);
+			 }
+			 else{
+			   alert("Failed to forward message: " + error);			
+			hideElem('#edit-loading');
+		    $(`#edit-actions`).removeClass("d-inline-flex");
+	        showElem([`#edit-actions`]);		 
+			 }					 
+		   }
+		   		     
+	   }).catch(error => {
+		    alert("Failed to forward message: " + error);			
+			hideElem('#edit-loading');
+		    $(`#edit-actions`).removeClass("d-inline-flex");
+	        hideElem([`#edit-actions`]);		
+	   });
+}
+
