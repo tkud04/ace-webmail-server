@@ -32,11 +32,12 @@ $xf = $m['id'];
 <?php $__env->startSection('content'); ?>
 <script>
 $(document).ready(() => {
-let addPostContentEditor = new Simditor({
-		textarea: $('#reply-box'),
-		toolbar: toolbar,
-		placeholder: `Enter your post content here. Maximum of 7000 words..`
-	});	
+	$('#reply-form').removeClass("d-inline-flex");
+	$('#reply-form').hide();
+	$('#forward-form').removeClass("d-inline-flex");
+	$('#forward-form').hide();
+	$('#edit-actions').removeClass("d-inline-flex");
+	$('#edit-actions').hide();
 });
 
 </script>
@@ -113,13 +114,25 @@ let addPostContentEditor = new Simditor({
                                     
                                     <div class="col-md-12">
 									<center>
-									<div>
+									<div class="mb-5">
 									<?php echo $m['content']; ?>
 
 									</div>
-									<div class="d-inline-flex">
+									<div class="d-inline-flex" id="edit-menu">
+									   <a id="reply-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-reply"></i> Reply</a>
+									   <a id="forward-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-forward"></i> Forward</a>
+									</div>
+									<div class="d-inline-flex" id="reply-form">
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
 									<div><textarea class="form-control" name="reply" id="reply-box"></textarea></div>
+									</div>
+									<div class="d-inline-flex" id="forward-form">
+									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
+									<div><textarea class="form-control" name="forward" id="forward-box"></textarea></div>
+									</div>
+									<div class="d-inline-flex" id="edit-actions">
+									   <a id="submit-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-reply"></i> Submit</a>
+									   <a id="discard-btn" class="btn btn-outline-danger" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-trash"></i> Discard</a>
 									</div>
 									</center>
 									

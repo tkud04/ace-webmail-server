@@ -1,7 +1,8 @@
 
 	let  toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'];
 	let xx = ['#spam-btn','#trash-btn','#unread-btn','#move-btn'];
-
+    let editMode = "";
+	
 $(document).ready(function() {
     "use strict";
 	hideInputErrors(["signup","login","forgot-password","reset-password","oauth-sp"]);
@@ -206,11 +207,56 @@ $(document).ready(function() {
 	   else{ 
 		    hideElem(xx);
             cc=false;			
-	   }
+	   }   
+	   $('.mm').prop('checked', cc);        
+    });
+	
+	$("#reply-btn").click(e => {
+       e.preventDefault();
+	   editMode = "reply";
 	   
-	   $('.mm').prop('checked', cc);
-	    
-        
+	   $('#edit-menu').removeClass("d-inline-flex");
+	   $('#edit-menu').hide();
+	   
+	   let replyEditor = new Simditor({
+		textarea: $('#reply-box'),
+		toolbar: toolbar,
+		placeholder: `Enter your post content here. Maximum of 7000 words..`
+	});	    
+	   $('#reply-form').addClass("d-inline-flex");
+	   showElem(['#reply-form']);	
+	   $('#edit-actions').addClass("d-inline-flex");
+	   showElem(['#edit-actions']);	
+    });
+	
+	$("#forward-btn").click(e => {
+       e.preventDefault();
+	   editMode = "forward";
+	   
+	   $('#edit-menu').removeClass("d-inline-flex");
+	   $('#edit-menu').hide();
+	   
+	   let forwardEditor = new Simditor({
+		textarea: $('#forward-box'),
+		toolbar: toolbar,
+		placeholder: `Enter your post content here. Maximum of 7000 words..`
+	});	    
+	   $('#forward-form').addClass("d-inline-flex");
+	   showElem(['#forward-form']);	
+	   $('#edit-actions').addClass("d-inline-flex");
+	   showElem(['#edit-actions']);	
+    });
+	
+	$("#discard-btn").click(e => {
+       e.preventDefault();
+	   
+	   $(`#${editMode}-form`).removeClass("d-inline-flex");
+	   hideElem([`#${editMode}-form`]);	
+	   $('#edit-actions').removeClass("d-inline-flex");
+	   hideElem(['#edit-actions']);	
+	   editMode = "";
+	   $('#edit-menu').addClass("d-inline-flex");
+	   showElem(['#edit-menu']);
     });
 	
 	
