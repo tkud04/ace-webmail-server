@@ -13,7 +13,7 @@
                            
 							<?php
 							$a = "active";
-							 if($user-> role == "admin")
+							 if($user->role == "admin")
 							 {
 								 $a = "";
 							?>

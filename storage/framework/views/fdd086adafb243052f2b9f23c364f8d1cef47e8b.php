@@ -155,7 +155,7 @@ John Abraham</span>is now following you
         <!-- end navbar -->
         <!-- ============================================================== -->
       
-	   <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+	   <?php echo $__env->make('sidebar',['user' => $user], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 	  
         <!-- ============================================================== -->
         <!-- wrapper  -->

@@ -113,6 +113,60 @@ class MainController extends Controller {
 		
 		return view($v,compact($cpt));
 		
+    } 
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getMessage(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+			  if(isset($req['xf']))
+			  {
+				  $v = "message"; 
+				  $m = $this->helpers->getMessage($req['xf']);
+				  #dd($m);
+				  if(count($m) > 0)
+				  {
+					   $title = $m['subject'];
+				  $subtitle = "";
+				  #dd($msgs);
+				  array_push($cpt,'m');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+				  }
+				  else
+				  {
+					  return redirect()->intended('inbox');
+				  }
+				 
+			  }
+			  else
+			  {
+				  return redirect()->intended('inbox');
+			  }
+		}
+		else
+		{
+			$v = "login";
+		}
+		
+		return view($v,compact($cpt));
+		
     }
 	
 	

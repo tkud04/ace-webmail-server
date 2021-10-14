@@ -155,7 +155,7 @@ John Abraham</span>is now following you
         <!-- end navbar -->
         <!-- ============================================================== -->
       
-	   @include('sidebar')
+	   @include('sidebar',['user' => $user])
 	  
         <!-- ============================================================== -->
         <!-- wrapper  -->

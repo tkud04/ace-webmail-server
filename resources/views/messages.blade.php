@@ -67,7 +67,7 @@ $void = "javascript:void(0)";
 												   $subject = "<p>{$m['subject']}</p>";
 												   $ss  = $m['excerpt'];
 												   $xf = $m['id'];
-												   
+												   $vu = url('message')."?xf=".$xf;
 												   if($m['status'] == "unread")
 												   {
 													   //$b = "text-bold";
@@ -76,7 +76,7 @@ $void = "javascript:void(0)";
 										  ?>
                                             <tr>
                                                 <td>
-                                                	<a href="{{$void}}">
+                                                	<a href="{{$vu}}">
                                                 	<div class="row mt-5">
                                                 	  <div class="col-md-6 col-sm-12 mb-1">
 													    <ul class="list-inline">
