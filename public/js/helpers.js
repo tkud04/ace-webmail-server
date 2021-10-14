@@ -244,6 +244,61 @@ const scrollTo = dt => {
         });
 }
 
+const compose = dt => {
+	 
+	//create request
+	let url = "api/new-message";
+	const req = new Request(url,{method: 'POST', body: dt});
+	
+	//fetch request
+	fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error", message: "Technical error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to send message: " + error);			
+			hideElem('#edit-loading');
+		    $(`#edit-actions`).removeClass("d-inline-flex");
+	        showElem([`#edit-actions`]);	
+	   })
+	   .then(res => {
+		   console.log(res);
+			 hideElem(['#rp-loading','#rp-submit']); 
+             	 
+		   if(res.status == "ok"){
+               $('#new-loading').hide();
+               $('#new-actions').addClass("d-inline-flex");
+	          showElem(['#new-actions']);	
+              alert("Message sent!");
+              window.location = "inbox";			   
+		   }
+		   else if(res.status == "error"){
+			   console.log(res.message);
+			 if(res.message == "validation" || res.message == "dt-validation"){
+				 $('#rp-finish').html(`<p class='text-primary'>Please enter a valid email address.</p>`);
+				 showElem(['#rp-finish','#rp-submit']);
+			 }
+			 else{
+			   alert("Failed to send reply: " + error);			
+			hideElem('#new-loading');
+		    $(`#new-actions`).removeClass("d-inline-flex");
+	        showElem([`#new-actions`]);		 
+			 }					 
+		   }
+		   		     
+	   }).catch(error => {
+		    alert("Failed to send reply: " + error);			
+			hideElem('#new-loading');
+		    $(`#new-actions`).removeClass("d-inline-flex");
+	        hideElem([`#new-actions`]);		
+	   });
+}
+
 const fwd = dt => {
 	 
 	//create request
