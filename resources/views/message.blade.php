@@ -121,12 +121,7 @@ $(document).ready(() => {
 									<div class="d-inline-flex" id="forward-form">
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
 									<div>
-									  <select class="form-control" id="forward-to">
-                                                <option value="none">Recipient</option>
-                                                   @foreach($contacts as $c)
-                                                           <option value="{{$c}}">{{$c}}</option>
-                                                   @endforeach
-									 </select>
+									  <input class="form-control" id="forward-to" placeholder="Recipient">
 									  <textarea class="form-control mb-2" name="forward" id="forward-box" rows="15" cols="50" placeholder="Content (optional)"></textarea>
 									</div>
 									</div>

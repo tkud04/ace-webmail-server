@@ -122,12 +122,7 @@ $(document).ready(() => {
 									<div class="d-inline-flex" id="forward-form">
 									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
 									<div>
-									  <select class="form-control" id="forward-to">
-                                                <option value="none">Recipient</option>
-                                                   <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                           <option value="<?php echo e($c); ?>"><?php echo e($c); ?></option>
-                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-									 </select>
+									  <input class="form-control" id="forward-to" placeholder="Recipient">
 									  <textarea class="form-control mb-2" name="forward" id="forward-box" rows="15" cols="50" placeholder="Content (optional)"></textarea>
 									</div>
 									</div>
