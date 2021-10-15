@@ -87,7 +87,7 @@ let ccc = `
 									<div class="col-md-12 mb-3">
 									  <div class="d-flex">
 										  <p class="text-bold text-primary" id="compose-result">Message sent! </p>
-										  <p class="text-bold" id="compose-loading">Sending <img src="" alt="Sending.." style="width: 40px; height: 40px;"></p>
+										  <p class="text-bold" id="compose-loading">Sending <img src="images/loading.gif" alt="Sending.." style="width: 40px; height: 40px;"></p>
 									  </div><hr>
 									</div>
                                     
