@@ -249,7 +249,8 @@ const scrollTo = dt => {
 
 const addToItem = (dest,dt) => {
 	 //console.log("dt: ",dt);
-	 if(dt.key == ' '){
+	let str = dt.target.value;
+	 if(str.substr(-1) == ' '){
 		 let em = $(`#${dest}-input`).val(), ii = ``,oc=``,bdiv=``;
 		 
 		 if(em.length > 0){
