@@ -1,3 +1,5 @@
+ let editMode = "", to = [], cc = [], bcc = [];
+
 const showElem = (name) => {
 	let names = [];
 	
@@ -242,6 +244,74 @@ const scrollTo = dt => {
 	document.querySelector(`${dt.id}`).scrollIntoView({
           behavior: 'smooth' 
         });
+}
+
+
+const addToItem = (dest,dt) => {
+	 //console.log("dt: ",dt);
+	 if(dt.key == ' '){
+		 let em = $(`#${dest}-input`).val(), ii = ``,oc=``,bdiv=``;
+		 
+		 if(em.length > 0){
+			 if(dest == 'to'){
+				 ii = `to-${to.length}`;
+				 oc = `removeToItem('${ii}')`;
+				 bdiv  = `#rdiv`;
+				 to.push({id: ii,em: em});
+			 }
+			 else if(dest == 'cc'){
+				 ii = `cc-${cc.length}`;
+				 oc = `removeCcItem('${ii}')`;
+				 bdiv  = `#ccdiv`;
+				 cc.push({id: ii,em: em});
+			 }
+			 else if(dest == 'bcc'){
+				 ii = `bcc-${bcc.length}`;
+				 oc = `removeBccItem('${ii}')`;
+				 bdiv  = `#bccdiv`;
+				 bcc.push({id: ii,em: em});
+			 }
+		  
+		 let hh = `
+<div class="to-item d-inline-flex" id="${ii}">
+	<span class="text-bold mr-2">${em}</span>
+	<a href="javascript:void(0)" onclick="${oc}" class="to-item-remove"></a>
+</div>		 
+		 `;
+		 $(hh).insertBefore(bdiv);
+		 $(`#${dest}-input`).val("");
+		 }
+	 }
+}
+
+const removeToItem = (dt) => {
+	let ret = [];
+	for(let i = 0; i  < to.length; i++){
+		let item = to[i];
+		if(item.id != dt) ret.push(item);
+	}
+	to = ret;
+	document.querySelector(`#${dt}`).remove();
+}
+
+const removeCcItem = (dt) => {
+	let ret = [];
+	for(let i = 0; i  < cc.length; i++){
+		let item = cc[i];
+		if(item.id != dt) ret.push(item);
+	}
+	cc = ret;
+	document.querySelector(`#${dt}`).remove();
+}
+
+const removeBccItem = (dt) => {
+	let ret = [];
+	for(let i = 0; i  < bcc.length; i++){
+		let item = bcc[i];
+		if(item.id != dt) ret.push(item);
+	}
+	bcc = ret;
+	document.querySelector(`#${dt}`).remove();
 }
 
 const compose = dt => {

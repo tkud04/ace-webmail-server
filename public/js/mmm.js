@@ -1,7 +1,7 @@
 
 	let  toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'];
 	let xx = ['#spam-btn','#trash-btn','#unread-btn','#move-btn'];
-    let editMode = "";
+   
 	
 $(document).ready(function() {
     "use strict";

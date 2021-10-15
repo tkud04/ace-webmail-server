@@ -20,7 +20,7 @@ let composeModal = new tingle.modal({
 });
 
 let ccc = `
-                 <div class="row">
+              <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card ">
 	                          <h3 class="card-header bg-dark text-white">New Message</h3>
@@ -31,9 +31,22 @@ let ccc = `
 										  <div class="d-inline-flex">
 										    <div class="mr-2"> <span class="text-gray">To</span></div>
 										    <div class="d-inline-flex" id="to-list">
-											    <div class="to-item d-inline-flex">
-												  <span class="text-bold mr-2">{{$m['sn']}} </span>
-												  <a href="javascript:void(0)" class="to-item-remove"></a>
+											    
+												<div class="d-inline-flex" id="rdiv">
+												  <input type="text" id="to-input" class="compose-input" onkeypress="addToItem('to',event)">
+												</div>
+											</div>
+										  </div>
+									  </div><hr>
+									</div>
+									<div class="col-md-12 mb-3">
+									  <div class="d-flex">
+										  <div class="d-inline-flex">
+										    <div class="mr-2"> <span class="text-gray">Cc</span></div>
+										    <div class="d-inline-flex" id="cc-list">
+											    
+												<div class="d-inline-flex" id="ccdiv">
+												  <input type="text" id="cc-input" class="compose-input" onkeypress="addToItem('cc',event)">
 												</div>
 											</div>
 										  </div>
@@ -80,7 +93,7 @@ let ccc = `
 							 </div>
 						</div>
                     </div>
-                </div>		
+                </div>			
 `;
 // set content
 composeModal.setContent(ccc);
