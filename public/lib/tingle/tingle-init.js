@@ -24,7 +24,7 @@ let ccc = `
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card ">
 	                          <h3 class="card-header bg-dark text-white">New Message</h3>
-                            <div class="card-body" style="overflow-y:scroll;">
+                            <div class="card-body" style="">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
 									  <div class="d-flex">
@@ -52,48 +52,43 @@ let ccc = `
 										  </div>
 									  </div><hr>
 									</div>
+									<div class="col-md-12 mb-3">
+									  <div class="d-flex">
+										  <div class="d-inline-flex">
+										    <div class="mr-2"> <span class="text-gray">Subject</span></div>
+										    <div class="d-inline-flex" id="cc-list">
+											    
+												<div class="d-inline-flex">
+												  <input type="text" id="subject-input" class="compose-input" onkeypress="addToItem('cc',event)">
+												</div>
+											</div>
+										  </div>
+									  </div><hr>
+									</div>
+									<div class="col-md-12 mb-3">
+									  <div class="d-flex">
+										  <textarea class="compose-input" id="msg-input"></textarea>
+									  </div><hr>
+									</div><div class="col-md-12 mb-3">
+									  <div class="d-flex">
+										  <div class="d-inline-flex">
+										    <div class="mr-2"> <span class="text-gray">Subject</span></div>
+										    <div class="d-inline-flex" id="cc-list">
+											    
+												<div class="d-inline-flex">
+												  <input type="text" id="subject-input" class="compose-input" onkeypress="addToItem('cc',event)">
+												</div>
+											</div>
+										  </div>
+									  </div><hr>
+									</div>
                                     
-                                    <div class="col-md-12">
-									<center>
-									<div class="mb-5">
-									{!! $m['content'] !!}
-									</div>
-									<div class="d-inline-flex" id="edit-menu">
-									   <a id="reply-btn" class="btn btn-outline-primary" href="javascript:void(0)"><i class="fa fa-fw fa-reply"></i> Reply</a>
-									   <a id="forward-btn" class="btn btn-outline-primary" href="javascript:void(0)"><i class="fa fa-fw fa-forward"></i> Forward</a>
-									</div>
-									<div class="d-inline-flex" id="reply-form">
-									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
-									<div>
-									 
-									 <textarea class="form-control" name="reply" id="reply-box" rows="15" cols="50" placeholder="Content"></textarea>
-									</div>
-									</div>
-									<div class="d-inline-flex" id="forward-form">
-									<div><i class="fa fa-2x fa-fw fa-user-circle"></i></div>
-									<div>
-									  <select class="form-control" id="forward-to">
-                                                <option value="none">Recipient</option>
-                                                   @foreach($contacts as $c)
-                                                           <option value="{{$c}}">{{$c}}</option>
-                                                   @endforeach
-									 </select>
-									  <textarea class="form-control mb-2" name="forward" id="forward-box" rows="15" cols="50" placeholder="Content (optional)"></textarea>
-									</div>
-									</div>
-									<div class="d-inline-flex" id="edit-actions">
-									   <a id="submit-btn" class="btn btn-outline-primary" href="javascript:void(0)"><i class="fa fa-fw fa-rocket"></i> Submit</a>
-									   <a id="discard-btn" class="btn btn-outline-danger" href="javascript:void(0)"><i class="fa fa-fw fa-trash"></i> Discard</a>
-									</div>
-									<h4 id="edit-loading">Sending.. <img src="{{asset('images/loading.gif')}}" class="img img-fluid" alt="Sending.."></h4>
-									</center>
-									
-							        </div>
+                                   
 							    </div>
 							 </div>
 						</div>
                     </div>
-                </div>			
+                </div>				
 `;
 // set content
 composeModal.setContent(ccc);

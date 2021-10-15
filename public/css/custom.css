@@ -51,5 +51,7 @@
     border: 0!important;
     margin: 0!important;
 	outline:none;
-	    box-shadow: none;
+	box-shadow: none;
+	width: 100%;
+	height: 100%;
 }
