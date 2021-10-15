@@ -480,7 +480,7 @@ const reply = dt => {
 	   });
 }
 
-const sendMessage = dt => {
+const sendMessage = (dt,mm) => {
 	 
 	//create request
 	let url = "api/new-message";
@@ -506,7 +506,12 @@ const sendMessage = dt => {
 			 hideElem(['#compose-loading']); 
              	 
 		   if(res.status == "ok"){
-               
+			   $('#subject-input').val("");
+			   $('#msg-input').val("");
+			   $('#subject-input').val("");
+			   hideElem(['#compose-result']);
+              for(let i = 0; i < to.length; i++) removeToItem(to[i].id);			   
+               mm.close();
 		   }
 		   else if(res.status == "error"){
 			   console.log(res.message);

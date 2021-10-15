@@ -100,7 +100,6 @@ composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
    // composeModal.close();
    
    let fd = new FormData();
-   fd.append('u',$('#xf').val());
    fd.append('tk',"kt");
    fd.append('t',JSON.stringify(to));
    fd.append('s',$('#subject-input').val());
@@ -109,7 +108,7 @@ composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
    fetch("gu").then((r)=>{r.text()
        .then((d)=>{
 	   fd.append('u',d);
-	      sendMessage(fd);
+	      sendMessage(fd,composeModal);
 	   });
 	});
 

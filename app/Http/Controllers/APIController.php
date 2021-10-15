@@ -198,17 +198,17 @@ class APIController extends Controller {
                 }
 				else
                 {
-					$to = json_decode($req['t'],true);
+					$to = json_decode($req['t']);
 					$u = $req['u'];
 					$rr = [
 					  'c' => $req['c'],
 					  's' => $req['s'],
 					  'u' => $u,
 					];
-					foreach($to as $em)
+					foreach($to as $i)
 					{
-						$rr['t'] = $em;
-						$this->helpers->sendMessage($req);
+						$rr['t'] = $i->em;
+						$this->helpers->sendMessage($rr);
 					}
                 	
                     $ret = ['status' => "ok"];
