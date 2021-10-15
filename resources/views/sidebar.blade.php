@@ -8,15 +8,17 @@ $void = "javascript:void(0)";
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="javascript:void(0)">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="collapse navbar-collapse" id="sidebarNav">
                         <ul class="navbar-nav flex-column">
                            
 							<?php
 							$a = "active";
-							 if(!is_null($user) && $user->role == "admin")
+							 if(!is_null($user))
+							 {
+							  if($user->role == "admin")
 							 {
 								 $a = "";
 							?>
@@ -61,6 +63,9 @@ $void = "javascript:void(0)";
 							<li class="nav-item">
                                 <a class="nav-link" href="{{url('spam')}}"><i class="fa fa-fw fa-exclamation-triangle"></i>Spam </a>
                             </li>
+							<?php
+							 }
+							?>
                         </ul>
                     </div>
                 </nav>
