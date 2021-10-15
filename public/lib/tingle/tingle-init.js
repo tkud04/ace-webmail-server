@@ -55,13 +55,14 @@ let ccc = `
 									<div class="col-md-12 mb-3">
 									  <div class="d-flex">
 										  <div class="d-inline-flex">
-										    <div class="mr-2"> <span class="text-gray">Subject</span></div>
+										    
 										    <div class="d-inline-flex">
 											    
 												<div class="d-inline-flex">
-												  <input type="text" id="subject-input" class="compose-input">
+												  <input type="text" id="subject-input" placeholder="Subject" class="compose-input">
 												</div>
 											</div>
+											<div class="mr-2"><a href="javascript:void(0)" onclick="addAttachment()"><i class="fa fa-fw fa-paperclip"></i></a></div>
 										  </div>
 									  </div><hr>
 									</div>
