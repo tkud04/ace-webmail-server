@@ -33,7 +33,7 @@ let ccc = `
 										    <div class="d-inline-flex" id="to-list">
 											    
 												<div class="d-inline-flex" id="rdiv">
-												  <input type="text" id="to-input" class="compose-input" onkeypress="addToItem('to',event)">
+												  <input type="text" id="to-input" class="compose-input" onkeydown="addToItem('to',event)">
 												</div>
 											</div>
 										  </div>
@@ -46,7 +46,7 @@ let ccc = `
 										    <div class="d-inline-flex" id="cc-list">
 											    
 												<div class="d-inline-flex" id="ccdiv">
-												  <input type="text" id="cc-input" class="compose-input" onkeypress="addToItem('cc',event)">
+												  <input type="text" id="cc-input" class="compose-input" onkeydown="addToItem('cc',event)">
 												</div>
 											</div>
 										  </div>
@@ -59,7 +59,7 @@ let ccc = `
 										    <div class="d-inline-flex" id="cc-list">
 											    
 												<div class="d-inline-flex">
-												  <input type="text" id="subject-input" class="compose-input" onkeypress="addToItem('cc',event)">
+												  <input type="text" id="subject-input" class="compose-input">
 												</div>
 											</div>
 										  </div>
@@ -76,7 +76,7 @@ let ccc = `
 										    <div class="d-inline-flex" id="cc-list">
 											    
 												<div class="d-inline-flex">
-												  <input type="text" id="subject-input" class="compose-input" onkeypress="addToItem('cc',event)">
+												  <input type="text" id="subject-input" class="compose-input">
 												</div>
 											</div>
 										  </div>
