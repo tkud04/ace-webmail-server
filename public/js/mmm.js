@@ -17,7 +17,7 @@ $(document).ready(function() {
 	hideElem(['#send-message-type-error','#send-message-subject-error','#send-message-msg-error', '#send-message-email-div']);
 	
 	hideElem(["#sps-row","#pa-side-2","#pa-side-3","#ap-loading"]);
-	
+	hideElem(['#compose-loading','#compose-result']);
 	/**
 	//Init wysiwyg editors
 	Simditor.locale = 'en-US';
