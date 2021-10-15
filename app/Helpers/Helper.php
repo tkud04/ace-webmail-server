@@ -1992,7 +1992,7 @@ function createSocial($data)
           'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
             'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
-            'to' => $m['sa'],
+            'to' => $dt['t'],
             'subject' => "Re: ".$m['subject'],
             'html' => $c
           ],

@@ -8,6 +8,9 @@
     
 	<title><?php echo $__env->yieldContent('title'); ?> | Ace Webmail</title>
 	
+	<!-- favicon 
+	  <link rel="favicon" src="<?php echo e(asset('images/logo.png')); ?>">-->
+	  
 	<!-- Bootstrap CSS -->
    <link rel="stylesheet" href="<?php echo e(asset('vendor/bootstrap/css/bootstrap.min.css')); ?>">
     <link href="<?php echo e(asset('vendor/fonts/circular-std/style.css')); ?>" rel="stylesheet">
@@ -42,6 +45,9 @@
     <link href="<?php echo e(asset('lib/sweet-alert/sweetalert2.css')); ?>" rel="stylesheet">
     <script src="<?php echo e(asset('lib/sweet-alert/sweetalert2.js')); ?>"></script>
 	
+	<!--Tingle--> 
+    <link href="<?php echo e(asset('lib/tingle/tingle.min.css')); ?>" rel="stylesheet">
+	
 	<?php echo $__env->yieldContent('styles'); ?>
 	<?php echo $__env->yieldContent('scripts'); ?>
 </head>
@@ -60,7 +66,7 @@ if(!isset($blank))
         <!-- ============================================================== -->
        <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">ACE</a>
+                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">Ace Lu</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -239,6 +245,10 @@ if(!isset($blank))
     <script src="<?php echo e(asset('vendor/slimscroll/jquery.slimscroll.js')); ?>"></script>
     <!-- main js -->
     <script src="<?php echo e(asset('libs/js/main-js.js')); ?>"></script>
+	
+	<!--Tingle--> 
+    <script src="<?php echo e(asset('lib/tingle/tingle.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('lib/tingle/tingle-init.js')); ?>"></script>
 <?php
 }
 ?>    

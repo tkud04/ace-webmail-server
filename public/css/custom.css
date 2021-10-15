@@ -17,3 +17,28 @@
 .ib{
 	display: inline-block;
 }
+
+.to-item{
+	align-items: center;
+    background-color: #fff;
+    border: 1px solid #dadce0;
+	border-radius: 10px;
+	box-sizing: border-box;
+    height: 20px;
+    line-height: 20px;
+    margin: 2px 0;
+    padding-left: 8px;
+    padding-right: 4px;
+}
+
+.to-item-remove{
+	height: 16px;
+    opacity: 0.54;
+    width: 16px;
+    background-image: url(https://www.gstatic.com/images/icons/material/system/1x/close_black_16dp.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    margin-left: 4px;
+}
+}

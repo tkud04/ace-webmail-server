@@ -108,12 +108,42 @@ class MainController extends Controller {
 		}
 		else
 		{
-			$v = "login";
+			return redirect()->intended('/');
 		}
 		
 		return view($v,compact($cpt));
 		
     } 
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getNewMessage(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$v = "new-message"; 
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+		return view($v,compact($cpt));
+		
+    }
 	
 	/**
 	 * Show the application home page.
@@ -155,13 +185,13 @@ class MainController extends Controller {
 				  }
 				  else
 				  {
-					  return redirect()->intended('inbox');
+					  return redirect()->intended('/');
 				  }
 				 
 			  }
 			  else
 			  {
-				  return redirect()->intended('inbox');
+				  return redirect()->intended('/');
 			  }
 		}
 		else

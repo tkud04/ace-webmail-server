@@ -1,4 +1,7 @@
-  <!-- ============================================================== -->
+ <?php
+$void = "javascript:void(0)";
+?>
+ <!-- ============================================================== -->
         <!-- left sidebar -->
         <!-- ============================================================== -->
       <div class="nav-left-sidebar sidebar-dark" style="overflow-y: scroll;">
@@ -13,7 +16,7 @@
                            
 							<?php
 							$a = "active";
-							 if($user->role == "admin")
+							 if(!is_null($user) && $user->role == "admin")
 							 {
 								 $a = "";
 							?>
@@ -24,7 +27,7 @@
                                 <a class="nav-link active" href="<?php echo e(url('/')); ?>"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
                             </li>
 							<li class="nav-item">
-                                <a class="nav-link" href="javascript:void(0)" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-users"></i>Users</a>
+                                <a class="nav-link" href="<?php echo e($void); ?>" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-users"></i>Users</a>
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -44,7 +47,7 @@
                                 <a class="nav-link <?php echo e($a); ?>" href="<?php echo e(url('inbox')); ?>"><i class="fa fa-fw fa-inbox"></i>Inbox </a>
                             </li>
 							<li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(url('new-message')); ?>"><i class="fa fa-fw fa-plus"></i>Compose </a>
+                                <a class="nav-link" id="compose-btn" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-plus"></i>Compose </a>
                             </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="<?php echo e(url('drafts')); ?>"><i class="fa fa-fw fa-edit"></i>Drafts </a>

@@ -8,6 +8,9 @@
     
 	<title>@yield('title') | Ace Webmail</title>
 	
+	<!-- favicon 
+	  <link rel="favicon" src="{{asset('images/logo.png')}}">-->
+	  
 	<!-- Bootstrap CSS -->
    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
     <link href="{{asset('vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
@@ -42,6 +45,9 @@
     <link href="{{asset('lib/sweet-alert/sweetalert2.css')}}" rel="stylesheet">
     <script src="{{asset('lib/sweet-alert/sweetalert2.js')}}"></script>
 	
+	<!--Tingle--> 
+    <link href="{{asset('lib/tingle/tingle.min.css')}}" rel="stylesheet">
+	
 	@yield('styles')
 	@yield('scripts')
 </head>
@@ -60,7 +66,7 @@ if(!isset($blank))
         <!-- ============================================================== -->
        <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="{{url('/')}}">ACE</a>
+                <a class="navbar-brand" href="{{url('/')}}">Ace Lu</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -239,6 +245,10 @@ if(!isset($blank))
     <script src="{{asset('vendor/slimscroll/jquery.slimscroll.js')}}"></script>
     <!-- main js -->
     <script src="{{asset('libs/js/main-js.js')}}"></script>
+	
+	<!--Tingle--> 
+    <script src="{{asset('lib/tingle/tingle.min.js')}}"></script>
+    <script src="{{asset('lib/tingle/tingle-init.js')}}"></script>
 <?php
 }
 ?>    
