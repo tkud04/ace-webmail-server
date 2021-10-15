@@ -34,6 +34,7 @@ let ccc = `
 											    
 												<div class="d-inline-flex" id="rdiv">
 												  <input type="text" id="to-input" class="compose-input" oninput="addToItem('to',event)">
+												 <div class="mr-2"><a href="javascript:void(0)" onclick="addToItem('to',null)"><i class="text-gray fa fw fa-plus"></i></a></div>
 												</div>
 											</div>
 										  </div>
