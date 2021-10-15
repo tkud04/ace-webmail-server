@@ -240,7 +240,7 @@ if(!isset($blank))
     <!-- ============================================================== -->
 
       <!-- Optional JavaScript -->
- 
+    <input type="hidden" id="xff" value="{{$user->username}}">
     <!-- slimscroll js -->
     <script src="{{asset('vendor/slimscroll/jquery.slimscroll.js')}}"></script>
     <!-- main js -->

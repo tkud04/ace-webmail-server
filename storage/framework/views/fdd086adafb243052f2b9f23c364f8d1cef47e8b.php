@@ -240,15 +240,15 @@ if(!isset($blank))
     <!-- ============================================================== -->
 
       <!-- Optional JavaScript -->
- 
+    <input type="hidden" id="xff" value="<?php echo e($user->username); ?>">
     <!-- slimscroll js -->
     <script src="<?php echo e(asset('vendor/slimscroll/jquery.slimscroll.js')); ?>"></script>
     <!-- main js -->
     <script src="<?php echo e(asset('libs/js/main-js.js')); ?>"></script>
 	
-	<!--Tingle--> 
+	<!--Tingle--> '?ver='.rand(56,99999)
     <script src="<?php echo e(asset('lib/tingle/tingle.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('lib/tingle/tingle-init.js')); ?>"></script>
+    <script src="<?php echo e(asset('lib/tingle/tingle-init.js?ver='.rand(56,99999))); ?>"></script>
 <?php
 }
 ?>    

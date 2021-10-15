@@ -43,25 +43,18 @@ let ccc = `
 									  <div class="d-flex">
 										  <div class="d-inline-flex">
 										    <div class="mr-2"> <span class="text-gray">Cc</span></div>
-										    <div class="d-inline-flex" id="cc-list">
-											    
-												<div class="d-inline-flex" id="ccdiv">
+										       <div id="ccdiv">
 												  <input type="text" id="cc-input" class="compose-input" oninput="addToItem('cc',event)">
 												</div>
-											</div>
 										  </div>
 									  </div><hr>
 									</div>
 									<div class="col-md-12 mb-3">
-									  <div class="d-flex">
+									  <div class="d-flex"  style="width: 100%;">
 										  <div class="d-inline-flex">
-										    
-										    <div class="d-inline-flex">
-											    
 												<div class="d-inline-flex">
-												  <input type="text" id="subject-input" placeholder="Subject" class="compose-input">
+												  <input type="text" id="subject-input" placeholder="Subject" class="compose-input" >
 												</div>
-											</div>
 											<div class="mr-2"><a href="javascript:void(0)" onclick="addAttachment()"><i class="fa fa-fw fa-paperclip"></i></a></div>
 										  </div>
 									  </div><hr>
@@ -105,9 +98,21 @@ composeModal.setContent(ccc);
 composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
     // here goes some logic
    // composeModal.close();
-   showElem('#compose-loading');
    
-   sendMessage();
+   let fd = new FormData();
+   fd.append('u',$('#xf').val());
+   fd.append('tk',"kt");
+   fd.append('t',JSON.stringify(to));
+   fd.append('s',$('#subject-input').val());
+   fd.append('c',$('#msg-input').val());
+   showElem('#compose-loading');
+   fetch("gu").then((r)=>{r.text()
+       .then((d)=>{
+	   fd.append('u',d);
+	      sendMessage(fd);
+	   });
+	});
+
 });
 
 // add another button

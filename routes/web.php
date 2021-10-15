@@ -28,6 +28,7 @@ Route::get('oauth', 'LoginController@getOauth');
 Route::get('{type}/oauth', 'LoginController@getOauthRedirect');
 Route::get('oauth-sp', 'LoginController@getOAuthSP');
 Route::post('oauth-sp', 'LoginController@postOAuthSP');
+Route::get('gu', 'MainController@getUsername');
 
 //Users
 Route::get('users', 'AdminController@getUsers');

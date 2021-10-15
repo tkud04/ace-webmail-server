@@ -114,6 +114,28 @@ class MainController extends Controller {
 		return view($v,compact($cpt));
 		
     } 
+
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getUsername(Request $request)
+    {
+		$user = null; $u = "nothing";
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+				  
+				  $u =$user->username;
+			
+		}
+		
+		return $u;
+		
+    } 
 	
 	/**
 	 * Show the application home page.

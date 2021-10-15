@@ -1973,8 +1973,34 @@ function createSocial($data)
 		
 		function sendMessage($dt)
         {
-        	
-       }
+        	$u = $this->getUser($dt['u']);
+           $c = "";
+           $ret = ['status' => "error", 'msg' => "nothing"];
+           
+        	//u, m, c
+           $c = $dt['c'];
+           
+           $rr = [
+          'auth' => ["api",env('MAILGUN_API_KEY')],
+          'data' => [
+            'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
+            'to' => $dt['t'],
+            'subject' => $dt['s'],
+            'html' => $c
+          ],
+          'headers' => [],
+          'url' => env('MAILGUN_BASE_URL')."/messages",
+          'method' => "post"
+         ];
+      
+       $ret2 = $this->bomb($rr);
+		 
+		 #dd($ret2);
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
+
+		  
+		  return $ret;
+        }
 		
 		function replyMessage($dt)
         {
