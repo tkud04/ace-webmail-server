@@ -1,4 +1,4 @@
- let editMode = "", to = [], cc = [], bcc = [];
+let editMode = "", to = [], cc = [], bcc = [];
 
 const showElem = (name) => {
 	let names = [];
@@ -477,6 +477,52 @@ const reply = dt => {
 			hideElem('#edit-loading');
 		    $(`#edit-actions`).removeClass("d-inline-flex");
 	        hideElem([`#edit-actions`]);		
+	   });
+}
+
+const sendMessage = dt => {
+	 
+	//create request
+	let url = "api/new-message";
+	const req = new Request(url,{method: 'POST', body: dt});
+	
+	//fetch request
+	fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error", message: "Technical error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to send message: " + error);			
+			hideElem('#compose-loading');
+		    showElem([`#compose-result`]);	
+	   })
+	   .then(res => {
+		   console.log(res);
+			 hideElem(['#compose-loading']); 
+             	 
+		   if(res.status == "ok"){
+               
+		   }
+		   else if(res.status == "error"){
+			   console.log(res.message);
+			 if(res.message == "validation" || res.message == "dt-validation"){
+				 
+			 }
+			 else{
+			   alert("Failed to send message: " + error);			
+			//hideElem('#compose-loading');
+		    //showElem([`#compose-actions`]);		 
+			 }					 
+		   }
+		   		     
+	   }).catch(error => {
+		    alert("Failed to send reply: " + error);			
+			//showElem([`#compose-actions`]);		 
 	   });
 }
 
