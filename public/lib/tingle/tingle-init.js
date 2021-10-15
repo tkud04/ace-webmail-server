@@ -56,7 +56,7 @@ let ccc = `
 									  <div class="d-flex">
 										  <div class="d-inline-flex">
 										    <div class="mr-2"> <span class="text-gray">Subject</span></div>
-										    <div class="d-inline-flex" id="cc-list">
+										    <div class="d-inline-flex">
 											    
 												<div class="d-inline-flex">
 												  <input type="text" id="subject-input" class="compose-input">
@@ -72,11 +72,11 @@ let ccc = `
 									</div><div class="col-md-12 mb-3">
 									  <div class="d-flex">
 										  <div class="d-inline-flex">
-										    <div class="mr-2"> <span class="text-gray">Subject</span></div>
-										    <div class="d-inline-flex" id="cc-list">
+										    <div class="mr-2"> <span class="text-gray">Extra</span></div>
+										    <div class="d-inline-flex">
 											    
 												<div class="d-inline-flex">
-												  <input type="text" id="subject-input" class="compose-input">
+												  <input type="text" id="" class="compose-input">
 												</div>
 											</div>
 										  </div>
