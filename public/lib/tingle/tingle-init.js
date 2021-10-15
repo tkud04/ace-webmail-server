@@ -35,7 +35,7 @@ let ccc = `
 												  <input type="text" id="to-input" class="compose-input" oninput="addToItem('to',event)"> 
 												</div>
 											</div>
-											<div><a href="javascript:void(0)" onclick="addToItem('to',null)"><i class="text-gray fa fw fa-plus"></i></a></div>
+											
 										  </div>
 									  </div><hr>
 									</div>
