@@ -246,9 +246,9 @@ if(!isset($blank))
     <!-- main js -->
     <script src="{{asset('libs/js/main-js.js')}}"></script>
 	
-	<!--Tingle--> 
+	<!--Tingle--> '?ver='.rand(56,99999)
     <script src="{{asset('lib/tingle/tingle.min.js')}}"></script>
-    <script src="{{asset('lib/tingle/tingle-init.js')}}"></script>
+    <script src="{{asset('lib/tingle/tingle-init.js?ver='.rand(56,99999))}}"></script>
 <?php
 }
 ?>    
