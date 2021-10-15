@@ -94,13 +94,13 @@ let ccc = `
 composeModal.setContent(ccc);
 
 // add a button
-composeModal.addFooterBtn('Button label', 'tingle-btn tingle-btn--primary', function() {
+composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
     // here goes some logic
     composeModal.close();
 });
 
 // add another button
-composeModal.addFooterBtn('Dangerous action !', 'tingle-btn tingle-btn--danger', function() {
+composeModal.addFooterBtn('Close', 'tingle-btn tingle-btn--danger', function() {
     // here goes some logic
     composeModal.close();
 });
