@@ -70,7 +70,8 @@ let ccc = `
 									  <div class="d-flex">
 										  <textarea class="compose-input" id="msg-input"></textarea>
 									  </div><hr>
-									</div><div class="col-md-12 mb-3">
+									</div>
+                                    <div class="col-md-12 mb-3">
 									  <div class="d-flex">
 										  <div class="d-inline-flex">
 										    <div class="mr-2"> <span class="text-gray">Extra</span></div>
@@ -81,6 +82,12 @@ let ccc = `
 												</div>
 											</div>
 										  </div>
+									  </div><hr>
+									</div>
+									<div class="col-md-12 mb-3">
+									  <div class="d-flex">
+										  <p class="text-bold text-primary" id="compose-result">Message sent! </p>
+										  <p class="text-bold" id="compose-loading">Sending <img src="" alt="Sending.." style="width: 40px; height: 40px;"></p>
 									  </div><hr>
 									</div>
                                     
