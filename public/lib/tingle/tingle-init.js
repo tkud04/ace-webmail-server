@@ -97,7 +97,10 @@ composeModal.setContent(ccc);
 // add a button
 composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
     // here goes some logic
-    composeModal.close();
+   // composeModal.close();
+   showElem('#compose-loading');
+   
+   sendMessage();
 });
 
 // add another button
