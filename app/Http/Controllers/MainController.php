@@ -214,7 +214,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "trash"]);
-				  $title = "Sent";
+				  $title = "Trash";
 				  $subtitle = "View messages in your trash";
 				  #dd($msgs);
 				  array_push($cpt,'msgs');		
@@ -252,7 +252,7 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 				  $v = "messages"; 
-				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "sent"]);
+				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "spam"]);
 				  $title = "Spam";
 				  $subtitle = "View messages that have been marked as spam";
 				  #dd($msgs);
