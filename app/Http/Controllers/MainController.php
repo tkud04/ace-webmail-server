@@ -114,6 +114,84 @@ class MainController extends Controller {
 		return view($v,compact($cpt));
 		
     } 
+    
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getDrafts(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+				  $v = "messages"; 
+				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "drafts"]);
+				  $title = "Drafts";
+				  $subtitle = "View messages you're still editing";
+				  #dd($msgs);
+				  array_push($cpt,'msgs');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+			  		   
+			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+		return view($v,compact($cpt));
+		
+    } 
+    
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getSent(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+				  $v = "messages"; 
+				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "sent"]);
+				  $title = "Sent";
+				  $subtitle = "View messages you have sent";
+				  #dd($msgs);
+				  array_push($cpt,'msgs');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+			  		   
+			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+		return view($v,compact($cpt));
+		
+    } 
 
 	/**
 	 * Show the application home page.
