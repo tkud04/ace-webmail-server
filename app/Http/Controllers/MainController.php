@@ -192,6 +192,86 @@ class MainController extends Controller {
 		return view($v,compact($cpt));
 		
     } 
+    
+     /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getTrash(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+				  $v = "messages"; 
+				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "trash"]);
+				  $title = "Sent";
+				  $subtitle = "View messages in your trash";
+				  #dd($msgs);
+				  array_push($cpt,'msgs');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+			  		   
+			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+		return view($v,compact($cpt));
+		
+    } 
+    
+     /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getSpam(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+				  $v = "messages"; 
+				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "sent"]);
+				  $title = "Spam";
+				  $subtitle = "View messages that have been marked as spam";
+				  #dd($msgs);
+				  array_push($cpt,'msgs');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+			  		   
+			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+		return view($v,compact($cpt));
+		
+    } 
+    
+    
 
 	/**
 	 * Show the application home page.
