@@ -7,6 +7,7 @@ let composeModal = new tingle.modal({
     cssClass: ['custom-class-1', 'custom-class-2'],
     onOpen: function() {
         console.log('modal open');
+		
     },
     onClose: function() {
         console.log('modal closed');
@@ -60,22 +61,8 @@ let ccc = `
 									  </div><hr>
 									</div>
 									<div class="col-md-12 mb-3">
-									  <div class="d-flex">
-										  <textarea class="compose-input" id="msg-input"></textarea>
-									  </div><hr>
-									</div>
-                                    <div class="col-md-12 mb-3">
-									  <div class="d-flex">
-										  <div class="d-inline-flex">
-										    <div class="mr-2"> <span class="text-gray">Extra</span></div>
-										    <div class="d-inline-flex">
-											    
-												<div class="d-inline-flex">
-												  <input type="text" id="" class="compose-input">
-												</div>
-											</div>
-										  </div>
-									  </div><hr>
+										  <div id="msg-input"></div>
+									  <hr>
 									</div>
 									<div class="col-md-12 mb-3">
 									  <div class="d-flex">
@@ -124,6 +111,7 @@ $(document).ready(() => {
 let btn = document.querySelector('#compose-btn');
         btn.addEventListener('click', function () {
             composeModal.open();
+			
         });
 });
 

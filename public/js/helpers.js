@@ -510,7 +510,8 @@ const sendMessage = (dt,mm) => {
 			   $('#msg-input').val("");
 			   $('#subject-input').val("");
 			   hideElem(['#compose-result']);
-              for(let i = 0; i < to.length; i++) removeToItem(to[i].id);			   
+              for(let i = 0; i < to.length; i++) removeToItem(to[i].id);
+               alert("Message sent!");			  
                mm.close();
 		   }
 		   else if(res.status == "error"){
