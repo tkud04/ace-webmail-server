@@ -1998,7 +1998,13 @@ function createSocial($data)
        $ret2 = $this->bomb($rr);
 		 
 		 #dd($ret2);
-		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.")
+		 {
+			 $ret = ['status' => "ok"];
+			 
+			 //save to db
+			 
+		 } 
 
 		  
 		  return $ret;

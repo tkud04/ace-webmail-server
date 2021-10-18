@@ -1,4 +1,4 @@
-let editMode = "", to = [], cc = [], bcc = [];
+let editMode = "", to = [], cc = [], bcc = [], mmsg = ``;
 
 const showElem = (name) => {
 	let names = [];
@@ -545,5 +545,7 @@ const extractMessage = (dt) => {
          //}
 		 ret += line;
 	 }
-	  console.log("ret: ",ret);
+	  //console.log("ret: ",ret);
+	  mmsg = ret;
+	  return ret;
 }

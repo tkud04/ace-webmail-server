@@ -91,7 +91,8 @@ composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
    fd.append('tk',"kt");
    fd.append('t',JSON.stringify(to));
    fd.append('s',$('#subject-input').val());
-   fd.append('c',$('#msg-input').val());
+   //fd.append('c',$('#msg-input').val());
+   fd.append('c',mmsg);
    showElem('#compose-loading');
    fetch("gu").then((r)=>{r.text()
        .then((d)=>{

@@ -126,7 +126,7 @@ $(document).ready(() => {
 									  <textarea class="form-control mb-2" name="forward" id="forward-box" rows="15" cols="50" placeholder="Content (optional)"></textarea>
 									</div>
 									</div>
-									<div class="d-inline-flex" id="edit-actions">
+									<div id="edit-actions">
 									   <a id="submit-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-rocket"></i> Submit</a>
 									   <a id="discard-btn" class="btn btn-outline-danger" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-trash"></i> Discard</a>
 									</div>

@@ -91,6 +91,7 @@ $(document).ready(() => {
                                             <tr>
                                                 <td>
                                                 	<a href="<?php echo e($vu); ?>">
+													<?php if(!app('mobile-detect')->isMobile()) : ?>
                                                 	 <div class="d-flex justify-content-between">
 													   <div class="d-inline-flex mt-3">
                                                 	    <div><input type="checkbox" class="mm mr-2" data-xf="<?php echo e($xf); ?>"></div>  
@@ -105,6 +106,25 @@ $(document).ready(() => {
                                                 	     <div><?php echo e($m['dd']); ?></div>
                                                	       </div>
                                                	      </div>
+													  <?php else: ?>
+													   <div class="row">
+													      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+														   <div class="d-flex justify-content-between">
+													         <div class="d-inline-flex mt-3">
+                                                	          <div><input type="checkbox" class="mm mr-2" data-xf="<?php echo e($xf); ?>"></div>  
+                                               	             </div>
+													         <div class="mt-3">
+													          <div><?php echo $sn; ?></div>															 
+                                                	          <div class="mt-3"><?php echo $subject; ?></div>
+                                                	          <div style="color: #b3b3b3;"><?php echo $ss; ?>...</div>
+                                               	             </div>
+													         <div class=" mt-3">
+                                                	           <div><?php echo e($m['dd']); ?></div>
+                                               	             </div>
+                                               	           </div>
+													      </div>
+													   </div>
+													  <?php endif; ?>
                                                    </a>
                                                 </td>
                                             </tr>
