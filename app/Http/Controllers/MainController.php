@@ -31,7 +31,7 @@ class MainController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
-		dd($this->helpers->md->isMobille());
+		//dd($this->helpers->md->isMobille());
 		$user = null;
 		$nope = false;
 		$v = "";

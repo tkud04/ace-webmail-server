@@ -39,7 +39,7 @@ use Mobile_Detect;
 class Helper implements HelperContract
 {
 
- public $md = new Mobile_Detect();
+ //public $md = new Mobile_Detect();
  
  public $signals = ['okays'=> [
                      //SUCCESS NOTIFICATIONS
