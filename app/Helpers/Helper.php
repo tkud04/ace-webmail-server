@@ -1978,7 +1978,7 @@ function createSocial($data)
 		 {
 			 $ret = ['status' => "ok"];
 			 
-			 //save to db
+			 //save msg to db
 			 $msg = [];
 				       $msg['content'] = $c;
 				       $msg['subject'] = $dt['s'];
