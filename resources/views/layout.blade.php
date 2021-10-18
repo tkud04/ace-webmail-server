@@ -56,8 +56,8 @@
 	
 	<script>
 	$(document).ready(() => {
-	var Delta = Quill.import('delta');
-var quill = new Quill('#msg-input', {
+	let Delta = Quill.import('delta');
+let quill = new Quill('#msg-ctr', {
   modules: {
     toolbar: true
   },
@@ -66,7 +66,7 @@ var quill = new Quill('#msg-input', {
 });
 
 // Store accumulated changes
-var change = new Delta();
+let change = new Delta();
 quill.on('text-change', function(delta) {
   change = change.compose(delta);
 });
@@ -87,6 +87,8 @@ setInterval(function() {
     });
     */
     change = new Delta();
+	let xx = quill.getContents();
+	document.querySelector('#msg-input').value = extractMessage(xx);
   }
 }, 5*1000);
 

@@ -532,3 +532,18 @@ const sendMessage = (dt,mm) => {
 	   });
 }
 
+const extractMessage = (dt) => {
+	 console.log("dt: ",dt);
+	 let ret = ``, ops = dt.ops;
+	 
+	 for(let i = 0; i < ops.length; i++){
+		 let op = ops[i], a = op.attributes || {},line = `
+		  ${a.link ? `<a href="${a.link}">` : ''} ${a.bold ? `<b>` : ''} ${a.italic ? `<i>` : ''} ${op.insert} ${a.italic ? `</i>` : ''} ${a.bold ? `</b>` : ''} ${a.link ? `</a>` : ''}
+		 `;
+	     //for (const property in op) {
+           //console.log(`${property}: ${op[property]}`);
+         //}
+		 ret += line;
+	 }
+	  console.log("ret: ",ret);
+}
