@@ -1203,6 +1203,7 @@ function createSocial($data)
 		  
 		   function createMessage($dt)
 		   {
+			  $status = isset($data['status']) ? $data['status'] : "unread";
 			   $ret = Messages::create(['fmail_id' => $dt['fmail_id'], 
                                                       'username' => $dt['username'], 
                                                       'sn' => $dt['sn'], 
@@ -1210,7 +1211,7 @@ function createSocial($data)
                                                       'subject' => $dt['subject'], 
                                                       'content' => $dt['content'], 
                                                       'label' => $dt['label'], 
-                                                      'status' => "unread", 
+                                                      'status' => $status, 
                                                       ]);
                                                       
                 return $ret;
@@ -1981,7 +1982,7 @@ function createSocial($data)
 			 $msg = [];
 				       $msg['content'] = $c;
 				       $msg['subject'] = $dt['s'];
-				       $msg['fmail_id'] = "new";
+				       $msg['fmail_id'] = "0";
 				       $msg['username'] = $u['username'];
 				       $msg['sn'] = "";
 				       $msg['sa'] = $dt['t'];
