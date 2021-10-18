@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e3b90538293b5f7ebc46d570c046523",
+    "content-hash": "a5c31a8adfc8b9892c8f749ee07297af",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1602,16 +1602,16 @@
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "2.8.34",
+            "version": "2.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "6f8113f57a508494ca36acbcfa2dc2d923c7ed5b"
+                "reference": "9841e3c46f5bd0739b53aed8ac677fa712943df7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/6f8113f57a508494ca36acbcfa2dc2d923c7ed5b",
-                "reference": "6f8113f57a508494ca36acbcfa2dc2d923c7ed5b",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/9841e3c46f5bd0739b53aed8ac677fa712943df7",
+                "reference": "9841e3c46f5bd0739b53aed8ac677fa712943df7",
                 "shasum": ""
             },
             "require": {
@@ -1650,7 +1650,17 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2019-09-18T18:44:20+00:00"
+            "support": {
+                "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.37"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/serbanghita",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-19T21:22:57+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2646,6 +2656,68 @@
                 "uuid"
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "riverskies/laravel-mobile-detect",
+            "version": "1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/riverskies/laravel-mobile-detect.git",
+                "reference": "0ddb27d31a4a1148875424426b9feda6598f2f14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/riverskies/laravel-mobile-detect/zipball/0ddb27d31a4a1148875424426b9feda6598f2f14",
+                "reference": "0ddb27d31a4a1148875424426b9feda6598f2f14",
+                "shasum": ""
+            },
+            "require": {
+                "mobiledetect/mobiledetectlib": "^2.8"
+            },
+            "require-dev": {
+                "laravel/laravel": "5.5.*",
+                "philo/laravel-blade": "^3.1",
+                "phpspec/prophecy-phpunit": "^1.1",
+                "phpunit/phpunit": "^6.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Riverskies\\Laravel\\MobileDetect\\MobileDetectServiceProvider"
+                    ],
+                    "aliases": {
+                        "MobileDetect": "Riverskies\\Laravel\\MobileDetect\\Facades\\MobileDetect"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Riverskies\\Laravel\\MobileDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barnabas Kecskes",
+                    "email": "barnabas@riverskies.com"
+                }
+            ],
+            "description": "Instant mobile detection access directly from within Blade templates.",
+            "keywords": [
+                "blade",
+                "detection",
+                "laravel",
+                "mobile"
+            ],
+            "support": {
+                "issues": "https://github.com/riverskies/laravel-mobile-detect/issues",
+                "source": "https://github.com/riverskies/laravel-mobile-detect/tree/master"
+            },
+            "time": "2017-09-02T08:11:53+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -6721,5 +6793,6 @@
         "php": "^7.3",
         "ext-gd": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

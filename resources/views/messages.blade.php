@@ -91,6 +91,7 @@ $(document).ready(() => {
                                             <tr>
                                                 <td>
                                                 	<a href="{{$vu}}">
+													@desktop
                                                 	 <div class="d-flex justify-content-between">
 													   <div class="d-inline-flex mt-3">
                                                 	    <div><input type="checkbox" class="mm mr-2" data-xf="{{$xf}}"></div>  
@@ -105,6 +106,25 @@ $(document).ready(() => {
                                                 	     <div>{{ $m['dd'] }}</div>
                                                	       </div>
                                                	      </div>
+													  @elsedesktop
+													   <div class="row">
+													      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+														   <div class="d-flex justify-content-between">
+													         <div class="d-inline-flex mt-3">
+                                                	          <div><input type="checkbox" class="mm mr-2" data-xf="{{$xf}}"></div>  
+                                               	             </div>
+													         <div class="mt-3">
+													          <div>{!! $sn !!}</div>															 
+                                                	          <div>{!! $subject !!}</div>
+                                                	          <div style="color: #ccc;">{!! $ss !!}...</div>
+                                               	             </div>
+													         <div class=" mt-3">
+                                                	           <div>{{ $m['dd'] }}</div>
+                                               	             </div>
+                                               	           </div>
+													      </div>
+													   </div>
+													  @enddesktop
                                                    </a>
                                                 </td>
                                             </tr>

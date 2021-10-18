@@ -33,12 +33,14 @@ use \Cloudinary\Api\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
-use Codedge\Fpdf\Fpdf\Fpdf;
+use Mobile_Detect;
 
 
 class Helper implements HelperContract
 {
 
+ public $md = new Mobile_Detect();
+ 
  public $signals = ['okays'=> [
                      //SUCCESS NOTIFICATIONS
 					 "login-status" => "Welcome back!",            
