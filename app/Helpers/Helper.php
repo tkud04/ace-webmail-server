@@ -400,32 +400,7 @@ public $smtpp = [
        ],
   ];
 	
- public $banks = [
-      'access' => "Access Bank", 
-      'citibank' => "Citibank", 
-      'diamond-access' => "Diamond-Access Bank", 
-      'ecobank' => "Ecobank", 
-      'fidelity' => "Fidelity Bank", 
-      'fbn' => "First Bank", 
-      'fcmb' => "FCMB", 
-      'globus' => "Globus Bank", 
-      'gtb' => "GTBank", 
-      'heritage' => "Heritage Bank", 
-      'jaiz' => "Jaiz Bank", 
-      'keystone' => "KeyStone Bank", 
-      'polaris' => "Polaris Bank", 
-      'providus' => "Providus Bank", 
-      'stanbic' => "Stanbic IBTC Bank", 
-      'standard-chartered' => "Standard Chartered Bank", 
-      'sterling' => "Sterling Bank", 
-      'suntrust' => "SunTrust Bank", 
-      'titan-trust' => "Titan Trust Bank", 
-      'union' => "Union Bank", 
-      'uba' => "UBA", 
-      'unity' => "Unity Bank", 
-      'wema' => "Wema Bank", 
-      'zenith' => "Zenith Bank"
- ];			
+ 
 
   public $ip = "";
   
@@ -2003,7 +1978,17 @@ function createSocial($data)
 			 $ret = ['status' => "ok"];
 			 
 			 //save to db
-			 
+			 $msg = [];
+				       $msg['content'] = $c;
+				       $msg['subject'] = $dt['s'];
+				       $msg['fmail_id'] = "new";
+				       $msg['username'] = $u['username'];
+				       $msg['sn'] = "";
+				       $msg['sa'] = $dt['t'];
+				       $msg['label'] = "sent";
+				       $msg['status'] = "read";
+					   
+					   $mm = $this->createMessage($msg);
 		 } 
 
 		  
