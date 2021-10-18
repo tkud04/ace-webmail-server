@@ -115,8 +115,8 @@ $(document).ready(() => {
                                                	             </div>
 													         <div class="mt-3">
 													          <div>{!! $sn !!}</div>															 
-                                                	          <div>{!! $subject !!}</div>
-                                                	          <div style="color: #ccc;">{!! $ss !!}...</div>
+                                                	          <div class="mt-3">{!! $subject !!}</div>
+                                                	          <div style="color: #b3b3b3;">{!! $ss !!}...</div>
                                                	             </div>
 													         <div class=" mt-3">
                                                 	           <div>{{ $m['dd'] }}</div>
