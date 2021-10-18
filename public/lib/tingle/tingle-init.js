@@ -61,7 +61,7 @@ let ccc = `
 									  </div><hr>
 									</div>
 									<div class="col-md-12 mb-3">
-										  <div id="msg-input"></div>
+										  <div id="msg-input" style="height: 350px;"></div>
 									  <hr>
 									</div>
 									<div class="col-md-12 mb-3">
