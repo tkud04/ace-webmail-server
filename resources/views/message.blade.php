@@ -103,10 +103,11 @@ $(document).ready(() => {
 									</div>
                                     
                                     <div class="col-md-12">
-									<center>
+									
 									<div class="mb-5">
 									{!! $m['content'] !!}
 									</div>
+									<center>
 									<div class="d-inline-flex" id="edit-menu">
 									   <a id="reply-btn" class="btn btn-outline-primary" href="{{$void}}"><i class="fa fa-fw fa-reply"></i> Reply</a>
 									   <a id="forward-btn" class="btn btn-outline-primary" href="{{$void}}"><i class="fa fa-fw fa-forward"></i> Forward</a>

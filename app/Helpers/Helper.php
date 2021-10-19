@@ -1977,7 +1977,9 @@ function createSocial($data)
 		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.")
 		 {
 			 $ret = ['status' => "ok"];
-			 
+		 } 
+		 
+		 
 			 //save msg to db
 			 $msg = [];
 				       $msg['content'] = $c;
@@ -1990,7 +1992,6 @@ function createSocial($data)
 				       $msg['status'] = "read";
 					   
 					   $mm = $this->createMessage($msg);
-		 } 
 
 		  
 		  return $ret;

@@ -52,7 +52,7 @@ $(document).ready(() => {
 							    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							 <ul class="list-inline"  style="overflow-x: scroll;">
 							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
-							  <li class="list-inline-item"><a id="refresh-btn" href="<?php echo e($void); ?>" class="btn" title="Refresh" onclick="refresh()"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="refresh-btn" href="<?php echo e(url('inbox')); ?>" class="btn" title="Refresh"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="spam-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam" onclick="markSpam()"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" onclick="trash()"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="unread-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread" onclick="markUnread()"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
