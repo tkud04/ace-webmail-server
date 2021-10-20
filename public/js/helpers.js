@@ -460,7 +460,7 @@ const sendMessage = (dt,mm) => {
 	fetch(req)
 	   .then(response => {
 		   if(response.status === 200){
-			   return response.text();
+			   return response.json();
 		   }
 		   else{
 			   return {status: "error", message: "Technical error"};
