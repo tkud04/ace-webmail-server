@@ -1203,7 +1203,7 @@ function createSocial($data)
 		  
 		   function createMessage($dt)
 		   {
-			  $status = isset($data['status']) ? $data['status'] : "unread";
+			  $status = isset($dt['status']) ? $dt['status'] : "unread";
 			   $ret = Messages::create(['fmail_id' => $dt['fmail_id'], 
                                                       'username' => $dt['username'], 
                                                       'sn' => $dt['sn'], 
@@ -1282,8 +1282,6 @@ function createSocial($data)
 							 switch(($data['op']))
 							 {
 								 case "read":
-								   $m->update(['status' => "read"]);
-								 break;
 								 case "unread":
 								   $m->update(['status' => "read"]);
 								 break;
