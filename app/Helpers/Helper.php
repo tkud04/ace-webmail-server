@@ -1271,7 +1271,7 @@ function createSocial($data)
 				  $temp['cid'] = $a->cid;
 				  $temp['ctype'] = $a->ctype;
 				  $temp['filename'] = $a->filename;
-				  $temp['url'] = $this->getCloudinaryImage(a->url);
+				  $temp['url'] = $this->getCloudinaryImage($a->url);
 				  $temp['checksum'] = $a->checksum;
 				  $temp['size'] = $a->size;
      			  $temp['date'] = $a->created_at->format("m/d/Y h:i A");
