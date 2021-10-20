@@ -610,6 +610,74 @@ $subject = $data['subject'];
               return $ret; 
            }
 		   
+		    function deleteCloudImage($id)
+          {
+          	$dt = ['cloud_name' => "kloudtransact",'invalidate' => true];
+          	$rett = \Cloudinary\Uploader::destroy($id,$dt);
+                                                     
+             return $rett; 
+         }
+		 
+		 function resizeImage($res,$size)
+		 {
+			  $ret = Image::make($res)->resize($size[0],$size[1])->save(sys_get_temp_dir()."/upp");			   
+              // dd($ret);
+			   $fname = $ret->dirname."/".$ret->basename;
+			   $fsize = getimagesize($fname);
+			  return $fname;		   
+		 }
+		   
+		    function uploadCloudImage($path)
+          {
+          	$ret = [];
+          	$dt = ['cloud_name' => "kloudtransact"];
+              $preset = "gjbdj9bt";
+          	$rett = \Cloudinary\Uploader::unsigned_upload($path,$preset,$dt);
+                                                      
+             return $rett; 
+         }
+		   
+		   function getCloudinaryImage($dt)
+		   {
+			   $ret = [];
+                  //dd($dt);       
+               if(is_null($dt)) { $ret = "img/no-image.png"; }
+               
+			   else
+			   {
+				    $ret = "https://res.cloudinary.com/kloudtransact/raw/upload/v1634740095/".$dt;
+                }
+				
+				return $ret;
+		   }
+		   
+		   function getCloudinaryImages($dt)
+		   {
+			   $ret = [];
+                  //dd($dt);       
+               if(count($dt) < 1) { $ret = ["img/no-image.png"]; }
+               
+			   else
+			   {
+                   $ird = $dt[0]['url'];
+				   if($ird == "none")
+					{
+					   $ret = ["img/no-image.png"];
+					}
+				   else
+					{
+                       for($x = 0; $x < count($dt); $x++)
+						 {
+							 $ird = $dt[$x]['url'];
+                            $imgg = $this->getCloudinaryImage($ird);
+                            array_push($ret,$imgg); 
+                         }
+					}
+                }
+				
+				return $ret;
+		   }
+		   
 		   
            function createUser($data)
            {
@@ -1337,16 +1405,12 @@ function createSocial($data)
 				       $msg['sn'] = ($s['name'] == null) ? "" : $s['name'];
 				       $msg['sa'] = $s['address'];
 				       $msg['label'] = "inbox";
-				       $msg['status'] = "enabled";
-					   $this->createSetting([
-				       'name' => 'msg',
-				       'value' => json_encode($msg),
-					   'status' => "enabled"
-					]);
+				       $msg['status'] = "unread";
+					   
 					   $mm = $this->createMessage($msg);
 					   
 					    //Attachments
-					   $fatts = $m['attachments']; $atts = [];
+					   $fatts = $m['attachments'];
 					   
 					   foreach($fatts as $ff)
 					   {
@@ -1356,10 +1420,11 @@ function createSocial($data)
 						   $atts['cid'] = $ff['textAsHtml'];
 						   $atts['ctype'] = $ff['contentType'];
 						   $atts['filename'] = $ff['filename'];
-						   $atts['content'] = json_encode($content['data']);
+						   $ret = $this->helpers->uploadCloudImage($img[$i]->getRealPath());
+						   $atts['url'] = $ret['public_id'];
 						   $atts['checksum'] = $ff['checksum'];
 						   $atts['size'] = $ff['size'];
-						   $this->createAttachment($msg);
+						   $this->createAttachment($atts);
 					   }
 					   
 					   $ret = ['status' => "ok"];

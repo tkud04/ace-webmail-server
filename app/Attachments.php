@@ -13,6 +13,6 @@ class Attachments extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'message_id', 'cid', 'ctype', 'filename', 'content', 'checksum', 'size'
+        'id', 'message_id', 'cid', 'ctype', 'filename', 'url', 'checksum', 'size'
     ];
 }
