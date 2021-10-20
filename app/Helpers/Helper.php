@@ -1986,7 +1986,7 @@ function createSocial($data)
 				       $msg['subject'] = $dt['s'];
 				       $msg['fmail_id'] = "0";
 				       $msg['username'] = $u['username'];
-				       $msg['sn'] = "";
+				       $msg['sn'] = $u['username'];
 				       $msg['sa'] = $dt['t'];
 				       $msg['label'] = "sent";
 				       $msg['status'] = "read";
@@ -2008,13 +2008,14 @@ function createSocial($data)
            {
         	//u, m, c
            $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['content'];
-           
+           $subject = "Re: ".$m['subject'];
+		   
            $rr = [
           'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
             'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
             'to' => $dt['t'],
-            'subject' => "Re: ".$m['subject'],
+            'subject' => $subject,
             'html' => $c
           ],
           'headers' => [],
@@ -2026,6 +2027,19 @@ function createSocial($data)
 		 
 		 #dd($ret2);
 		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
+		 
+		   //save msg to db
+			 $msg = [];
+				       $msg['content'] = $c;
+				       $msg['subject'] = $subject;
+				       $msg['fmail_id'] = "0";
+				       $msg['username'] = $u['username'];
+				       $msg['sn'] = $u['username'];
+				       $msg['sa'] = $dt['t'];
+				       $msg['label'] = "sent";
+				       $msg['status'] = "read";
+					   
+					   $mm = $this->createMessage($msg);
           }
 		  
 		  return $ret;
@@ -2053,13 +2067,14 @@ To: <kudayisitobi@gmail.com>
 		   $c.= "Date: ".$m['date']." <br>";
 		   $c.= "Subject: ".$m['subject']." <br>";
 		   $c.= "To: ".$u['username']."@aceluxurystore.com><br><br>".$m['content'];
-           
+           $subject = "Fw: ".$m['subject'];
+		   
            $rr = [
           'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
             'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
             'to' => $dt['t'],
-            'subject' => "Fw: ".$m['subject'],
+            'subject' => $subject,
             'html' => $c
           ],
           'headers' => [],
@@ -2071,6 +2086,19 @@ To: <kudayisitobi@gmail.com>
 		 
 		 #dd($ret2);
 		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
+		 
+		  //save msg to db
+			 $msg = [];
+				       $msg['content'] = $c;
+				       $msg['subject'] = $subject;
+				       $msg['fmail_id'] = "0";
+				       $msg['username'] = $u['username'];
+				       $msg['sn'] = $u['username'];
+				       $msg['sa'] = $dt['t'];
+				       $msg['label'] = "sent";
+				       $msg['status'] = "read";
+					   
+					   $mm = $this->createMessage($msg);
           }
 		  
 		  return $ret;
