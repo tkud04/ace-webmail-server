@@ -200,11 +200,24 @@ class APIController extends Controller {
                 {
 					$to = json_decode($req['t']);
 					$u = $req['u'];
+					
 					$rr = [
 					  'c' => $req['c'],
 					  's' => $req['s'],
 					  'u' => $u,
 					];
+					
+					//attachments
+		              $atts = $request->file('atts');
+                 $ird = [];
+				 $rr['atts'] = [];
+				 
+             for($i = 0; $i < count($atts); $i++)
+             {  
+			     #dd($ret);
+			    array_push($rr['atts'],['name' => $atts[$i]->getClientOriginalName(), 'content' => $atts[$i]->getRealPath()]);
+             }
+					 
 					foreach($to as $i)
 					{
 						$rr['t'] = $i->em;

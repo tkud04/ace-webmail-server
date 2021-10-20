@@ -51,14 +51,13 @@ let ccc = `
 									  </div><hr>
 									</div>
 									<div class="col-md-12 mb-3">
-									  <div class="d-flex"  style="width: 100%;">
-										  <div class="d-inline-flex">
-												<div class="d-inline-flex">
+									  <div class="d-inline-flex" style="width: 100%;">
+												<div>
 												  <input type="text" id="subject-input" placeholder="Subject" class="compose-input" >
 												</div>
 											<div class="mr-2"><a href="javascript:void(0)" onclick="addAttachment()"><i class="fa fa-fw fa-paperclip"></i></a></div>
-										  </div>
 									  </div><hr>
+									  <div id="adiv"></div><hr>
 									</div>
 									<div class="col-md-12 mb-3">
 										  <div id="msg-ctr" style="height: 350px;"></div>
@@ -86,14 +85,20 @@ composeModal.setContent(ccc);
 composeModal.addFooterBtn('Send', 'tingle-btn tingle-btn--primary', function() {
     // here goes some logic
    // composeModal.close();
-   
+    showElem('#compose-loading');
    let fd = new FormData();
    fd.append('tk',"kt");
    fd.append('t',JSON.stringify(to));
    fd.append('s',$('#subject-input').val());
-   //fd.append('c',$('#msg-input').val());
    fd.append('c',mmsg);
-   showElem('#compose-loading');
+   
+   if(attachments.length > 0){
+	   for(let i = 0; i < attachments.length; i++){
+		let f = $(`#${attachments[i].id}`)[0].files[0];
+		fd.append('atts[]',f,f.name);
+	  }
+   }
+   
    fetch("gu").then((r)=>{r.text()
        .then((d)=>{
 	   fd.append('u',d);

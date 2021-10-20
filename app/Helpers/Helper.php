@@ -508,6 +508,21 @@ $subject = $data['subject'];
 						 
 					     array_push($dt['multipart'],$temp);
 				      }
+					  
+					   if(isset($data['atts']))
+					   {
+						   foreach($data['atts'] as $a)
+						   {
+							   $n = $a['name']; $r = $a['content']; 
+							   $temp = [
+					              'name' => 'attachment',
+								  'filename' => $n,
+						          'contents' => Psr7\Utils::tryFopen($r, 'r')
+					           ];
+						 
+					           array_push($dt['multipart'],$temp);
+						   }
+					   }
 					}
 				   
 				 }
@@ -515,7 +530,7 @@ $subject = $data['subject'];
 				 
 				 try
 				 {
-					 #dd($data);
+					# dd($dt);
 					$res = $client->request(strtoupper($data['method']),$url,$dt);
 					$ret = $res->getBody()->getContents(); 
 			       //dd($ret);
@@ -1956,6 +1971,8 @@ function createSocial($data)
         	//u, m, c
            $c = $dt['c'];
            
+		   //attachments
+		   //if(i
            $rr = [
           'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
@@ -1968,7 +1985,12 @@ function createSocial($data)
           'url' => env('MAILGUN_BASE_URL')."/messages",
           'method' => "post"
          ];
-      
+		 
+		if(isset($dt['atts']) && count($dt['atts']) > 0)
+		{
+			$rr['atts'] = $dt['atts'];
+		}
+
        $ret2 = $this->bomb($rr);
 		 
 		 #dd($ret2);

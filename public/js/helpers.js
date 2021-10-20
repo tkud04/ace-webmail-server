@@ -1,4 +1,4 @@
-let editMode = "", to = [], cc = [], bcc = [], mmsg = ``;
+let editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [];
 
 const showElem = (name) => {
 	let names = [];
@@ -315,59 +315,29 @@ const removeBccItem = (dt) => {
 	document.querySelector(`#${dt}`).remove();
 }
 
-const compose = dt => {
-	 
-	//create request
-	let url = "api/new-message";
-	const req = new Request(url,{method: 'POST', body: dt});
-	
-	//fetch request
-	fetch(req)
-	   .then(response => {
-		   if(response.status === 200){
-			   return response.json();
-		   }
-		   else{
-			   return {status: "error", message: "Technical error"};
-		   }
-	   })
-	   .catch(error => {
-		    alert("Failed to send message: " + error);			
-			hideElem('#edit-loading');
-		    $(`#edit-actions`).removeClass("d-inline-flex");
-	        showElem([`#edit-actions`]);	
-	   })
-	   .then(res => {
-		   console.log(res);
-			 hideElem(['#rp-loading','#rp-submit']); 
-             	 
-		   if(res.status == "ok"){
-               $('#new-loading').hide();
-               $('#new-actions').addClass("d-inline-flex");
-	          showElem(['#new-actions']);	
-              alert("Message sent!");
-              window.location = "inbox";			   
-		   }
-		   else if(res.status == "error"){
-			   console.log(res.message);
-			 if(res.message == "validation" || res.message == "dt-validation"){
-				 $('#rp-finish').html(`<p class='text-primary'>Please enter a valid email address.</p>`);
-				 showElem(['#rp-finish','#rp-submit']);
-			 }
-			 else{
-			   alert("Failed to send reply: " + error);			
-			hideElem('#new-loading');
-		    $(`#new-actions`).removeClass("d-inline-flex");
-	        showElem([`#new-actions`]);		 
-			 }					 
-		   }
-		   		     
-	   }).catch(error => {
-		    alert("Failed to send reply: " + error);			
-			hideElem('#new-loading');
-		    $(`#new-actions`).removeClass("d-inline-flex");
-	        hideElem([`#new-actions`]);		
-	   });
+const addAttachment = () => {
+	 //console.log("dt: ",dt);
+	let xx = `att-${attachments.length}`;
+
+		 let hh = `
+		 <div class="d-inline-flex" id="${xx}-div">
+		   <input type="file" id="${xx}">
+		   <a class="ml-2" href="javascript:void(0)" onclick="removeAttachment('${xx}')"><i class="fa fa-fw fa-trash"></i></a>
+		 </div>
+		   `;
+		 adiv  = `#adiv`;
+		 $(hh).insertBefore(adiv);
+		 attachments.push({id: xx});
+}
+
+const removeAttachment = (dt) => {
+	let ret = [];
+	for(let i = 0; i < attachments.length; i++){
+		let a = attachments[i];
+		if(a.id != dt) ret.push(a);
+	}
+	attachments = ret;
+	document.querySelector(`#${dt}-div`).remove();
 }
 
 const fwd = dt => {
