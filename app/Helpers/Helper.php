@@ -1184,8 +1184,16 @@ function createSocial($data)
 		   
 		   function createFmail($dt)
 		   {
-			    $ret = Fmails::create(['message' => json_encode($dt)]);
-				$this->parseMessage($ret->id);
+			   $mm = Fmails::where('message_id',$dt->messageId)->first();
+			   if($mm == null)
+               {               	
+                   $ret = Fmails::create(['message_id' => $dt->messageId, 'message' => json_encode($dt)]);
+				   $this->parseMessage($ret->id);
+              }
+			   else
+			   {
+			      $ret = ['msg' => "duplicate"];
+			  }
 				return $ret;
 		   }
 		   
@@ -1218,6 +1226,7 @@ function createSocial($data)
 				  $temp = [];
 				  $temp['id'] = $m->id;
 				  $temp['message'] =$m->message;
+				  $temp['message_id'] =$m->message_id;
      			  $temp['date'] = $m->created_at->format("m/d/Y h:i A");
 				  $ret = $temp;
                }
@@ -1390,9 +1399,10 @@ function createSocial($data)
 				   $username = explode('@',$r['address']);
 				   
 				   $u = User::where('username',$username[0])->first();
+				   
 				   if($u == null)
 				   {
-					   $ret = ['status' => "nice try"];
+					   $ret = ['msg' => "nice try"];
 				   }
 				   else
 				   {
