@@ -1232,7 +1232,7 @@ function createSocial($data)
 				   'cid' => $dt['cid'],
 				   'ctype' => $dt['ctype'],
 				   'filename' => $dt['filename'],
-				   'content' => $dt['content'],
+				   'url' => $dt['url'],
 				   'checksum' => $dt['checksum'],
 				   'size' => $dt['size'],
 				]);
@@ -1271,7 +1271,7 @@ function createSocial($data)
 				  $temp['cid'] = $a->cid;
 				  $temp['ctype'] = $a->ctype;
 				  $temp['filename'] = $a->filename;
-				  $temp['content'] = $a->content;
+				  $temp['url'] = $this->getCloudinaryImage(a->url);
 				  $temp['checksum'] = $a->checksum;
 				  $temp['size'] = $a->size;
      			  $temp['date'] = $a->created_at->format("m/d/Y h:i A");
@@ -1417,7 +1417,7 @@ function createSocial($data)
 						   $atts = [];
 						   $content = $ff['content'];
 						   $atts['message_id'] = $mm->id;
-						   $atts['cid'] = $ff['textAsHtml'];
+						   $atts['cid'] = $ff['cid'];
 						   $atts['ctype'] = $ff['contentType'];
 						   $atts['filename'] = $ff['filename'];
 						   $ret = $this->helpers->uploadCloudImage($content['data']);
