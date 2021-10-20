@@ -1420,7 +1420,7 @@ function createSocial($data)
 						   $atts['cid'] = $ff['textAsHtml'];
 						   $atts['ctype'] = $ff['contentType'];
 						   $atts['filename'] = $ff['filename'];
-						   $ret = $this->helpers->uploadCloudImage($img[$i]->getRealPath());
+						   $ret = $this->helpers->uploadCloudImage($content['data']);
 						   $atts['url'] = $ret['public_id'];
 						   $atts['checksum'] = $ff['checksum'];
 						   $atts['size'] = $ff['size'];
