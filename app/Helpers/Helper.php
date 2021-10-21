@@ -1184,20 +1184,23 @@ function createSocial($data)
 		   
 		   function createFmail($dt)
 		   {
-			 /**
-			 $t = $dt->to; $f = $dt->from;
-				   $r = $t->value[0]; $s = $f->value[0];
-				   $username = explode('@',$r->address);
+			   $msg = json_encode($dt);
+			   $m = json_decode($msg,true);
+				   $t = $m['to']; $f = $m['from'];
+				   $r = $t['value'][0]; $s = $f['value'][0];
+				   $username = explode('@',$r['address']);
+			
 			   $fields = [
-			   'sa' => $f->address,
+			   'u' => $username[0],
+			   'sa' => $s['address'],
 			   'subject' => $dt->subject,
 			   ];
 			   $this->createSetting(['fields' => json_encode($fields)]);
 			   $mm = Messages::where($fields)->first();
-			   **/
+			 
 			  // if($mm == null)
               // {               	
-                   $ret = Fmails::create(['message_id' => $dt->messageId, 'message' => json_encode($dt)]);
+                   $ret = Fmails::create(['message_id' => "", 'message' => $msg]);
 				   $this->parseMessage($ret->id);
           //    }
 			  // else
