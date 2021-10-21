@@ -1184,7 +1184,14 @@ function createSocial($data)
 		   
 		   function createFmail($dt)
 		   {
-			   $mm = Fmails::where('message_id',$dt->messageId)->first();
+			   $t = $dt->to; $f = $dt->from;
+				   $r = $t->value[0]; $s = $f->value[0];
+				   $username = explode('@',$r->address);
+			   $fields = [
+			   'sa' => $f->address,
+			   'subject' => $dt->subject,
+			   ];
+			   $mm = Messages::where($fields)->first();
 			   if($mm == null)
                {               	
                    $ret = Fmails::create(['message_id' => $dt->messageId, 'message' => json_encode($dt)]);
