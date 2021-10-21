@@ -573,7 +573,7 @@ class MainController extends Controller {
 		
 		$req = $request->all();
 		$fm =  $this->helpers->getFmail("95");
-		dd($fm);
+		#dd($fm);
 		 $m = json_decode($fm['message'],true);
 		  //Attachments
 					   $fatts = $m['attachments'];
