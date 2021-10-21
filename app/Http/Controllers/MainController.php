@@ -412,7 +412,9 @@ class MainController extends Controller {
 				  if(count($a) > 0)
 				  {
 					      $headers = ['Content-Type: '.$a['ctype']];
-                         return Response::download($a['content'], $a['filename'], $headers);
+                         return Response::streamDownload(function(){
+                                                  echo $a['content'];
+                                                }, $a['filename'], $headers);
 				  }
 				 
 			  }
