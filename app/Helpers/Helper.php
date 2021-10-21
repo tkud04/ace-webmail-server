@@ -1258,7 +1258,7 @@ function createSocial($data)
 				   'cid' => $dt['cid'],
 				   'ctype' => $dt['ctype'],
 				   'filename' => $dt['filename'],
-				   'url' => $dt['url'],
+				   'content' => $dt['content'],
 				   'checksum' => $dt['checksum'],
 				   'size' => $dt['size'],
 				]);
@@ -1276,7 +1276,7 @@ function createSocial($data)
 			  
 				  foreach($atts as $a)
 				  {
-					  $temp = $this->getAttachment($a->id);
+					  $temp = $this->getAttachment($a->id,[]);
 					  array_push($ret,$temp);
 				  }
                }                         
@@ -1284,11 +1284,12 @@ function createSocial($data)
                 return $ret;
            }
 		   
-		   function getAttachment($id)
+		   function getAttachment($id,$dt)
 		   {
 			   $ret = [];
 			   $a = Attachments::where('id',$id)->first();
-			   
+			  # dd($a);
+			   $content = isset($dt['content']) ? true : false;
 			   if($a != null)
                {
 				  $temp = [];
@@ -1297,7 +1298,7 @@ function createSocial($data)
 				  $temp['cid'] = $a->cid;
 				  $temp['ctype'] = $a->ctype;
 				  $temp['filename'] = $a->filename;
-				  $temp['url'] = $this->getCloudinaryImage($a->url);
+				  if($content) $temp['content'] = json_decode($a->content);
 				  $temp['checksum'] = $a->checksum;
 				  $temp['size'] = $a->size;
      			  $temp['date'] = $a->created_at->format("m/d/Y h:i A");
@@ -1343,7 +1344,7 @@ function createSocial($data)
 				  $temp['content'] = $m->content;
 				  $temp['excerpt'] = $this->clean(substr($m->content,0,33));
 				  $temp['label'] = $m->label;
-				  $temp['attachments'] = $this->getAttachments($m->username);
+				  $temp['attachments'] = $this->getAttachments($m->id);
 				  $temp['status'] = $m->status;
      			  $temp['date'] = $m->created_at->format("jS F,Y h:i A");
      			  $temp['dd'] = $this->getdd($m->created_at);
@@ -1447,8 +1448,7 @@ function createSocial($data)
 						   $atts['cid'] = $ff['cid'];
 						   $atts['ctype'] = $ff['contentType'];
 						   $atts['filename'] = $ff['filename'];
-						   $ret = $this->uploadCloudImage($content['data']);
-						   $atts['url'] = $ret['public_id'];
+						   $atts['content'] =  json_encode($content['data']);
 						   $atts['checksum'] = $ff['checksum'];
 						   $atts['size'] = $ff['size'];
 						   $this->createAttachment($atts);

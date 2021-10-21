@@ -107,6 +107,32 @@ $(document).ready(() => {
 									<div class="mb-5">
 									{!! $m['content'] !!}
 									</div>
+									<div class="mb-3">
+									<?php
+									  $atts = $m['attachments'];
+									  if(count($atts) > 0)
+									  {
+										  foreach($atts as $a)
+										  {
+										    $du = url('dl')."?xf=".$a['id']."&uid=".rand(10000,1244567997);
+											$as = $a['size']; $asd = $as; $asd2 = " bytes";
+											if($as >= 999999)
+											{
+												$asd = $as / 1000000; $asd2 = " MB";
+											}
+											elseif($as >= 999 && $as <= 999999)
+											{
+												$asd = $as / 1000; $asd2 = " KB";
+											}
+									?>
+									  <div id="att-{{$xf}}-div" class="inline-flex">
+									  <a id="att-{{$xf}}" href="{{$du}}" target="_blank"><i class="fa fa-fw fa-paperclip"></i> {{$a['filename']}} - {{$asd.$asd2}}</a>
+									  </div>
+									<?php
+									      }
+									  }
+									?>
+									</div>
 									<center>
 									<div class="d-inline-flex" id="edit-menu">
 									   <a id="reply-btn" class="btn btn-outline-primary" href="{{$void}}"><i class="fa fa-fw fa-reply"></i> Reply</a>

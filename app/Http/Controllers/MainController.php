@@ -382,6 +382,63 @@ class MainController extends Controller {
 		
 		return view($v,compact($cpt));
 		
+    }	
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getDownload(Request $request)
+    {
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+			  if(isset($req['xf']))
+			  {
+				  $a = $this->helpers->getAttachment($req['xf'],['content' => true]);
+				  dd($a);
+				  if(count($m) > 0)
+				  {
+					  $req['op'] = "read";
+					  $this->helpers->updateMessage($req);
+					   $title = $m['subject'];
+					   $contacts = $this->helpers->getContacts($user->username);
+				  $subtitle = "";
+				  #dd($msgs);
+				  array_push($cpt,'m');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');		
+				  array_push($cpt,'contacts');		
+				  }
+				  else
+				  {
+					  return redirect()->intended('/');
+				  }
+				 
+			  }
+			  else
+			  {
+				  return redirect()->intended('/');
+			  }
+		}
+		else
+		{
+			$v = "login";
+		}
+		
+		return view($v,compact($cpt));
+		
     }
 	
 	
@@ -585,12 +642,12 @@ class MainController extends Controller {
 					   {
 						   $atts = [];
 						   $content = $ff['content'];
-						   $atts['message_id'] = $mm->id;
+						   $atts['message_id'] = "1935";
 						   $atts['cid'] = $ff['cid'];
 						   $atts['ctype'] = $ff['contentType'];
 						   $atts['filename'] = $ff['filename'];
-						   $ret = $this->helpers->uploadCloudImage($content['data']);
-						   $atts['url'] = $ret['public_id'];
+						   //$ret = $this->helpers->uploadCloudImage($content['data']);
+						   $atts['content'] = json_encode($content['data']);
 						   $atts['checksum'] = $ff['checksum'];
 						   $atts['size'] = $ff['size'];
 						   $this->helpers->createAttachment($atts);

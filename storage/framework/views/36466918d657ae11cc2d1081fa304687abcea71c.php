@@ -108,6 +108,32 @@ $(document).ready(() => {
 									<?php echo $m['content']; ?>
 
 									</div>
+									<div class="mb-3">
+									<?php
+									  $atts = $m['attachments'];
+									  if(count($atts) > 0)
+									  {
+										  foreach($atts as $a)
+										  {
+										    $du = url('dl')."?xf=".$a['id']."&uid=".rand(10000,1244567997);
+											$as = $a['size']; $asd = $as; $asd2 = " bytes";
+											if($as >= 999999)
+											{
+												$asd = $as / 1000000; $asd2 = " MB";
+											}
+											elseif($as >= 999 && $as <= 999999)
+											{
+												$asd = $as / 1000; $asd2 = " KB";
+											}
+									?>
+									  <div id="att-<?php echo e($xf); ?>-div" class="inline-flex">
+									  <a id="att-<?php echo e($xf); ?>" href="<?php echo e($du); ?>" target="_blank"><i class="fa fa-fw fa-paperclip"></i> <?php echo e($a['filename']); ?> - <?php echo e($asd.$asd2); ?></a>
+									  </div>
+									<?php
+									      }
+									  }
+									?>
+									</div>
 									<center>
 									<div class="d-inline-flex" id="edit-menu">
 									   <a id="reply-btn" class="btn btn-outline-primary" href="<?php echo e($void); ?>"><i class="fa fa-fw fa-reply"></i> Reply</a>

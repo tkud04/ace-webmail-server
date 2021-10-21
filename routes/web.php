@@ -47,6 +47,7 @@ Route::get('sent', 'MainController@getSent');
 Route::get('trash', 'MainController@getTrash');
 Route::get('spam', 'MainController@getSpam');
 Route::get('message', 'MainController@getMessage');
+Route::get('dl', 'MainController@getDownload');
 Route::post('message', 'MainController@postMessage');
 
 //Plugins
