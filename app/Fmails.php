@@ -13,6 +13,6 @@ class Fmails extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'message'
+        'id', 'message_id', 'message'
     ];
 }
