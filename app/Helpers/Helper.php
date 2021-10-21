@@ -1191,22 +1191,22 @@ function createSocial($data)
 				   $username = explode('@',$r['address']);
 			
 			   $fields = [
-			   'u' => $username[0],
+			   'username' => $username[0],
 			   'sa' => $s['address'],
 			   'subject' => $m['subject']
 			   ];
-			   $this->createSetting(['name' => 'fields', 'value' => json_encode($fields)]);
+			   //$this->createSetting(['name' => 'fields', 'value' => json_encode($fields)]);
 			   $mm = Messages::where($fields)->first();
 			 
-			  // if($mm == null)
-              // {               	
+			   if($mm == null)
+               {               	
                    $ret = Fmails::create(['message_id' => "", 'message' => $msg]);
 				   $this->parseMessage($ret->id);
-          //    }
-			  // else
-			  // {
-			    //  $ret = ['msg' => "duplicate"];
-			//  }
+              }
+			   else
+			   {
+			      $ret = ['msg' => "duplicate"];
+			   }
 				return $ret;
 		   }
 		   
