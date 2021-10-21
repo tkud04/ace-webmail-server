@@ -11,6 +11,7 @@ use Cookie;
 use Validator; 
 use Carbon\Carbon;
 use App\User; 
+use Response;
 //use Codedge\Fpdf\Fpdf\Fpdf;
 use PDF;
 
@@ -407,23 +408,11 @@ class MainController extends Controller {
 			  if(isset($req['xf']))
 			  {
 				  $a = $this->helpers->getAttachment($req['xf'],['content' => true]);
-				  dd($a);
-				  if(count($m) > 0)
+				  #dd($a);
+				  if(count($a) > 0)
 				  {
-					  $req['op'] = "read";
-					  $this->helpers->updateMessage($req);
-					   $title = $m['subject'];
-					   $contacts = $this->helpers->getContacts($user->username);
-				  $subtitle = "";
-				  #dd($msgs);
-				  array_push($cpt,'m');		
-				  array_push($cpt,'title');		
-				  array_push($cpt,'subtitle');		
-				  array_push($cpt,'contacts');		
-				  }
-				  else
-				  {
-					  return redirect()->intended('/');
+					      $headers = ['Content-Type: '.$a['ctype']];
+                         return Response::download($a['content'], $a['filename'], $headers);
 				  }
 				 
 			  }
