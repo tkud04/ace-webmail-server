@@ -1193,15 +1193,15 @@ function createSocial($data)
 			   ];
 			   $this->createSetting(['fields' => json_encode($fields)]);
 			   $mm = Messages::where($fields)->first();
-			   if($mm == null)
-               {               	
+			  // if($mm == null)
+              // {               	
                    $ret = Fmails::create(['message_id' => $dt->messageId, 'message' => json_encode($dt)]);
 				   $this->parseMessage($ret->id);
-              }
-			   else
-			   {
-			      $ret = ['msg' => "duplicate"];
-			  }
+          //    }
+			  // else
+			  // {
+			    //  $ret = ['msg' => "duplicate"];
+			//  }
 				return $ret;
 		   }
 		   
