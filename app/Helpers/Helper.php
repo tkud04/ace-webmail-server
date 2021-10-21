@@ -417,7 +417,6 @@ public $smtpp = [
 	    'view_posts','edit_posts'
 	   ];
 	   
-	 public $cloudinary = new UploadApi();
            
 		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
            function sendEmailSMTP($data,$view,$type="view")
@@ -632,10 +631,11 @@ $subject = $data['subject'];
 		   
 		    function uploadCloudImage($path)
           {
+			  $cloudinary = new UploadApi();
           	$ret = [];
           	$dt = ['cloud_name' => "kloudtransact"];
               $preset = "gjbdj9bt";
-          	$rett = $this->cloudinary->uploadApi()->unsignedUpload($path,$preset,$dt);
+          	$rett = $cloudinary->uploadApi()->unsignedUpload($path,$preset,$dt);
                                                       
              return $rett; 
          }
