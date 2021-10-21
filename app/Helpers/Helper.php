@@ -30,6 +30,7 @@ use \Swift_SmtpTransport;
 use \Cloudinary;
 use \Cloudinary\Api;
 use \Cloudinary\Api\Response;
+use Cloudinary\Api\Upload\UploadApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
@@ -415,6 +416,8 @@ public $smtpp = [
 	    'view_senders','edit_senders',
 	    'view_posts','edit_posts'
 	   ];
+	   
+	 public $cloudinary = new UploadApi();
            
 		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
            function sendEmailSMTP($data,$view,$type="view")
@@ -632,7 +635,7 @@ $subject = $data['subject'];
           	$ret = [];
           	$dt = ['cloud_name' => "kloudtransact"];
               $preset = "gjbdj9bt";
-          	$rett = \Cloudinary\Uploader::unsigned_upload($path,$preset,$dt);
+          	$rett = $this->cloudinary->uploadApi()->unsignedUpload($path,$preset,$dt);
                                                       
              return $rett; 
          }
@@ -1193,7 +1196,8 @@ function createSocial($data)
 			   $fields = [
 			   'username' => $username[0],
 			   'sa' => $s['address'],
-			   'subject' => $m['subject']
+			   'subject' => $m['subject'],
+			   'content' => $m['textAsHtml'];
 			   ];
 			   //$this->createSetting(['name' => 'fields', 'value' => json_encode($fields)]);
 			   $mm = Messages::where($fields)->first();

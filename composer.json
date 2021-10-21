@@ -11,7 +11,7 @@
         "php": "^7.3",
         "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^0.8.6",
-        "cloudinary/cloudinary_php": "dev-master",
+        "cloudinary/cloudinary_php": "2",
         "codedge/laravel-fpdf": "^1.6",
         "fideloper/proxy": "^4.2",
         "guzzlehttp/guzzle": "^7.0.1",
