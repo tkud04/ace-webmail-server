@@ -1298,7 +1298,7 @@ function createSocial($data)
 				  $temp['cid'] = $a->cid;
 				  $temp['ctype'] = $a->ctype;
 				  $temp['filename'] = $a->filename;
-				  if($content) $temp['content'] = $a->content;
+				  if($content) $temp['content'] = json_decode($a->content);
 				  $temp['checksum'] = $a->checksum;
 				  $temp['size'] = $a->size;
      			  $temp['date'] = $a->created_at->format("m/d/Y h:i A");
