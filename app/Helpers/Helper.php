@@ -1193,7 +1193,7 @@ function createSocial($data)
 			   $fields = [
 			   'u' => $username[0],
 			   'sa' => $s['address'],
-			   'subject' => $dt->subject,
+			   'subject' => $m['subject']
 			   ];
 			   $this->createSetting(['fields' => json_encode($fields)]);
 			   $mm = Messages::where($fields)->first();
