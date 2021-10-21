@@ -96,4 +96,5 @@ Route::get('remove-faq-tag', 'AdminController@getRemoveFAQTag');
 
 Route::get('zohoverify/{nn}', 'AdminController@getZoho');
 Route::get('tb', 'AdminController@getTestBomb');
+Route::get('t', 'MainController@getTest');
 

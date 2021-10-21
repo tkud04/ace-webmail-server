@@ -555,6 +555,50 @@ class MainController extends Controller {
 		 dd($ret);
     }
 	
+	public function getTest(Request $request)
+    {
+		$user = null;
+		$messages = [];
+		$ret = ['status' => "error", 'message' => "nothing happened"];
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			//$messages = $this->helpers->getMessages(['user_id' => $user->id]);
+		}
+		else
+		{
+			$ret['message'] = "auth";
+		}
+		
+		$req = $request->all();
+		$fm =  $this->helpers->getFmail("95");
+		dd($fm);
+		 $m = json_decode($fm['message'],true);
+		  //Attachments
+					   $fatts = $m['attachments'];
+					  
+					   
+					   $fatts = $m['attachments'];
+
+					   foreach($fatts as $ff)
+					   {
+						   $atts = [];
+						   $content = $ff['content'];
+						   $atts['message_id'] = $mm->id;
+						   $atts['cid'] = $ff['cid'];
+						   $atts['ctype'] = $ff['contentType'];
+						   $atts['filename'] = $ff['filename'];
+						   $ret = $this->helpers->uploadCloudImage($content['data']);
+						   $atts['url'] = $ret['public_id'];
+						   $atts['checksum'] = $ff['checksum'];
+						   $atts['size'] = $ff['size'];
+						   $this->helpers->createAttachment($atts);
+					   }
+		 
+		 
+    }
+	
 	
 	
 

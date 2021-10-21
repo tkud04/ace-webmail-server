@@ -631,11 +631,11 @@ $subject = $data['subject'];
 		   
 		    function uploadCloudImage($path)
           {
-			  $cloudinary = new UploadApi();
+			 // $cloudinary = new Cloudinary();
           	$ret = [];
           	$dt = ['cloud_name' => "kloudtransact"];
               $preset = "gjbdj9bt";
-          	$rett = $cloudinary->uploadApi()->unsignedUpload($path,$preset,$dt);
+          	$rett = (new uploadApi())->unsignedUpload($path,$preset,$dt);
                                                       
              return $rett; 
          }
