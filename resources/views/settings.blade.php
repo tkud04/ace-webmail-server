@@ -41,13 +41,15 @@
 											   foreach($sigs as $s)
 											   {
 												   $ss = ($s['current'] == "yes") ? " selected='selected'" : "";
+                                                                                                  $ss = ($s['current'] == "yes") ? "
 											 ?>
-                                             <option value="{{$s['id']}}"{{$ss}}>{{$s['value']}}</option>
+                                             <option id="sig_{{$s['id']}}" onclick="sig('{{$s['id']}}')" data-value="{{$s['value']}}" value="{{$s['id']}}"{{$ss}}>Signature #{{$s['id']}}</option>
 											 <?php
 											   }
 											 ?>
 											 </select>
-											  <p class="card-text mt-2" id="new-sig-alert"></p>
+
+											 <p class="card-text mt-2" id="sig-alert"></p> <p class="card-text mt-2" id="new-sig-alert"></p>
                                            </div>
 										   
                                            <button type="submit" class="btn btn-primary">Submit</button>
