@@ -458,7 +458,7 @@ class MainController extends Controller {
 				  $sigs = $this->helpers->getUSignatures($user->username);
 				  $title = "Settings";
 				  $subtitle = "Your account settings";
-				  dd($sigs);
+				  #dd($sigs);
 				  array_push($cpt,'settings');		
 				  array_push($cpt,'sigs');		
 				  array_push($cpt,'title');		
