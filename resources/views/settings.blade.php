@@ -33,8 +33,8 @@
                                            </div>
 
 										   <div class="form-group">
-                                             <h5 class="card-title" for="sig">Signatures</h5>
-											 <a href="javascript:void(0)" id="add-sig-btn">Add new signature</a>
+                                             <h5 class="card-title" for="sig">Signatures <a href="javascript:void(0)" class="btn btn-primary" id="add-sig-btn">Add new signature</a></h5>
+											 
 											 <select class="form-control" id="sig" name="sig">
 											   <option value="none">Select a signature to enable it</option>
 											 <?php
