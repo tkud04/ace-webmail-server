@@ -416,7 +416,7 @@ class APIController extends Controller {
                     	$v2 = ['current' => "yes"];
                     	$this->helpers->updateUSignature($req['sig'],$v2);
                     }
-                	
+                    if($req['tk'] == "kt") return redirect()->intended('settings');
                     $ret = ['status' => "ok"];
                 }		
 		  }
