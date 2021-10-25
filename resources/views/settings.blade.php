@@ -24,7 +24,9 @@
 									  <div class="tab-content" id="settings-tab-content">
 									    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
 										  <form method="post" action="{{url('api/settings')}}">
-										   <input id="new-sig-input" name="new-sigs" type="hidden">
+										   <input id="new-sig-input" name="new-sigs" type="hidden"><input name="tk" type="hidden" value="kt">
+
+                            
 										    <div class="form-group">
                                              <h5 class="card-title" for="sig">Language</h5>
                                              <p class="card-text">English</p>
