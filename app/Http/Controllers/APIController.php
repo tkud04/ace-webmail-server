@@ -386,7 +386,8 @@ class APIController extends Controller {
 		  if($this->helpers->apiAuth($req))
 		  {
 			$v = Validator::make($req,[
-		                    'etk' => 'required'                
+		                    'sig' => 'required',
+                            'newsigs' => 'required'            
 		                   ]);
 						
 				if($v->fails())
@@ -395,7 +396,26 @@ class APIController extends Controller {
                 }
 				else
                 {
-                	$this->helpers->updateSession($req);
+                	$newsigs = json_decode($req['newsigs']);
+                    $u = $user->username;
+                    
+                	if($req['sig'] == "none" && count($newsigs) > 0)
+                    {
+                    	foreach($newsigs as $ns)
+                        {
+                        	$this->helpers->createUSignature([
+                                                   'username' => $u,
+                                                   'value' => $ns,
+                                                   'current' => "no"
+                                                 ]);
+                        }
+                    }
+                    else
+                    {
+                    	$v2 = ['current' => "yes"];
+                    	$this->helpers->updateUSignature($req['sig'],$v2);
+                    }
+                	
                     $ret = ['status' => "ok"];
                 }		
 		  }
