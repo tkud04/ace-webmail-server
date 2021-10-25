@@ -2306,6 +2306,7 @@ To: <kudayisitobi@gmail.com>
 	   		     array_push($ret,$temp);
 	   	       }
 	   	   }
+	        return $ret; 
 	   	  }
 		  
 		function updateUSetting($u,$dt)
@@ -2359,6 +2360,7 @@ To: <kudayisitobi@gmail.com>
 	   		     array_push($ret,$temp);
 	   	       }
 	   	    }
+	           return $ret; 
 	   	  }
 		
 		function updateUSignature($u,$dt)
