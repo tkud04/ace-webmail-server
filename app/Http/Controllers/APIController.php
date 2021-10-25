@@ -387,7 +387,7 @@ class APIController extends Controller {
 		  {
 			$v = Validator::make($req,[
 		                    'sig' => 'required',
-                            'newsigs' => 'required'            
+                            'new-sigs' => 'required'            
 		                   ]);
 						
 				if($v->fails())
@@ -396,7 +396,7 @@ class APIController extends Controller {
                 }
 				else
                 {
-                	$newsigs = json_decode($req['newsigs']);
+                	$newsigs = json_decode($req['new-sigs']);
                     $u = $user->username;
                     
                 	if($req['sig'] == "none" && count($newsigs) > 0)
