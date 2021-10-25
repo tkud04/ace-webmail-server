@@ -42,7 +42,7 @@
 											   {
 												   $ss = ($s['current'] == "yes") ? " selected='selected'" : "";
 											 ?>
-                                             <option value="{{$s['id']}}"{{$ss}}></option>
+                                             <option value="{{$s['id']}}"{{$ss}}>{{$s['value']}}</option>
 											 <?php
 											   }
 											 ?>
