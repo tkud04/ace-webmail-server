@@ -99,7 +99,7 @@ window.onbeforeunload = function() {
   }
 }
 
-let sigQuill = new Quill('#sig-ctr', {
+sigQuill = new Quill('#sig-ctr', {
   modules: {
     toolbar: true
   },
