@@ -2055,13 +2055,23 @@ function createSocial($data)
 		                       
                              return $ret;       
 		 	              }
+		function getCurrentSignature($u)
+        {
+        	$ret = [];
+        	$c = USignatures::where(['username' => $u,'current' => "yes")->first();
+            if($c != null)
+            {
+            	$ret = $this->getUSignature($c->id);
+            }
+            return $ret;
+        }
 		
 		function sendMessage($dt)
         {
         	$u = $this->getUser($dt['u']);
            $c = "";
            $ret = ['status' => "error", 'msg' => "nothing"];
-           
+           $sig = $this->getCurrentSignature($dt['u']);
         	//u, m, c
            $c = $dt['c'];
            
