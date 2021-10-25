@@ -33,6 +33,9 @@ Route::get('bye', 'APIController@getBye');
 Route::get('update-session', 'APIController@getUpdateSession');
 Route::post('update-session', 'APIController@postUpdateSession');
 
+Route::get('settings', 'APIController@getSettings');
+Route::post('settings', 'APIController@postSettings');
+
 //Messages
 Route::get('postman', 'APIController@getPostman');
 Route::post('postman', 'APIController@postPostman');
