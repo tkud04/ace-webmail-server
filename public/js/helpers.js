@@ -1,4 +1,4 @@
-let editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [],
+let  editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [],
  sigs = [], sig = ``, sigQuill = null;
 
 const showElem = (name) => {
@@ -520,4 +520,8 @@ const extractMessage = (dt,t) => {
 	  if(t == "compose") mmsg = ret;
 	  else if(t == "sig") sig = ret;
 	  return ret;
+}
+
+sig = xf => {
+   $('#sig-alert').html($(`#sig_${xf}`).attr('data-value'));
 }
