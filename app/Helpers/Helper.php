@@ -2282,7 +2282,8 @@ To: <kudayisitobi@gmail.com>
  
               if($s != null)
                {
-				      $temp['name'] = $s->name; 
+				      $temp['name'] = $s->name;
+                      $temp['id'] = $s->id;   
                        $temp['value'] = $s->value;                  
                        $temp['username'] = $s->username; 
                        $temp['date'] = $s->created_at->format("jS F, Y"); 
@@ -2337,7 +2338,8 @@ To: <kudayisitobi@gmail.com>
               if($s != null)
                {
 				      $temp['username'] = $s->username; 
-                       $temp['value'] = $s->value;                  
+                       $temp['value'] = $s->value;  
+                      $temp['id'] = $s->id;                  
                        $temp['current'] = $s->current; 
                        $temp['date'] = $s->created_at->format("jS F, Y"); 
                        $temp['updated'] = $s->updated_at->format("jS F, Y"); 
