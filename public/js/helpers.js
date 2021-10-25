@@ -1,4 +1,5 @@
-let editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [], sigs = [], sig = ``;
+let editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [],
+ sigs = [], sig = ``, sigQuill = null;
 
 const showElem = (name) => {
 	let names = [];
