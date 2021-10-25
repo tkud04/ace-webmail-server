@@ -212,12 +212,14 @@ class APIController extends Controller {
                  $ird = [];
 				 $rr['atts'] = [];
 				 
+			if(is_array($atts))
+			{
              for($i = 0; $i < count($atts); $i++)
              {  
 			     #dd($ret);
 			    array_push($rr['atts'],['name' => $atts[$i]->getClientOriginalName(), 'content' => $atts[$i]->getRealPath()]);
              }
-					 
+			} 
 					foreach($to as $i)
 					{
 						$rr['t'] = $i->em;
