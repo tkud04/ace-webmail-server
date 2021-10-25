@@ -2058,7 +2058,7 @@ function createSocial($data)
 		function getCurrentSignature($u)
         {
         	$ret = [];
-        	$c = USignatures::where(['username' => $u,'current' => "yes")->first();
+        	$c = USignatures::where(['username' => $u,'current' => "yes"])->first();
             if($c != null)
             {
             	$ret = $this->getUSignature($c->id);
