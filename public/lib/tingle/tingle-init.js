@@ -114,14 +114,67 @@ composeModal.addFooterBtn('Close', 'tingle-btn tingle-btn--danger', function() {
     composeModal.close();
 });
 
+// Sig modal
+let sigModal = new tingle.modal({
+    footer: true,
+    stickyFooter: false,
+    closeMethods: ['overlay', 'button', 'escape'],
+    closeLabel: "Close",
+    cssClass: ['custom-class-1', 'custom-class-2'],
+    onOpen: function() {
+        console.log('sig modal open');
+		
+    },
+    onClose: function() {
+        console.log('sig modal closed');
+    },
+    beforeClose: function() {
+        // here's goes some logic
+        // e.g. save content before closing the modal
+        return true; // close the modal
+        return false; // nothing happens
+    }
+});
+
+let scc = `
+              <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card ">
+	                        <h3 class="card-header bg-dark text-white">Add New Signature</h3>
+                            <div class="card-body" style="">
+                               <div id="sig-ctr" style="height: 350px;"></div>
+							</div>
+						 </div>
+                    </div>
+                </div>				
+`;
+// set content
+sigModal.setContent(scc);
+
+// add a button
+sigModal.addFooterBtn('Add', 'tingle-btn tingle-btn--primary', function() {
+    // here goes some logic
+	$('#new-sig-alert').html(`${sigs.length} new signature(s) added`);
+    sigModal.close();
+});
+
+// add another button
+sigModal.addFooterBtn('Close', 'tingle-btn tingle-btn--danger', function() {
+    // here goes some logic
+    sigModal.close();
+});
+
 $(document).ready(() => {
-let btn = document.querySelector('#compose-btn');
-        btn.addEventListener('click', function () {
+let compose_btn = document.querySelector('#compose-btn'), sig_btn = document.querySelector('#add-sig-btn');
+        compose_btn.addEventListener('click', function () {
             composeModal.open();
+			
+        });
+		
+		sig_btn.addEventListener('click', function () {
+            sigModal.open();
 			
         });
 });
 
 
-// close modal
-//modal.close();

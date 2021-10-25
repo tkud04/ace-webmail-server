@@ -432,6 +432,48 @@ class MainController extends Controller {
 		
     }
 	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getSettings(Request $request)
+    {
+		//dd($this->helpers->md->isMobille());
+		$user = null;
+		$nope = false;
+		$v = "";
+		
+		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
+        $cpt = ['user','signals','plugins'];
+		$req = $request->all();
+		
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+				  $v = "settings"; 
+				  $settings = $this->helpers->getUSettings($user->username);
+				  $sigs = $this->helpers->getUSignature($user->username);
+				  $title = "Settings";
+				  $subtitle = "Your account settings";
+				  #dd($msgs);
+				  array_push($cpt,'settings');		
+				  array_push($cpt,'sigs');		
+				  array_push($cpt,'title');		
+				  array_push($cpt,'subtitle');			   
+			
+		}
+		else
+		{
+			$v = "login";
+		}
+		
+		return view($v,compact($cpt));
+		
+    }
+	
 	
 	
 	/**

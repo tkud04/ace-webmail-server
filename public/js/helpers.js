@@ -1,4 +1,4 @@
-let editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [];
+let editMode = "", to = [], cc = [], bcc = [], mmsg = ``, attachments = [], sigs = [], sig = ``;
 
 const showElem = (name) => {
 	let names = [];
@@ -502,7 +502,7 @@ const sendMessage = (dt,mm) => {
 	   });
 }
 
-const extractMessage = (dt) => {
+const extractMessage = (dt,t) => {
 	 console.log("dt: ",dt);
 	 let ret = ``, ops = dt.ops;
 	 
@@ -516,6 +516,7 @@ const extractMessage = (dt) => {
 		 ret += line;
 	 }
 	  //console.log("ret: ",ret);
-	  mmsg = ret;
+	  if(t == "compose") mmsg = ret;
+	  else if(t == "sig") sig = ret;
 	  return ret;
 }

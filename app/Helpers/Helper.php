@@ -13,6 +13,8 @@ use App\Ads;
 use App\Banners;
 use App\Senders;
 use App\Settings;
+use App\USettings;
+use App\USignatures;
 use App\Plugins;
 use App\Socials;
 use App\Messages;
@@ -1298,7 +1300,7 @@ function createSocial($data)
 				  $temp['cid'] = $a->cid;
 				  $temp['ctype'] = $a->ctype;
 				  $temp['filename'] = $a->filename;
-				  if($content) $temp['content'] = json_decode($a->content);
+				  if($content) $temp['content'] = $a->content;
 				  $temp['checksum'] = $a->checksum;
 				  $temp['size'] = $a->size;
      			  $temp['date'] = $a->created_at->format("m/d/Y h:i A");
@@ -2262,6 +2264,115 @@ To: <kudayisitobi@gmail.com>
 			}
 			return $ret;
 		}
+		
+		 function createUSetting($data)
+           {
+			    $ret = USettings::create(['username' => $data['username'], 
+                                          'name' => $data['name'],
+                                          'value' => $data['value']
+                                        ]);
+                                                      
+                return $ret;
+           }
+		   
+		function getUSetting($id)
+	    {
+		   $temp = [];
+		   $s = USettings::where('id',$id)->first();
+ 
+              if($s != null)
+               {
+				      $temp['name'] = $s->name; 
+                       $temp['value'] = $s->value;                  
+                       $temp['username'] = $s->username; 
+                       $temp['date'] = $s->created_at->format("jS F, Y"); 
+                       $temp['updated'] = $s->updated_at->format("jS F, Y"); 
+                   
+               }      
+           return $temp;            	   
+        }
+		
+		function getUSettings($u)
+	      {
+	   	   $ret = [];
+	   
+	   	   $settings = USettings::where('username',$u)->get();
+	   
+	   	   if(!is_null($settings))
+	   	   {
+	   		   foreach($settings as $s)
+	   		   {
+	   		     $temp = $this->getUSetting($s->id);
+	   		     array_push($ret,$temp);
+	   	       }
+	   	   }
+	   	  }
+		  
+		function updateUSetting($u,$dt)
+	    { 
+              foreach($dt as $k => $v)
+               {
+				   $fields = ['username' => $u,'name' => $k];
+				       $s = USettings::where($fields)->first();
+                    if($s != null) $s->update(['value' => $v]);
+               }                 	   
+        }
+		
+		 function createUSignature($data)
+           {
+			    $ret = USignatures::create(['username' => $data['username'], 
+                                          'current' => $data['current'],
+                                          'value' => $data['value']
+                                        ]);
+                                                      
+                return $ret;
+           }
+		   
+		function getUSignature($id)
+	    {
+		   $temp = [];
+		   $s = USignatures::where('id',$id)->first();
+ 
+              if($s != null)
+               {
+				      $temp['username'] = $s->username; 
+                       $temp['value'] = $s->value;                  
+                       $temp['current'] = $s->current; 
+                       $temp['date'] = $s->created_at->format("jS F, Y"); 
+                       $temp['updated'] = $s->updated_at->format("jS F, Y"); 
+                   
+               }      
+           return $temp;            	   
+        }
+		
+		function getUSignatures($u)
+	      {
+	   	   $ret = [];
+	   
+	   	   $sigs = USignatures::where('username',$u)->get();
+	   
+	   	   if(!is_null($sigs))
+	   	    {
+	   		   foreach($sigs as $s)
+	   		   {
+	   		     $temp = $this->getUSignature($s->id);
+	   		     array_push($ret,$temp);
+	   	       }
+	   	    }
+	   	  }
+		
+		
+		function removeUSignature($xf)
+	    {
+		   $temp = [];
+		   $s = USignatures::where('id',$xf)->first();
+ 
+              if($s != null)
+               {
+				     $s-->delete();  
+               }      
+           return $temp;            	   
+        }
 
 }
 ?>

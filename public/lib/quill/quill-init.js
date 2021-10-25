@@ -1,5 +1,5 @@
-var Delta = Quill.import('delta');
-var quill = new Quill('#msg-input', {
+let Delta = Quill.import('delta');
+let composeQuill = new Quill('#msg-input', {
   modules: {
     toolbar: true
   },
@@ -8,8 +8,8 @@ var quill = new Quill('#msg-input', {
 });
 
 // Store accumulated changes
-var change = new Delta();
-quill.on('text-change', function(delta) {
+let change = new Delta();
+composeQuill.on('text-change', function(delta) {
   change = change.compose(delta);
 });
 
@@ -38,3 +38,12 @@ window.onbeforeunload = function() {
     return 'There are unsaved changes. Are you sure you want to leave?';
   }
 }
+
+
+let sigQuill = new Quill('#sig-input', {
+  modules: {
+    toolbar: true
+  },
+  placeholder: 'Your signature..',
+  theme: 'snow'
+});

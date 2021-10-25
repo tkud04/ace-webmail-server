@@ -361,6 +361,54 @@ class APIController extends Controller {
 		
     }
 	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getSettings(Request $request)
+    {
+		$ret = ['status' => "error",'msg' => "unsupported"];
+		return json_encode($ret);
+    }
+
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postSettings(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'etk' => 'required'                
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                	$this->helpers->updateSession($req);
+                    $ret = ['status' => "ok"];
+                }		
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
+	
 	
 	
 	

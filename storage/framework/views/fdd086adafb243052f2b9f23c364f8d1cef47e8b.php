@@ -66,7 +66,7 @@ let quill = new Quill('#msg-ctr', {
 });
 
 // Store accumulated changes
-let change = new Delta();
+let change = new Delta(), sigChange = new Delta();
 quill.on('text-change', function(delta) {
   change = change.compose(delta);
 });
@@ -88,7 +88,7 @@ setInterval(function() {
     */
     change = new Delta();
 	let xx = quill.getContents();
-	document.querySelector('#msg-input').value = extractMessage(xx);
+	document.querySelector('#msg-input').value = extractMessage(xx,"compose");
   }
 }, 5*1000);
 
@@ -98,6 +98,30 @@ window.onbeforeunload = function() {
     return 'There are unsaved changes. Are you sure you want to leave?';
   }
 }
+
+let sigQuill = new Quill('#sig-ctr', {
+  modules: {
+    toolbar: true
+  },
+  placeholder: 'Your signature..',
+  theme: 'snow'
+});
+
+sigQuill.on('text-change', function(delta) {
+  sigChange = change.compose(delta);
+});
+
+// Save periodically
+setInterval(function() {
+  if (sigChange.length() > 0) {
+    console.log('Saving sig changes', sigChange);
+    sigChange = new Delta();
+	let yy = sigQuill.getContents();
+	extractMessage(yy,"sig");
+	sigs.push(sig);
+  }
+}, 5*1000);
+
 });
 </script>
 	<?php echo $__env->yieldContent('styles'); ?>
@@ -203,7 +227,7 @@ John Abraham</span>is now following you
                                     <span class="status"></span><span class="ml-2"><?php echo e(strtoupper($user->role)); ?></span>
                                 </div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-cog mr-2"></i>Setting</a>
+                                <a class="dropdown-item" href="<?php echo e(url('settings')); ?>"><i class="fas fa-cog mr-2"></i>Settings</a>
                                 <a class="dropdown-item" href="<?php echo e(url('bye')); ?>"><i class="fas fa-power-off mr-2"></i>Logout</a>								
 								<?php
 								 }
