@@ -154,6 +154,9 @@ sigModal.setContent(scc);
 // add a button
 sigModal.addFooterBtn('Add', 'tingle-btn tingle-btn--primary', function() {
     // here goes some logic
+    let yy = sigQuill.getContents();
+	extractMessage(yy,"sig");
+	sigs.push(sig);
 	$('#new-sig-alert').html(`${sigs.length} new signature(s) added`);
     sigModal.close();
 });
