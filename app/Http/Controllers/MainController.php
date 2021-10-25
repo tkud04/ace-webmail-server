@@ -455,7 +455,7 @@ class MainController extends Controller {
 			
 				  $v = "settings"; 
 				  $settings = $this->helpers->getUSettings($user->username);
-				  $sigs = $this->helpers->getUSignature($user->username);
+				  $sigs = $this->helpers->getUSignatures($user->username);
 				  $title = "Settings";
 				  $subtitle = "Your account settings";
 				  #dd($msgs);
