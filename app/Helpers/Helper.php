@@ -2361,6 +2361,16 @@ To: <kudayisitobi@gmail.com>
 	   	    }
 	   	  }
 		
+		function updateUSignature($u,$dt)
+	    { 
+               $fields = ['id' => $u];
+				  $v2 = [];
+				   if(isset($dt['current'])) $v2['current'] = $dt['current'];
+				   if(isset($dt['value'])) $v2['value'] = $dt['value'];
+				
+				       $s = USignatures::where($fields)->first();
+                    if($s != null) $s->update($v2);          	   
+        }
 		
 		function removeUSignature($xf)
 	    {
