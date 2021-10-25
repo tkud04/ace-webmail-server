@@ -158,7 +158,8 @@ sigModal.addFooterBtn('Add', 'tingle-btn tingle-btn--primary', function() {
 	extractMessage(yy,"sig");
 	sigs.push(sig);
 	$('#new-sig-alert').html(`${sigs.length} new signature(s) added`);
-    sigModal.close();
+     $('#new-sig-input').val(JSON.stringify(sigs));
+     sigModal.close();
 });
 
 // add another button
