@@ -470,6 +470,79 @@ class APIController extends Controller {
 		return json_encode($ret);
 		
     }
+
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getDeleteMessage(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'xf' => 'required',
+		                    'u' => 'required',
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                   $this->helpers->deleteMessage($req);
+                }
+                    if($req['tk'] == "kt") return redirect()->intended('settings');
+                    $ret = ['status' => "ok"];
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
+	
+	public function getMoveMessage(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'xf' => 'required',
+		                    'l' => 'required',
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                   $this->helpers->moveMessage($req);
+                }
+                    if($req['tk'] == "kt") return redirect()->intended($req['l']);
+                    $ret = ['status' => "ok"];
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
 	
 	
 	

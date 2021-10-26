@@ -1404,6 +1404,40 @@ function createSocial($data)
            	
                                return $ret;
 		 	              }
+						  
+			function deleteMessage($data)
+		 	              {
+		 	   			   #dd($data);
+		 	   			 $ret = "error";
+		                  $m = Messages::where(['id'=>$data['xf'], 'username'=>$data['u']])->first();
+			 
+			 
+		 	   			 if(!is_null($m))
+		 	   			 {
+							 $m->delete();
+		 	   				
+		 	   			   $ret = "ok";
+		 	   			 }
+           	
+                               return $ret;
+		 	              }
+						  
+			function moveMessage($data)
+		 	              {
+		 	   			   #dd($data);
+		 	   			 $ret = "error";
+		                  $m = Messages::where(['id'=>$data['xf']])->first();
+			 
+			 
+		 	   			 if(!is_null($m))
+		 	   			 {
+							 $m->update(['label'=>$data['l']]);
+		 	   				
+		 	   			   $ret = "ok";
+		 	   			 }
+           	
+                               return $ret;
+		 	              }
 		   
 		    function parseMessage($fid)
 		   {

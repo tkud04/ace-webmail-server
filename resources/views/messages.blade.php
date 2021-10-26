@@ -13,6 +13,26 @@ $void = "javascript:void(0)";
 	<!-- DataTables js -->
 	<script src="{{asset('lib/datatables/js/datatables.min.js')}}"></script>
 	 <script src="{{asset('lib/datatables/js/datatables-init.js')}}"></script>
+	 
+<script>
+$(document).ready(() => {
+	hideElem(xx);
+	
+	$('.mm').change((e) => {
+		e.preventDefault();
+		
+		let ims = isMessageSelected('mm');
+	    console.log('ims: ',ims);
+		if(ims){
+			showElem(xx);
+		}
+		else{
+			hideElem(xx);
+		}
+	});
+});
+
+</script>
   @stop
   
   @section('scriptss')
@@ -38,12 +58,6 @@ $void = "javascript:void(0)";
 @stop
 
 @section('content')
-<script>
-$(document).ready(() => {
-	hideElem(xx);
-});
-
-</script>
 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
@@ -52,9 +66,9 @@ $(document).ready(() => {
 							    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							 <ul class="list-inline"  style="overflow-x: scroll;">
 							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
-							  <li class="list-inline-item"><a id="refresh-btn" href="{{url('inbox')}}" class="btn" title="Refresh"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="spam-btn" href="{{$void}}" class="btn" title="Mark as Spam" onclick="markSpam()"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="trash-btn" href="{{$void}}" class="btn" title="Delete" onclick="trash()"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="refresh-btn" href="{{$label}}" class="btn" title="Refresh"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="spam-btn" href="{{$void}}" class="btn" title="Mark as Spam" onclick="move('spam')"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="trash-btn" href="{{$void}}" class="btn" title="Delete" onclick="move('trash')"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="unread-btn" href="{{$void}}" class="btn" title="Mark as Unread" onclick="markUnread()"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a id="move-btn" href="{{$void}}" class="btn" title="Move to" onclick="moveTo()"><i class="fa fa-fw fa-folder-open menu-icon"></i></a></li>				  
 							 </ul>  

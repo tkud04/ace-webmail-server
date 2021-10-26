@@ -61,9 +61,11 @@ class MainController extends Controller {
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "inbox"]);
 				  $title = "Inbox";
+				  $label = "inbox";
 				  $subtitle = "View messages in your inbox";
 				  #dd($msgs);
 				  array_push($cpt,'msgs');		
+				  array_push($cpt,'label');		
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
 			   }			   
@@ -100,9 +102,11 @@ class MainController extends Controller {
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "inbox"]);
 				  $title = "Inbox";
+				  $label = "inbox";
 				  $subtitle = "View messages in your inbox";
 				  #dd($msgs);
-				  array_push($cpt,'msgs');		
+				  array_push($cpt,'msgs');
+				   array_push($cpt,'label');	
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
 			  		   
@@ -139,9 +143,11 @@ class MainController extends Controller {
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "drafts"]);
 				  $title = "Drafts";
+				  $label = "drafts";
 				  $subtitle = "View messages you're still editing";
 				  #dd($msgs);
-				  array_push($cpt,'msgs');		
+				  array_push($cpt,'msgs');	
+                   array_push($cpt,'label');					  
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
 			  		   
@@ -178,9 +184,11 @@ class MainController extends Controller {
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "sent"]);
 				  $title = "Sent";
+				  $label = "sent";
 				  $subtitle = "View messages you have sent";
 				  #dd($msgs);
-				  array_push($cpt,'msgs');		
+				  array_push($cpt,'msgs');	
+                   array_push($cpt,'label');					  
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
 			  		   
@@ -217,9 +225,11 @@ class MainController extends Controller {
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "trash"]);
 				  $title = "Trash";
+				  $label = "trash";
 				  $subtitle = "View messages in your trash";
 				  #dd($msgs);
-				  array_push($cpt,'msgs');		
+				  array_push($cpt,'msgs');	
+                   array_push($cpt,'label');					  
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
 			  		   
@@ -256,9 +266,12 @@ class MainController extends Controller {
 				  $v = "messages"; 
 				  $msgs = $this->helpers->getMessages(['u' => $user->username,'l' => "spam"]);
 				  $title = "Spam";
+				  $label = "spam";
+				  
 				  $subtitle = "View messages that have been marked as spam";
 				  #dd($msgs);
-				  array_push($cpt,'msgs');		
+				  array_push($cpt,'msgs');
+                   array_push($cpt,'label');					  
 				  array_push($cpt,'title');		
 				  array_push($cpt,'subtitle');		
 			  		   

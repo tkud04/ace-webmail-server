@@ -530,3 +530,14 @@ const sigg = () => {
    }
    $('#sig-alert').html(dd);
 }
+
+const isMessageSelected = c => {
+    ret = false;
+
+    $(`.${c}`).each((index, obj) => {
+        if (obj.checked === true) {
+            ret = true;
+        }
+    });
+    return ret;
+};
