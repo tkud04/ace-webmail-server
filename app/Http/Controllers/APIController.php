@@ -497,7 +497,7 @@ class APIController extends Controller {
                 {
                    $this->helpers->deleteMessage($req);
                 }
-                    if($req['tk'] == "kt") return redirect()->intended('settings');
+                    if($req['tk'] == "kt") return redirect()->intended('inbox');
                     $ret = ['status' => "ok"];
 		  }
 		  else
@@ -519,7 +519,7 @@ class APIController extends Controller {
 		  if($this->helpers->apiAuth($req))
 		  {
 			$v = Validator::make($req,[
-		                    'xf' => 'required',
+		                    'dt' => 'required',
 		                    'l' => 'required',
 		                   ]);
 						
@@ -532,6 +532,39 @@ class APIController extends Controller {
                    $this->helpers->moveMessage($req);
                 }
                     if($req['tk'] == "kt") return redirect()->intended($req['l']);
+                    $ret = ['status' => "ok"];
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
+	
+	public function getMarkUnread(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'dt' => 'required',
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                   $this->helpers->markUnread($req);
+                }
+                    if($req['tk'] == "kt") return redirect()->intended('inbox');
                     $ret = ['status' => "ok"];
 		  }
 		  else

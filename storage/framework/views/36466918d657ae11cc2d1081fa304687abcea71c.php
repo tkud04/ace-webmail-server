@@ -36,10 +36,16 @@ $(document).ready(() => {
 							 <div class="row">
 							    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							 <ul class="list-inline">
-							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
+							  <li class="list-inline-item"><a id="spam-btn" href="<?php echo e(url($m['label'])); ?>" class="btn" title="Back"><i class="fa fa-fw fa-arrow-circle-left menu-icon"></i></a></li>
+							  
 							   <li class="list-inline-item"><a id="spam-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam" onclick="markSpam(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" onclick="trash()"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
-							  <li class="list-inline-item">|</li>
+							 
+							   <?php if($m['label'] == "trash"): ?>
+							 <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete forever" onclick="trash(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
+							   <?php else: ?>
+ 							<li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Move to trash" onclick="deleteMessage(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
+							   <?php endif; ?>
+							<li class="list-inline-item">|</li>
 							 <li class="list-inline-item"><a id="unread-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread" onclick="markUnread(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
 							  <li class="list-inline-item">
 								<div class="dropdown">
@@ -47,7 +53,11 @@ $(document).ready(() => {
 								   <i class="fa fa-fw fa-folder-open menu-icon"></i>
 								 </a>
                                   <div class="dropdown-menu" aria-labelledby="more-btn">
-                                    <a class="dropdown-item" href="<?php echo e($void); ?>" onclick="moveTo({'xf':<?php echo e($xf); ?>,'dest':'spam'})">Spam</a>
+								    <?php if($m['label'] == "inbox"): ?>
+                                    <a class="dropdown-item" href="<?php echo e($void); ?>" onclick="markSpam(<?php echo e($xf); ?>)">Spam</a>
+								    <?php elseif($m['label'] == "spam"): ?>
+                                    <a class="dropdown-item" href="<?php echo e($void); ?>" onclick="moveToInbox(<?php echo e($xf); ?>)">Inbox</a>
+									<?php endif; ?>
                                   </div>
                                 </div>
 							  </li>

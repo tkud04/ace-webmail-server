@@ -22,7 +22,7 @@ $(document).ready(() => {
 		e.preventDefault();
 		
 		let ims = isMessageSelected('mm');
-	    console.log('ims: ',ims);
+
 		if(ims){
 			showElem(xx);
 		}
@@ -66,11 +66,21 @@ $(document).ready(() => {
 							    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							 <ul class="list-inline"  style="overflow-x: scroll;">
 							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
-							  <li class="list-inline-item"><a id="refresh-btn" href="<?php echo e($label); ?>" class="btn" title="Refresh"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="spam-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam" onclick="move('spam')"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" onclick="move('trash')"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="unread-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread" onclick="markUnread()"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="move-btn" href="<?php echo e($void); ?>" class="btn" title="Move to" onclick="moveTo()"><i class="fa fa-fw fa-folder-open menu-icon"></i></a></li>				  
+							  <li class="list-inline-item"><a id="refresh-all-btn" href="<?php echo e($label); ?>" class="btn" title="Refresh"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a class="spam-all-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="trash-all-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" ><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
+							  <li class="list-inline-item"><a id="unread-all-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
+							 <li class="list-inline-item">
+								<div class="dropdown">
+                                <a id="move-btn" href="<?php echo e($void); ?>" class="btn dropdown-toggle" title="Move to" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								   <i class="fa fa-fw fa-folder-open menu-icon"></i>
+								 </a>
+                                  <div class="dropdown-menu" aria-labelledby="more-btn">
+								   <a class="spam-all-btn" class="dropdown-item" href="<?php echo e($void); ?>">Spam</a>
+                                    <a class="inbox-all-btn" class="dropdown-item" href="<?php echo e($void); ?>">Inbox</a>
+                                  </div>
+                                </div>
+							  </li>			  
 							 </ul>  
 							</div>	  
 							</div>	  

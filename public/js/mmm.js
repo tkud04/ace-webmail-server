@@ -281,6 +281,58 @@ $(document).ready(function() {
 		 
     });
 	
+	$(".inbox-all-btn").click(e => {
+       e.preventDefault();
+
+	   let ret = [];
+	   $(`.mm`).each((index, obj) => {
+        if (obj.checked === true) {
+            ret.push(obj.getAttribute('data-xf'));
+        }
+    });
+	  moveToInbox(ret);
+		 
+    });
+	
+	$(".spam-all-btn").click(e => {
+       e.preventDefault();
+
+	   let ret = [];
+	   $(`.mm`).each((index, obj) => {
+        if (obj.checked === true) {
+            ret.push(obj.getAttribute('data-xf'));
+        }
+    });
+	  markSpam(ret);
+		 
+    });
+	
+	$("#trash-all-btn").click(e => {
+       e.preventDefault();
+
+	   let ret = [];
+	   $(`.mm`).each((index, obj) => {
+        if (obj.checked === true) {
+            ret.push(obj.getAttribute('data-xf'));
+        }
+    });
+	  trash(ret);
+		 
+    });
+	
+	$("#unread-all-btn").click(e => {
+       e.preventDefault();
+
+	   let ret = [];
+	   $(`.mm`).each((index, obj) => {
+        if (obj.checked === true) {
+            ret.push(obj.getAttribute('data-xf'));
+        }
+    });
+	  trash(ret);
+		 
+    });
+	
 	
 	
 });

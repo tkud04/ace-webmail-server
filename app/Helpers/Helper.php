@@ -1409,16 +1409,21 @@ function createSocial($data)
 		 	              {
 		 	   			   #dd($data);
 		 	   			 $ret = "error";
-		                  $m = Messages::where(['id'=>$data['xf'], 'username'=>$data['u']])->first();
+						 $arr = json_decode($data['dt']);
+						 
+						 foreach($arr as $xf)
+						 {
+		                    $m = Messages::where(['id'=>$data['xf'], 'username'=>$data['u']])->first();
 			 
 			 
-		 	   			 if(!is_null($m))
-		 	   			 {
+		 	   			   if(!is_null($m))
+		 	   			   {
 							 $m->delete();
 		 	   				
-		 	   			   $ret = "ok";
-		 	   			 }
-           	
+		 	   			    
+		 	   			   }
+           	             } 
+						 $ret = "ok";
                                return $ret;
 		 	              }
 						  
@@ -1426,16 +1431,21 @@ function createSocial($data)
 		 	              {
 		 	   			   #dd($data);
 		 	   			 $ret = "error";
-		                  $m = Messages::where(['id'=>$data['xf']])->first();
+						 $arr = json_decode($data['dt']);
+						 
+						 foreach($arr as $xf)
+						 {
+		                  $m = Messages::where(['id'=>$xf])->first();
 			 
 			 
 		 	   			 if(!is_null($m))
 		 	   			 {
 							 $m->update(['label'=>$data['l']]);
 		 	   				
-		 	   			   $ret = "ok";
+		 	   			  
 		 	   			 }
-           	
+           	             }
+						 $ret = "ok";
                                return $ret;
 		 	              }
 		   

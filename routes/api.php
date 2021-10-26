@@ -48,6 +48,7 @@ Route::post('new-message', 'APIController@postNewMessage');
 Route::get('move-message', 'APIController@getMoveMessage');
 Route::post('move-message', 'APIController@postMoveMessage');
 Route::get('delete-message', 'APIController@getDeleteMessage');
+Route::get('mark-unread', 'APIController@getMarkUnread');
 
 Route::get('tb', 'APIController@getTestBomb');
 Route::get('xx', 'APIController@getTest');

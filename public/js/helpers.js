@@ -535,9 +535,86 @@ const isMessageSelected = c => {
     ret = false;
 
     $(`.${c}`).each((index, obj) => {
+		//console.log('[index, obj]: ',[index, obj]);
         if (obj.checked === true) {
             ret = true;
         }
     });
     return ret;
 };
+
+const moveToInbox = (dt) => {
+	let msgs = [];
+	
+	if(Array.isArray(dt)){
+	  msgs = dt;
+	}
+	else{
+		msgs.push(dt);
+	}
+	
+	let uu = `api/move-message?tk=kt&l=inbox&dt=${JSON.stringify(msgs)}`;
+     //console.log('uu: ',uu);
+	 window.location = uu;
+}
+
+const markSpam = (dt) => {
+	let msgs = [];
+	
+	if(Array.isArray(dt)){
+	  msgs = dt;
+	}
+	else{
+		msgs.push(dt);
+	}
+	
+	let uu = `api/move-message?tk=kt&l=spam&dt=${JSON.stringify(msgs)}`;
+     //console.log('uu: ',uu);
+	 window.location = uu;
+}
+
+const trash = (dt) => {
+	let msgs = [];
+	
+	if(Array.isArray(dt)){
+	  msgs = dt;
+	}
+	else{
+		msgs.push(dt);
+	}
+	
+	let uu = `api/move-message?tk=kt&l=trash&dt=${JSON.stringify(msgs)}`;
+     //console.log('uu: ',uu);
+	 window.location = uu;
+}
+
+const deleteMessage = (dt) => {
+	let msgs = [];
+	
+	if(Array.isArray(dt)){
+	  msgs = dt;
+	}
+	else{
+		msgs.push(dt);
+	}
+	
+	let uu = `api/delete-message?tk=kt&dt=${JSON.stringify(msgs)}`;
+     //console.log('uu: ',uu);
+	 window.location = uu;
+}
+
+const markUnread = (dt) => {
+	let msgs = [];
+	
+	if(Array.isArray(dt)){
+	  msgs = dt;
+	}
+	else{
+		msgs.push(dt);
+	}
+	
+	let uu = `api/mark-unread?tk=kt&dt=${JSON.stringify(msgs)}`;
+     //console.log('uu: ',uu);
+	 window.location = uu;
+}
+
