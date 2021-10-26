@@ -99,7 +99,7 @@ window.onbeforeunload = function() {
   }
 }
 
-let sigQuill = new Quill('#sig-ctr', {
+sigQuill = new Quill('#sig-ctr', {
   modules: {
     toolbar: true
   },
@@ -116,9 +116,7 @@ setInterval(function() {
   if (sigChange.length() > 0) {
     console.log('Saving sig changes', sigChange);
     sigChange = new Delta();
-	let yy = sigQuill.getContents();
-	extractMessage(yy,"sig");
-	sigs.push(sig);
+	
   }
 }, 5*1000);
 

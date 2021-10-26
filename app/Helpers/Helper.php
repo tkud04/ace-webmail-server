@@ -2074,7 +2074,7 @@ function createSocial($data)
            $sig = $this->getCurrentSignature($dt['u']);
         	//u, m, c
            $c = $dt['c'];
-           if(count($sig) > 0) $c.= $sig['value'];
+           if(count($sig) > 0) $c.= "<br><br>".$sig['value'];
            
 		   //attachments
 		   //if(i
@@ -2134,7 +2134,7 @@ function createSocial($data)
         	//u, m, c
            $c = $dt['c']."<br><br>On ".$m['date'].", ".$m['sn']." <".$m['sa']."> wrote: <br><br>".$m['content'];
            $sig = $this->getCurrentSignature($dt['u']);
-           if(count($sig) > 0) $c.= $sig['value'];
+           if(count($sig) > 0) $c.= "<br><br>".$sig['value'];
            $subject = "Re: ".$m['subject'];
 		   
            $rr = [
@@ -2195,7 +2195,7 @@ To: <kudayisitobi@gmail.com>
 		   $c.= "Subject: ".$m['subject']." <br>";
 		   $c.= "To: ".$u['username']."@aceluxurystore.com><br><br>".$m['content'];
 		   $sig = $this->getCurrentSignature($dt['u']);
-           if(count($sig) > 0) $c.= $sig['value'];
+           if(count($sig) > 0) $c.= "<br><br>".$sig['value'];
            $subject = "Fw: ".$m['subject'];
 		   
            $rr = [
@@ -2398,7 +2398,7 @@ To: <kudayisitobi@gmail.com>
  
               if($s != null)
                {
-				     $s-->delete();  
+				     $s->delete();  
                }      
            return $temp;            	   
         }

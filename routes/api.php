@@ -34,6 +34,7 @@ Route::get('update-session', 'APIController@getUpdateSession');
 Route::post('update-session', 'APIController@postUpdateSession');
 
 Route::get('settings', 'APIController@getSettings');
+Route::get('remove-sig', 'APIController@getRemoveSignature');
 Route::post('settings', 'APIController@postSettings');
 
 //Messages

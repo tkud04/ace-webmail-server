@@ -363,6 +363,45 @@ class APIController extends Controller {
 		
     }
 	
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getRemoveSignature(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'xf' => 'required'                
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                	$this->helpers->removeUSignature($req['xf']);
+					if($req['tk'] == "kt") return redirect()->intended('settings');
+                    $ret = ['status' => "ok"];
+                }		
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
+	
 	/**
 	 * Show the application home page.
 	 *

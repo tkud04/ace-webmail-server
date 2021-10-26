@@ -3,6 +3,25 @@
 @extends('layout')
 
 @section('title',$title)
+
+
+
+
+
+@section('scripts')
+<script>
+let ssigs = [
+ <?php
+foreach($sigs as $s)
+{
+?>
+{id: `{{$s['id']}}`, value: `{!! $s['value'] !!}`},
+ <?php
+}
+?>
+];
+</script>
+@stop
 @section('content')
  <div class="ecommerce-widget">
 
@@ -35,21 +54,23 @@
 										   <div class="form-group">
                                              <h5 class="card-title" for="sig">Signatures <a href="javascript:void(0)" class="btn btn-primary" id="add-sig-btn">Add new signature</a></h5>
 											 
-											 <select class="form-control" id="sig" name="sig">
+											 <select class="form-control" onchange="sigg()" id="sig" name="sig">
 											   <option value="none">Select a signature to enable it</option>
 											 <?php
+											   $sas = "";
 											   foreach($sigs as $s)
 											   {
 												   $ss = ($s['current'] == "yes") ? " selected='selected'" : "";
-                                                                                                  $ss = ($s['current'] == "yes") ? "
+												   if($s['current'] == "yes") $sas = $s['value']."<a href='api/remove-sig?tk=kt&xf={$s['id']}' class='btn btn-danger ml-2'><i class='fa fa-fw fa-trash'></i></a>";
 											 ?>
-                                             <option id="sig_{{$s['id']}}" onclick="sig('{{$s['id']}}')" data-value="{{$s['value']}}" value="{{$s['id']}}"{{$ss}}>Signature #{{$s['id']}}</option>
+                                             <option value="{{$s['id']}}"{{$ss}}>Signature #{{$s['id']}}</option>
 											 <?php
 											   }
 											 ?>
 											 </select>
 
-											 <p class="card-text mt-2" id="sig-alert"></p> <p class="card-text mt-2" id="new-sig-alert"></p>
+											 <p class="card-text mt-2" id="sig-alert">{!! $sas !!}</p>
+											 <p class="card-text mt-2" id="new-sig-alert"></p>
                                            </div>
 										   
                                            <button type="submit" class="btn btn-primary">Submit</button>

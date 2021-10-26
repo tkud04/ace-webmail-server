@@ -522,6 +522,11 @@ const extractMessage = (dt,t) => {
 	  return ret;
 }
 
-sig = xf => {
-   $('#sig-alert').html($(`#sig_${xf}`).attr('data-value'));
+const sigg = () => {
+   let xf = $('#sig').val(), ddd = null, dd = ``;
+   if(xf != "none"){	   
+	   ddd = ssigs.find(i => i.id == xf);
+	   if(ddd) dd = `${ddd.value} <a href="api/remove-sig?tk=kt&xf=${xf}" class="btn btn-danger ml-2"><i class="fa fa-fw fa-trash"></i></a>`;
+   }
+   $('#sig-alert').html(dd);
 }

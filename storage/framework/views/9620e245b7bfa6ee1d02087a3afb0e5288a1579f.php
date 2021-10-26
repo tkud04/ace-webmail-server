@@ -3,6 +3,25 @@
 
 
 <?php $__env->startSection('title',$title); ?>
+
+
+
+
+
+<?php $__env->startSection('scripts'); ?>
+<script>
+let ssigs = [
+ <?php
+foreach($sigs as $s)
+{
+?>
+{id: `<?php echo e($s['id']); ?>`, value: `<?php echo $s['value']; ?>`},
+ <?php
+}
+?>
+];
+</script>
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
  <div class="ecommerce-widget">
 
@@ -24,31 +43,34 @@
 									  <div class="tab-content" id="settings-tab-content">
 									    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
 										  <form method="post" action="<?php echo e(url('api/settings')); ?>">
-										   <input id="new-sig-input" name="new-sigs" type="hidden">
+										   <input id="new-sig-input" name="new-sigs" type="hidden" value="[]"><input name="tk" type="hidden" value="kt">
+<input name="u" type="hidden" value="<?php echo e($user->username); ?>">
+                            
 										    <div class="form-group">
                                              <h5 class="card-title" for="sig">Language</h5>
                                              <p class="card-text">English</p>
                                            </div>
+
 										   <div class="form-group">
-                                             <h5 class="card-title" for="sig">Images</h5>
-                                             <input type="text" class="form-control" id="sig" placeholder="Example input">
-                                           </div>
-										   <div class="form-group">
-                                             <h5 class="card-title" for="sig">Signatures</h5>
-											 <a href="javascript:void(0)" id="add-sig-btn">Add new signature</a>
-											 <select class="form-control" id="sig">
+                                             <h5 class="card-title" for="sig">Signatures <a href="javascript:void(0)" class="btn btn-primary" id="add-sig-btn">Add new signature</a></h5>
+											 
+											 <select class="form-control" onchange="sigg()" id="sig" name="sig">
 											   <option value="none">Select a signature to enable it</option>
 											 <?php
+											   $sas = "";
 											   foreach($sigs as $s)
 											   {
 												   $ss = ($s['current'] == "yes") ? " selected='selected'" : "";
+												   if($s['current'] == "yes") $sas = $s['value']."<a href='api/remove-sig?tk=kt&xf={$s['id']}' class='btn btn-danger ml-2'><i class='fa fa-fw fa-trash'></i></a>";
 											 ?>
-                                             <option value="<?php echo e($s['id']); ?>"<?php echo e($ss); ?>></option>
+                                             <option value="<?php echo e($s['id']); ?>"<?php echo e($ss); ?>>Signature #<?php echo e($s['id']); ?></option>
 											 <?php
 											   }
 											 ?>
 											 </select>
-											  <p class="card-text mt-2" id="new-sig-alert"></p>
+
+											 <p class="card-text mt-2" id="sig-alert"><?php echo $sas; ?></p>
+											 <p class="card-text mt-2" id="new-sig-alert"></p>
                                            </div>
 										   
                                            <button type="submit" class="btn btn-primary">Submit</button>
