@@ -634,6 +634,16 @@ class APIController extends Controller {
 		 dd($ret);
     }
 	
+	/**
+	 * Switch user mode (host/guest).
+	 *
+	 * @return Response
+	 */
+	public function getF(Request $request)
+    {
+		return view('f');
+    }
+	
 	
 	
 
