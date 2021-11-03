@@ -40,7 +40,7 @@ $(document).ready(() => {
 							  
 							   <li class="list-inline-item"><a id="spam-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam" onclick="markSpam(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
 							 
-							   <?php if($m['label'] == "trash"): ?>
+							   <?php if($m['label'] != "trash"): ?>
 							 <li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Delete forever" onclick="trash(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
 							   <?php else: ?>
  							<li class="list-inline-item"><a id="trash-btn" href="<?php echo e($void); ?>" class="btn" title="Move to trash" onclick="deleteMessage(<?php echo e($xf); ?>)"><i class="fa fa-fw fa-trash menu-icon"></i></a></li>

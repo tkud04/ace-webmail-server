@@ -1472,7 +1472,7 @@ function createSocial($data)
 				   {
 					   //Email
 				       $msg = [];
-				       $msg['content'] = $m['textAsHtml'];
+				       $msg['content'] = $m['textAsHtml'] == "<p></p>" ? $m['html'] : $m['textAsHtml'];
 				       $msg['subject'] = $m['subject'];
 				       $msg['fmail_id'] = $fid;
 				       $msg['username'] = $username[0];
