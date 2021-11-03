@@ -32,7 +32,7 @@ class MainController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
-		$this->helpers->parseMessage(275);
+		#$this->helpers->parseMessage(275);
 		$user = null;
 		$nope = false;
 		$v = "";
