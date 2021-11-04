@@ -589,7 +589,7 @@ const trash = (dt) => {
 }
 
 const deleteMessage = (dt) => {
-	let msgs = [];
+	let msgs = [], u = $('#u').val();
 	
 	if(Array.isArray(dt)){
 	  msgs = dt;
@@ -598,7 +598,7 @@ const deleteMessage = (dt) => {
 		msgs.push(dt);
 	}
 	
-	let uu = `api/delete-message?tk=kt&dt=${JSON.stringify(msgs)}`;
+	let uu = `api/delete-message?tk=kt&u=${u}&dt=${JSON.stringify(msgs)}`;
      //console.log('uu: ',uu);
 	 window.location = uu;
 }

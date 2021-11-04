@@ -58,6 +58,7 @@ $(document).ready(() => {
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+<input type="hidden" id="u" value="<?php echo e($user->username); ?>">
 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
@@ -68,8 +69,12 @@ $(document).ready(() => {
 							  <li class="list-inline-item"><input type="checkbox" id="mm-all"></li>
 							  <li class="list-inline-item"><a id="refresh-all-btn" href="<?php echo e($label); ?>" class="btn" title="Refresh"><i class="fa fa-fw fa-undo menu-icon"></i></a></li>
 							  <li class="list-inline-item"><a class="spam-all-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Spam"><i class="fa fa-fw fa-exclamation-triangle menu-icon"></i></a></li>
+							  <?php if($label == "trash"): ?>
+							  <li class="list-inline-item"><a id="delete-all-btn" href="<?php echo e($void); ?>" class="btn" title="Delete forever" ><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
+							  <?php else: ?>
 							  <li class="list-inline-item"><a id="trash-all-btn" href="<?php echo e($void); ?>" class="btn" title="Delete" ><i class="fa fa-fw fa-trash menu-icon"></i></a></li>
-							  <li class="list-inline-item"><a id="unread-all-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
+							  <?php endif; ?>
+							 <li class="list-inline-item"><a id="unread-all-btn" href="<?php echo e($void); ?>" class="btn" title="Mark as Unread"><i class="fa fa-fw fa-envelope menu-icon"></i></a></li>
 							 <li class="list-inline-item">
 								<div class="dropdown">
                                 <a id="move-btn" href="<?php echo e($void); ?>" class="btn dropdown-toggle" title="Move to" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -320,6 +320,19 @@ $(document).ready(function() {
 		 
     });
 	
+	$("#delete-all-btn").click(e => {
+       e.preventDefault();
+
+	   let ret = [];
+	   $(`.mm`).each((index, obj) => {
+        if (obj.checked === true) {
+            ret.push(obj.getAttribute('data-xf'));
+        }
+    });
+	  deleteMessage(ret);
+		 
+    });
+	
 	$("#unread-all-btn").click(e => {
        e.preventDefault();
 

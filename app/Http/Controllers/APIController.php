@@ -479,13 +479,13 @@ class APIController extends Controller {
 	public function getDeleteMessage(Request $request)
     {
 		$req = $request->all();
-		
+		#dd($req);
 		$ret = ['status' => "error",'msg' => "forbidden"];
 		
 		  if($this->helpers->apiAuth($req))
 		  {
 			$v = Validator::make($req,[
-		                    'xf' => 'required',
+		                    'dt' => 'required',
 		                    'u' => 'required',
 		                   ]);
 						

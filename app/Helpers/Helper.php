@@ -1410,17 +1410,23 @@ function createSocial($data)
 		 	   			   #dd($data);
 		 	   			 $ret = "error";
 						 $arr = json_decode($data['dt']);
+						 #dd($arr);
 						 
 						 foreach($arr as $xf)
 						 {
-		                    $m = Messages::where(['id'=>$data['xf'], 'username'=>$data['u']])->first();
+		                    $m = Messages::where(['id'=>$xf, 'username'=>$data['u']])->first();
 			 
 			 
 		 	   			   if(!is_null($m))
 		 	   			   {
+							  $atts = Attachments::where(['message_id'=>$m->id])->get();
+							  if($atts != null)
+							  {
+								  foreach($atts as $a)  $a->delete();
+							  }
+							  $fm = Fmails::where(['id'=>$m->fmail_id])->first();
+							  if($fm != null) $fm->delete();
 							 $m->delete();
-		 	   				
-		 	   			    
 		 	   			   }
            	             } 
 						 $ret = "ok";
