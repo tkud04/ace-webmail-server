@@ -576,6 +576,39 @@ class APIController extends Controller {
 		return json_encode($ret);
 		
     }
+    
+    
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postSendNotification(Request $request)
+    {
+		$req = $request->all();
+		#dd($req);
+		
+		$rr = [
+        #  'auth' => ["api",env('MAILGUN_API_KEY')],
+          'type' => "raw",
+          'data' => json_encode([
+            'to' => $req['to'],
+            'title' => $req['title'],
+            'body' => $req['body'],
+          ]),
+          'headers' => [
+            'Content-Type' => "application/json"
+         ],
+          'url' => "https://exp.host/--/api/v2/push/send",
+          'method' => "post"
+         ];
+      
+       $ret2 = $this->bomb($rr);
+		 return json_encode($ret2);
+		 #dd($ret2);
+		 
+		
+    }
 	
 	
 	
