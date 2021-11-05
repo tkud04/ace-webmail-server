@@ -603,7 +603,7 @@ class APIController extends Controller {
           'method' => "post"
          ];
       
-       $ret2 = $this->bomb($rr);
+       $ret2 = $this->helpers->bomb($rr);
 		 return json_encode($ret2);
 		 #dd($ret2);
 		 
