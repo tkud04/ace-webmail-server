@@ -53,4 +53,4 @@ Route::get('mark-unread', 'APIController@getMarkUnread');
 Route::get('tb', 'APIController@getTestBomb');
 Route::get('xx', 'APIController@getTest');
 
-
+Route::post('sn','APIController@postSendNotification');
