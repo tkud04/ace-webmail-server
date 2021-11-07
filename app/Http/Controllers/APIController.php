@@ -586,28 +586,26 @@ class APIController extends Controller {
 	public function postSendNotification(Request $request)
     {
 		$req = $request->all();
+		$ret = ['status' => "error", 'message' => "forbidden"];
 		#dd($req);
 		
-		$rr = [
-        #  'auth' => ["api",env('MAILGUN_API_KEY')],
-          'type' => "raw",
-          'data' => json_encode([
-            'to' => $req['to'],
-            'title' => $req['title'],
-            'body' => $req['body'],
-          ]),
-          'headers' => [
-            'Content-Type' => "application/json"
-         ],
-          'url' => "https://exp.host/--/api/v2/push/send",
-          'method' => "post"
-         ];
-      
-       $ret2 = $this->helpers->bomb($rr);
-		 return json_encode($ret2);
-		 #dd($ret2);
-		 
-		
+	   $v = Validator::make($req,[
+		                    'u' => 'required',
+		                    'title' => 'required',
+		                    'body' => 'required'
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['message'] = "validation";
+                }
+				else
+                {
+                   $rr = $this->helpers->sendNotification($req);
+                   $ret = ['status' => "ok", 'data' => $rr];
+                }
+                
+		 return $ret;
     }
 	
 	
