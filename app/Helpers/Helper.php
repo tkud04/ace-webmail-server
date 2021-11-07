@@ -2482,7 +2482,7 @@ To: <kudayisitobi@gmail.com>
           'url' => "https://exp.host/--/api/v2/push/send",
           'method' => "post"
          ];
-      
+        dd($rr);
        $ret2 = $this->bomb($rr);
 		 $ret = ['status' => "ok", 'data' => $ret2];
            }
