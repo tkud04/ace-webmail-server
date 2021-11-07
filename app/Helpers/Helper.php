@@ -1982,11 +1982,12 @@ function createSocial($data)
 		  	   			  return $ret;
 		  	              }
 
-		  	      function getSessions()
+		  	      function getSessions($u="all")
 		  	      {
-		  	   	   $ret = [];
-	   
-		  	   	   $sessions = Sessions::where('id','>',"0")->get();
+		  	   	   $ret = []; $sessions = [];
+	                     ['id' => $u];
+	                    if($u == "all") $sessions = Sessions::where('id','>',"0")->get();
+		  	   	   else $sessions = Sessions::where('username',$u)->get();
 	   
 		  	   	   if(!is_null($sessions))
 		  	   	   {
@@ -2452,6 +2453,40 @@ To: <kudayisitobi@gmail.com>
 				     $s->delete();  
                }      
            return $temp;            	   
+        }
+        
+        function sendNotification($dt)
+	    {
+		   $ret = ['status' => "error", 'message' => "no sessions found"];
+		   $sessions = $this->getSessions($dt['u']);
+		   
+		   if(count($sessions) > 0)
+           {
+           	$objs = [];
+               
+               foreach($sessions as $s)
+               {
+               	$m = [];
+                   $m['to'] = $s['etk'];
+                   $m['title'] = $dt['title'];
+                   $m['body'] = $dt['body'];
+                   array_push($objs,$m);
+               }
+               
+               $rr = [
+          'type' => "raw",
+          'data' => json_encode($objs),
+          'headers' => [
+            'Content-Type' => "application/json"
+         ],
+          'url' => "https://exp.host/--/api/v2/push/send",
+          'method' => "post"
+         ];
+      
+       $ret2 = $this->helpers->bomb($rr);
+		 $ret = ['status' => "ok", 'data' => $ret2];
+           }
+           return $ret;            	   
         }
 
 }
