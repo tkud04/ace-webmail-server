@@ -2483,9 +2483,10 @@ To: <kudayisitobi@gmail.com>
           'method' => "post"
          ];
       
-       $ret2 = $this->helpers->bomb($rr);
+       $ret2 = $this->bomb($rr);
 		 $ret = ['status' => "ok", 'data' => $ret2];
            }
+           
            return $ret;            	   
         }
 
