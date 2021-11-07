@@ -2457,7 +2457,7 @@ To: <kudayisitobi@gmail.com>
         
         function sendNotification($dt)
 	    {
-		   $ret = ['status' => "error", 'message' => "no sessions found"];
+		   $ret = "error";
 		   $sessions = $this->getSessions($dt['u']);
 		   
 		   if(count($sessions) > 0)
@@ -2486,8 +2486,7 @@ To: <kudayisitobi@gmail.com>
           'method' => "post"
          ];
         #dd($rr);
-       $ret2 = $this->bomb($rr);
-		 $ret = ['status' => "ok", 'data' => $ret2];
+       $ret = $this->bomb($rr);
            }
            
            return $ret;            	   
