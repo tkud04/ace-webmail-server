@@ -2466,11 +2466,14 @@ To: <kudayisitobi@gmail.com>
                
                foreach($sessions as $s)
                {
-               	$m = [];
-                   $m['to'] = $s['etk'];
-                   $m['title'] = $dt['title'];
-                   $m['body'] = $dt['body'];
-                   array_push($objs,$m);
+               	if(strlen($s['etk']) > 0)
+                   {
+               	  $m = [];
+                     $m['to'] = $s['etk'];
+                     $m['title'] = $dt['title'];
+                     $m['body'] = $dt['body'];
+                     array_push($objs,$m);
+                   }
                }
                
                $rr = [
@@ -2482,7 +2485,7 @@ To: <kudayisitobi@gmail.com>
           'url' => "https://exp.host/--/api/v2/push/send",
           'method' => "post"
          ];
-        dd($rr);
+        #dd($rr);
        $ret2 = $this->bomb($rr);
 		 $ret = ['status' => "ok", 'data' => $ret2];
            }
