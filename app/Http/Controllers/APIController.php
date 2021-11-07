@@ -605,7 +605,7 @@ class APIController extends Controller {
                    $ret = ['status' => "ok", 'data' => $rr];
                 }
                 
-		 return $ret;
+		 return json_encode($ret);
     }
 	
 	
