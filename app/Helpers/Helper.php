@@ -2481,6 +2481,7 @@ To: <kudayisitobi@gmail.com>
                      $m['to'] = $s['etk'];
                      $m['title'] = $dt['title'];
                      $m['body'] = $dt['body'];
+                     $m['data'] = ['type' => 'email'];
                      array_push($objs,$m);
                    }
                }
