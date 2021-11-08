@@ -1507,6 +1507,15 @@ function createSocial($data)
 						   $this->createAttachment($atts);
 					   }
 					   
+					   //Push notification
+					   $xx = ($s['name'] == null) ? $s['address'] : $s['name'];
+					   $req = [
+					    'u' => $username[0],
+					    'title' => "New message from {$xx}",
+					    'body' => $m['subject'],
+					   ];
+					   $rr = $this->sendNotification($req);
+					   
 					   $ret = ['status' => "ok"];
 				   }
 			   
@@ -2060,7 +2069,7 @@ function createSocial($data)
 				// $u = User::where('username',$dt['u'])->first(); 
             
               	 $tk = $this->getRandomString(7);
-                  $this->createSession(['username' => $dt['u'],'tk' => $tk,'etk' => ""]);
+                  $this->createSession(['username' => $dt['u'],'tk' => $tk,'etk' => $dt['etk']]);
                 $ret = ['status' => "ok",'tk' => $tk];
            }
             
