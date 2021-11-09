@@ -2490,6 +2490,8 @@ To: <kudayisitobi@gmail.com>
           'type' => "raw",
           'data' => json_encode($objs),
           'headers' => [
+            'Accept' => "application/json",
+            'Accept-Encoding' => "gzip, deflate",
             'Content-Type' => "application/json"
          ],
           'url' => "https://exp.host/--/api/v2/push/send",
