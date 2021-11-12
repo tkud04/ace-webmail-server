@@ -2197,12 +2197,12 @@ function createSocial($data)
            $sig = $this->getCurrentSignature($dt['u']);
            if(count($sig) > 0) $c.= "<br><br>".$sig['value'];
            $subject = "Re: ".$m['subject'];
-		   
+		   $t = isset($dt['t']) ? $dt['t'] : $m['sa'];
            $rr = [
           'auth' => ["api",env('MAILGUN_API_KEY')],
           'data' => [
             'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
-            'to' => $dt['t'],
+            'to' => $t,
             'subject' => $subject,
             'html' => $c
           ],
@@ -2223,7 +2223,7 @@ function createSocial($data)
 				       $msg['fmail_id'] = "0";
 				       $msg['username'] = $u['username'];
 				       $msg['sn'] = $u['username'];
-				       $msg['sa'] = $dt['t'];
+				       $msg['sa'] = $t;
 				       $msg['label'] = "sent";
 				       $msg['status'] = "read";
 					   
