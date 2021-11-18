@@ -237,6 +237,72 @@ class APIController extends Controller {
 		
 		return json_encode($ret);
 		
+    } 
+	
+	/**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function getSaveDraft(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		return json_encode($ret);
+		
+    }
+	
+    /**
+	 * Show the application home page.
+	 *
+	 * @return Response
+	 */
+	public function postSaveDraft(Request $request)
+    {
+		$req = $request->all();
+		$user = null;
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    't' => 'required',
+		                    's' => 'required',
+                            'c' => 'required'                  
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+					$to = json_decode($req['t']);
+					$u = $req['u'];
+					
+					$rr = [
+					  'c' => $req['c'],
+					  's' => $req['s'],
+					  't' => $req['t'],
+					  'u' => $u,
+					];
+					
+					 $this->helpers->saveDraft($rr);
+					 
+                    $ret = ['status' => "ok"];
+                }		
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
     }
 
 	/**

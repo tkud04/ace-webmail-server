@@ -45,9 +45,12 @@ Route::get('message', 'APIController@getMessage');
 Route::post('message', 'APIController@postMessage');
 Route::get('new-message', 'APIController@getNewMessage');
 Route::post('new-message', 'APIController@postNewMessage');
+Route::get('save-draft', 'APIController@getSaveDraft');
+Route::post('save-draft', 'APIController@postSaveDraft');
 Route::get('move-message', 'APIController@getMoveMessage');
 Route::post('move-message', 'APIController@postMoveMessage');
 Route::get('delete-message', 'APIController@getDeleteMessage');
+Route::get('mark-read', 'APIController@getMarkRead');
 Route::get('mark-unread', 'APIController@getMarkUnread');
 
 Route::get('tb', 'APIController@getTestBomb');

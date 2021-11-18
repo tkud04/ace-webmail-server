@@ -2183,6 +2183,79 @@ function createSocial($data)
 		  return $ret;
         }
 		
+		function saveDraft($dt)
+		{
+			 //save msg to db
+			 $msg = [];
+				       $msg['content'] = $c;
+				       $msg['subject'] = $dt['s'];
+				       $msg['fmail_id'] = "0";
+				       $msg['username'] = $u['username'];
+				       $msg['sn'] = $u['username'];
+				       $msg['sa'] = $dt['t'];
+				       $msg['label'] = "drafts";
+				       $msg['status'] = "read";
+					   
+					   $mm = $this->createMessage($msg);
+		}
+		
+		function sendDraft($dt)
+        {
+        	$u = $this->getUser($dt['u']);
+           $c = "";
+           $ret = ['status' => "error", 'msg' => "nothing"];
+           $sig = $this->getCurrentSignature($dt['u']);
+        	//u, m, c
+           $c = $dt['c'];
+           if(count($sig) > 0) $c.= "<br><br>".$sig['value'];
+           
+		   //attachments
+		   //if(i
+           $rr = [
+          'auth' => ["api",env('MAILGUN_API_KEY')],
+          'data' => [
+            'from' => $u['fname']." ".$u['lname']." <".$u['username']."@aceluxurystore.com>",
+            'to' => $dt['t'],
+            'subject' => $dt['s'],
+            'html' => $c
+          ],
+          'headers' => [],
+          'url' => env('MAILGUN_BASE_URL')."/messages",
+          'method' => "post"
+         ];
+		 
+		if(isset($dt['atts']) && count($dt['atts']) > 0)
+		{
+			$rr['atts'] = $dt['atts'];
+		}
+
+       $ret2 = $this->bomb($rr);
+		 
+		 #dd($ret2);
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.")
+		 {
+			 $ret = ['status' => "ok"];
+		 } 
+		 
+		 
+			 //save msg to db
+			 $msg = [];
+				       $msg['content'] = $c;
+				       $msg['subject'] = $dt['s'];
+				       $msg['fmail_id'] = "0";
+				       $msg['username'] = $u['username'];
+				       $msg['sn'] = $u['username'];
+				       $msg['sa'] = $dt['t'];
+				       $msg['label'] = "sent";
+				       $msg['status'] = "read";
+					   
+					   $mm = $this->createMessage($msg);
+
+		  
+		  return $ret;
+        }
+		
+		
 		function replyMessage($dt)
         {
            $m = $this->getMessage($dt['m']);
