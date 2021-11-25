@@ -619,7 +619,7 @@ class APIController extends Controller {
 		  if($this->helpers->apiAuth($req))
 		  {
 			$v = Validator::make($req,[
-		                    'dt' => 'required',
+		                    'xf' => 'required',
 		                   ]);
 						
 				if($v->fails())
