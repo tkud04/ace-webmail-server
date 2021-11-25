@@ -629,9 +629,10 @@ class APIController extends Controller {
 				else
                 {
                    $this->helpers->markUnread($req);
-                }
-                    if($req['tk'] == "kt") return redirect()->intended('inbox');
+				   if($req['tk'] == "kt") return redirect()->intended('inbox');
                     $ret = ['status' => "ok"];
+                }
+                   
 		  }
 		  else
           {
