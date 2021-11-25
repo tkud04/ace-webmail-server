@@ -2576,6 +2576,31 @@ To: <kudayisitobi@gmail.com>
            
            return $ret;            	   
         }
+		
+		
+		function markUnread($dt)
+        {
+        	$ret = "error"; $m = Messages::where('id',$dt['xf']);
+           
+		   if($m != null)
+		   {
+			   $m->update(['status' => "unread"]);
+			   $ret = "ok";
+		   }
+		  return $ret;
+        }
+		
+		function markRead($dt)
+        {
+        	$ret = "error"; $m = Messages::where('id',$dt['xf']);
+           
+		   if($m != null)
+		   {
+			   $m->update(['status' => "read"]);
+			   $ret = "ok";
+		   }
+		  return $ret;
+        }
 
 }
 ?>

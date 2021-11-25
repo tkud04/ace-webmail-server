@@ -610,6 +610,40 @@ class APIController extends Controller {
 		
     }
 	
+	public function getMarkRead(Request $request)
+    {
+		$req = $request->all();
+		
+		$ret = ['status' => "error",'msg' => "forbidden"];
+		
+		  if($this->helpers->apiAuth($req))
+		  {
+			$v = Validator::make($req,[
+		                    'xf' => 'required',
+		                   ]);
+						
+				if($v->fails())
+                {
+                	$ret['msg'] = "validation";
+                }
+				else
+                {
+                   $s = $this->helpers->markRead($req);
+				   if($req['tk'] == "kt") return redirect()->intended('inbox');
+                    $ret = ['status' => $s];
+                }
+                   
+		  }
+		  else
+          {
+          	$ret['msg'] = "auth";
+          }
+        
+		
+		return json_encode($ret);
+		
+    }
+	
 	public function getMarkUnread(Request $request)
     {
 		$req = $request->all();
@@ -628,9 +662,9 @@ class APIController extends Controller {
                 }
 				else
                 {
-                   $this->helpers->markUnread($req);
+                   $s = $this->helpers->markUnread($req);
 				   if($req['tk'] == "kt") return redirect()->intended('inbox');
-                    $ret = ['status' => "ok"];
+                    $ret = ['status' => $s];
                 }
                    
 		  }
